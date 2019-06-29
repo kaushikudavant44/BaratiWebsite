@@ -181,7 +181,7 @@
 			<div class="container-fluid"></div>
 
 
-			<div class="body" ng-controller="payScaleMasterController">
+			<div class="body" ng-controller="itemMasterController">
 				<div class="row clearfix">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="card">
@@ -193,29 +193,47 @@
 							</div>
 							<div class="body">
 
-								<form name="payScaleForm" ng-submit="submitAddJobPayScale()">
+								<form name="payScaleForm" ng-submit="submitAddItem()">
 									<div class="row clearfix">
 
-										<input type="hidden" ng-model="payscaleId" id="payscaleId"
+										<input type="hidden" ng-model="itemId" id="itemId"
 											ng-value="0">
+											
+											<div class="col-md-4">
+											<b>Item Name</b>
+
+											<div class="input-group spinner" data-trigger="spinner">
+												<div class="form-line">
+													<input type="text" class="form-control text-center"
+														ng-model="itemName" id="itemName" value="0" data-rule="currency">
+												</div>
+												<span class="input-group-addon"> <a
+													href="javascript:;" class="spin-up" data-spin="up"><i
+														class="glyphicon glyphicon-chevron-up"></i></a> <a
+													href="javascript:;" class="spin-down" data-spin="down"><i
+														class="glyphicon glyphicon-chevron-down"></i></a>
+												</span>
+											</div>
+										</div>
+										
 										<div class="col-md-4">
 
 											<b>Job</b> <select class="form-control"
 												ng-model="jobId" id="jobId" required="required">
 												 
-												<c:forEach items="${jobDetailsList}" var="jobDetails">
-													<option value="${jobDetails.jobId}">${jobDetails.jobName}</option>
-												</c:forEach>
+												 
+													<option value="1">1</option>
+												 
 											</select>
 
 										</div>
 										<div class="col-md-4">
-											<b>Grade Basic</b>
+											<b>designNo</b>
 
 											<div class="input-group spinner" data-trigger="spinner">
 												<div class="form-line">
 													<input type="text" class="form-control text-center"
-														ng-model="gradeBasic" id="gradeBasic" value="0" data-rule="currency">
+														ng-model="designNo" id="designNo" value="0" data-rule="currency">
 												</div>
 												<span class="input-group-addon"> <a
 													href="javascript:;" class="spin-up" data-spin="up"><i
@@ -226,29 +244,12 @@
 											</div>
 										</div>
 										<div class="col-md-4">
-											<b>Grade TA</b>
+											<b>barcode</b>
 
 											<div class="input-group spinner" data-trigger="spinner">
 												<div class="form-line">
 													<input type="text" class="form-control text-center"
-														ng-model="gradeTa" value="0" data-rule="currency">
-												</div>
-												<span class="input-group-addon"> <a
-													href="javascript:;" class="spin-up" data-spin="up"><i
-														class="glyphicon glyphicon-chevron-up"></i></a> <a
-													href="javascript:;" class="spin-down" data-spin="down"><i
-														class="glyphicon glyphicon-chevron-down"></i></a>
-												</span>
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<b>Grade HRA </b>
-
-											<div class="input-group spinner" data-trigger="spinner">
-												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="gradeHra" value="0" data-rule="currency">
+														ng-model="barcode" value="0" data-rule="currency">
 												</div>
 												<span class="input-group-addon"> <a
 													href="javascript:;" class="spin-up" data-spin="up"><i
@@ -260,12 +261,12 @@
 										</div>
 
 										<div class="col-md-4">
-											<b>Grade Bonus </b>
+											<b>itemSize </b>
 
 											<div class="input-group spinner" data-trigger="spinner">
 												<div class="form-line">
 													<input type="text" class="form-control text-center"
-														ng-model="gradeBonus" value="0" data-rule="currency">
+														ng-model="itemSize" value="0" data-rule="currency">
 												</div>
 												<span class="input-group-addon"> <a
 													href="javascript:;" class="spin-up" data-spin="up"><i
@@ -277,28 +278,12 @@
 										</div>
 
 										<div class="col-md-4">
-											<b>Grade Other </b>
+											<b>itemQuantity </b>
 
 											<div class="input-group spinner" data-trigger="spinner">
 												<div class="form-line">
 													<input type="text" class="form-control text-center"
-														ng-model="gradeOther" value="0" data-rule="currency">
-												</div>
-												<span class="input-group-addon"> <a
-													href="javascript:;" class="spin-up" data-spin="up"><i
-														class="glyphicon glyphicon-chevron-up"></i></a> <a
-													href="javascript:;" class="spin-down" data-spin="down"><i
-														class="glyphicon glyphicon-chevron-down"></i></a>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<b>Grade PF </b>
-
-											<div class="input-group spinner" data-trigger="spinner">
-												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="gradePf" value="0" data-rule="currency">
+														ng-model="itemQuantity" value="0" data-rule="currency">
 												</div>
 												<span class="input-group-addon"> <a
 													href="javascript:;" class="spin-up" data-spin="up"><i
@@ -310,12 +295,12 @@
 										</div>
 
 										<div class="col-md-4">
-											<b>Grade PT </b>
+											<b>itemPrice </b>
 
 											<div class="input-group spinner" data-trigger="spinner">
 												<div class="form-line">
 													<input type="text" class="form-control text-center"
-														ng-model="gradePt" value="0" data-rule="currency">
+														ng-model="itemPrice" value="0" data-rule="currency">
 												</div>
 												<span class="input-group-addon"> <a
 													href="javascript:;" class="spin-up" data-spin="up"><i
@@ -325,14 +310,13 @@
 												</span>
 											</div>
 										</div>
-
 										<div class="col-md-4">
-											<b>Graduity </b>
+											<b>poId</b>
 
 											<div class="input-group spinner" data-trigger="spinner">
 												<div class="form-line">
 													<input type="text" class="form-control text-center"
-														ng-model="graduity" value="0" data-rule="currency">
+														ng-model="poId" value="0" data-rule="currency">
 												</div>
 												<span class="input-group-addon"> <a
 													href="javascript:;" class="spin-up" data-spin="up"><i
@@ -342,66 +326,7 @@
 												</span>
 											</div>
 										</div>
-
-										<div class="col-md-4">
-											<b>Mediclaim </b>
-
-											<div class="input-group spinner" data-trigger="spinner">
-												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="mediclaim" value="0" data-rule="currency">
-												</div>
-												<span class="input-group-addon"> <a
-													href="javascript:;" class="spin-up" data-spin="up"><i
-														class="glyphicon glyphicon-chevron-up"></i></a> <a
-													href="javascript:;" class="spin-down" data-spin="down"><i
-														class="glyphicon glyphicon-chevron-down"></i></a>
-												</span>
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<b>Grade Gross Salary </b>
-
-											<div class="input-group spinner" data-trigger="spinner">
-												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="gradeGrossSalary" value="0" data-rule="currency">
-												</div>
-												<span class="input-group-addon"> <a
-													href="javascript:;" class="spin-up" data-spin="up"><i
-														class="glyphicon glyphicon-chevron-up"></i></a> <a
-													href="javascript:;" class="spin-down" data-spin="down"><i
-														class="glyphicon glyphicon-chevron-down"></i></a>
-												</span>
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<b>Grade Net Salary</b>
-
-											<div class="input-group spinner" data-trigger="spinner">
-												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="gradeNetSalary" value="0" data-rule="currency">
-												</div>
-												<span class="input-group-addon"> <a
-													href="javascript:;" class="spin-up" data-spin="up"><i
-														class="glyphicon glyphicon-chevron-up"></i></a> <a
-													href="javascript:;" class="spin-down" data-spin="down"><i
-														class="glyphicon glyphicon-chevron-down"></i></a>
-												</span>
-											</div>
-										</div>
-
-
-
-
-
-
-
-
-
+ 
 
 										<div class="col-md-4">
 											<div class="col-md-4">

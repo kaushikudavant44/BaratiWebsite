@@ -5,37 +5,34 @@ app.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 	cfpLoadingBarProvider.includeBar = true; // Show the bar.
 } ]);
 
-app.controller('payScaleMasterController', function($scope, $http, $location) {
-	$scope.submitAddJobPayScale = function() {
+app.controller('itemMasterController', function($scope, $http, $location) {
+	$scope.submitAddItem = function() {
 
 		document.getElementById("loader").style.display="block";
 		
 	 
 		var postData = {
-				payscaleId : $scope.payscaleId,
-			jobId : $scope.jobId,
+				itemId : $scope.itemId,
+				itemName : $scope.itemName,
 			 
-			gradeBasic : $scope.gradeBasic,
-			gradeTa : $scope.gradeTa,
-			gradeHra : $scope.gradeHra,
-			gradeBonus : $scope.gradeBonus,
-			gradeOther : $scope.gradeOther,
-			gradePf : $scope.gradePf,
-			gradePt : $scope.gradePt,
-			graduity : $scope.graduity,
-			mediclaim : $scope.mediclaim,
-			gradeGrossSalary : $scope.gradeGrossSalary,
-			gradeNetSalary : $scope.gradeNetSalary,
-			isUsed : 1,
+				typeId : $scope.typeId,
+				designNo : $scope.designNo,
+				barcode : $scope.barcode,
+				itemSize : $scope.itemSize,
+				itemQuantity : $scope.itemQuantity,
+				itemPrice : $scope.itemPrice,
+				poId : $scope.poId
+			 
+			 
 		};
 
 		$http({
 			method : 'POST',
-			url : '/api/hr/addPayScaleDetails',
+			url : '/Baraati/item/addItem',
 			data : postData
 		}).then(function successCallback(response) {
-			refreshData();
-		
+			//refreshData();
+			document.getElementById("loader").style.display="none";
 		
 
 		}, function errorsCallback(response) {
@@ -48,14 +45,14 @@ app.controller('payScaleMasterController', function($scope, $http, $location) {
 
 	$scope.init = function() {
 	 
-		refreshData();
+		//refreshData();
 	};
 
 	function refreshData()
 	{
 
 
-		$http({
+		/*$http({
 			method : 'GET',
 			url : '/api/hr/getAllPayScale',
 			 
@@ -68,7 +65,7 @@ app.controller('payScaleMasterController', function($scope, $http, $location) {
 				}, function errorsCallback(response) {
 					console.log(respose);
 					document.getElementById("loader").style.display="none";
-				});
+				});*/
 	}
 	
 	
