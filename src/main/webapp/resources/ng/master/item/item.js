@@ -9,7 +9,7 @@ app.controller('itemMasterController', function($scope, $http, $location) {
 	$scope.submitAddItem = function() {
 
 		document.getElementById("loader").style.display="block";
-		
+		 
 	 
 		var postData = {
 				itemId : $scope.itemId,
