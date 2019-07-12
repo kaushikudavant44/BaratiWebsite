@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mavrik.baraati.model.Vendors;
@@ -30,19 +32,21 @@ public class VendorController {
 	 * @return vendor
 	 */
 	@PostMapping("/insertVendor")
-	public Vendors insertVendor(HttpServletRequest request) {
+	public String insertVendor(@RequestBody Vendors vendor) {
 		
-		Vendors vendor=new Vendors();
 		
-		vendor.setIsUsed(0);
+		System.out.println("Vendor "+vendor.toString());
+		vendorRepository.save(vendor);
+		
+		/*vendor.setIsUsed(0);
 		vendor.setVendorAddress(request.getParameter("address"));
 		vendor.setVendorContact1(request.getParameter("contact1"));
 		vendor.setVendorContact2(request.getParameter("contact2"));
 		vendor.setVendorEmail(request.getParameter("email"));
 		vendor.setVendorGst(request.getParameter("gst"));
-		vendor.setVendorName(request.getParameter("name"));
+		vendor.setVendorName(request.getParameter("name"));*/
 		
-		return vendorRepository.save(vendor);
+		return "master/vendor/addVendor";
 	}
 	
 	/**
