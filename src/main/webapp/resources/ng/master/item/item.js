@@ -45,7 +45,7 @@ app.controller('itemMasterController', function($scope, $http, $location) {
 
 	$scope.init = function() {
 	 
-		//refreshData();
+		refreshData();
 	};
 
 	function refreshData()

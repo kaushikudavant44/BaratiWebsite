@@ -28,7 +28,7 @@ app.controller('vendorMasterController', function($scope, $http, $location) {
 			url : '/baraati/vendor/insertVendor',
 			data : postData
 		}).then(function successCallback(response) {
-		//	refreshData();
+			refreshData();
 		alert("Data Save");
 		
 
@@ -51,12 +51,12 @@ app.controller('vendorMasterController', function($scope, $http, $location) {
 
 		$http({
 			method : 'GET',
-			url : '/api/hr/getAllPayScale',
+			url : '/baraati/vendor/getAllVendors',
 			 
 		}).then(
 				function successCallback(response) {	
 					 
-					 $scope.payScale = response.data; 
+					 $scope.vendors = response.data; 
 						document.getElementById("loader").style.display="none";
 				}, function errorsCallback(response) {
 					console.log(respose);
@@ -64,5 +64,7 @@ app.controller('vendorMasterController', function($scope, $http, $location) {
 				});
 	
 	
-	}
+	};
+	
+});
 	

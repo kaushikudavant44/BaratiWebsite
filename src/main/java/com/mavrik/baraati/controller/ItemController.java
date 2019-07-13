@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mavrik.baraati.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +38,11 @@ public class ItemController {
 		}
 		return item;
 	}
+	/**
+	 * 
+	 * @param item
+	 * @return
+	 */
 	@PostMapping("/addItem")
 	public Item addItem(@RequestBody Item item) {
 		

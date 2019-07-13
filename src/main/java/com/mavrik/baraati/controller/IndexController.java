@@ -13,4 +13,10 @@ public class IndexController {
 		
 		return "master/item/addItem";
 	}
+	
+	@GetMapping("showCategoryForm")
+	public String showCategoryForm(Model model) {
+		
+		return "master/category/addCategory";
+	}
 }

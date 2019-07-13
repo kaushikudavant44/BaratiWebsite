@@ -1,6 +1,6 @@
 package com.mavrik.baraati.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mavrik.baraati.model.Vendors;
@@ -38,14 +37,6 @@ public class VendorController {
 		System.out.println("Vendor "+vendor.toString());
 		vendorRepository.save(vendor);
 		
-		/*vendor.setIsUsed(0);
-		vendor.setVendorAddress(request.getParameter("address"));
-		vendor.setVendorContact1(request.getParameter("contact1"));
-		vendor.setVendorContact2(request.getParameter("contact2"));
-		vendor.setVendorEmail(request.getParameter("email"));
-		vendor.setVendorGst(request.getParameter("gst"));
-		vendor.setVendorName(request.getParameter("name"));*/
-		
 		return "master/vendor/addVendor";
 	}
 	
@@ -60,6 +51,10 @@ public class VendorController {
 		return vendorRepository.findByVendorId(id);
 	}
 	
-	
+	@GetMapping("/getAllVendors")
+	public List<Vendors> getAllVendors() {
+		
+		return vendorRepository.findAllByIsUsed(0);
+	}
 
 }
