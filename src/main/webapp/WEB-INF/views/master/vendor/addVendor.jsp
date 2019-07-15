@@ -204,7 +204,7 @@
 
 											<div class="input-group spinner" data-trigger="spinner">
 												<div class="form-line">
-													<input type="text" class="form-control text-center"
+													<input type="text"  class="form-control text-center"
 														ng-model="vendorName" id="vendorName">
 												</div>
 
@@ -460,6 +460,6 @@
 
 
 	<script
-		src="${pageContext.request.contextPath}/resources/ng/master/item/item.js"></script>
+		src="${pageContext.request.contextPath}/resources/ng/master/vendor/vendor.js"></script>
 </body>
 </html>
