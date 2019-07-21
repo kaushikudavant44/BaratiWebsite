@@ -40,6 +40,9 @@ public class Item {
 	@Column(name="po_id")
 	private int poId;
 
+	@Column(name="is_used")
+	private int isUsed;
+	
 	
 	/**
 	 * @return the itemId
@@ -167,14 +170,24 @@ public class Item {
 		this.poId = poId;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public int getIsUsed() {
+		return isUsed;
+	}
+
+	public void setIsUsed(int isUsed) {
+		this.isUsed = isUsed;
+	}
+
 	@Override
 	public String toString() {
 		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", typeId=" + typeId + ", designNo=" + designNo
 				+ ", barcode=" + barcode + ", itemSize=" + itemSize + ", itemQuantity=" + itemQuantity + ", itemPrice="
-				+ itemPrice + ", poId=" + poId + "]";
+				+ itemPrice + ", poId=" + poId + ", isUsed=" + isUsed + "]";
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	 
 	
 }

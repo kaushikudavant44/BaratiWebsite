@@ -10,4 +10,6 @@ public interface CategoryRepository extends JpaRepository<Categories,Integer>{
 
 	
 	List<Categories> findAllByIsUsed(int isUsed);
+
+	List<Categories> findByIsUsed(int i);
 }

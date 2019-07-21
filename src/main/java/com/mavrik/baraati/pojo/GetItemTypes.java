@@ -1,4 +1,4 @@
-package com.mavrik.baraati.model;
+package com.mavrik.baraati.pojo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,13 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/**
- * @author Kaushik Udavant
- *
- */
+ 
 @Entity
-@Table(name = "m_item_type")
-public class ItemTypes {
+ 
+public class GetItemTypes {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +19,17 @@ public class ItemTypes {
 
 	@Column(name = "cat_id")
 	private int catId;
+	
+	@Column(name="category_name")
+	private String categoryName;
+	
 
 	@Column(name = "sub_cat_id")
 	private int subCatId;
-
+	
+	@Column(name="sub_cat_name")
+	private String subCatName;
+	
 	@Column(name = "item_type")
 	private String itemType;
 	
@@ -84,12 +88,28 @@ public class ItemTypes {
 		this.isUsed = isUsed;
 	}
 
-	@Override
-	public String toString() {
-		return "ItemTypes [typeId=" + typeId + ", catId=" + catId + ", subCatId=" + subCatId + ", itemType=" + itemType
-				+ ", isUsed=" + isUsed + "]";
+	public String getCategoryName() {
+		return categoryName;
 	}
 
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getSubCatName() {
+		return subCatName;
+	}
+
+	public void setSubCatName(String subCatName) {
+		this.subCatName = subCatName;
+	}
+
+	@Override
+	public String toString() {
+		return "GetItemTypes [typeId=" + typeId + ", catId=" + catId + ", categoryName=" + categoryName + ", subCatId="
+				+ subCatId + ", subCatName=" + subCatName + ", itemType=" + itemType + ", isUsed=" + isUsed + "]";
+	}
+ 
  
 	 
 }

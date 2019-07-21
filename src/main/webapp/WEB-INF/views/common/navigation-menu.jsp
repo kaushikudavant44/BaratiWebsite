@@ -34,7 +34,7 @@
 		<ul class="list" id="ul">
 			<li class="accordion-toggle "><a
 				href="${pageContext.request.contextPath}/home"> <i
-					class="material-icons">home</i> <span>Home</span>
+					class="material-icons">Home</i> <span>Home</span>
 			</a></li>
 
 
@@ -44,8 +44,9 @@
 				<ul class="ml-menu">
 
 					<li><a href="pages/ui/alerts.html">Item</a></li>
-					<li><a href="${pageContext.request.contextPath}/addNewStaffMember">Staff</a></li>
-					<li><a href="${pageContext.request.contextPath}/addNewVendor">Vendor</a></li>
+					<li><a href="${pageContext.request.contextPath}/addNewStaffMember">Category</a></li>
+					<li><a href="${pageContext.request.contextPath}/addNewVendor">Sub Category</a></li>
+					<li><a href="${pageContext.request.contextPath}/addNewVendor">Item</a></li>
 					<li><a href="pages/ui/alerts.html">Vendor</a></li>
 
 
@@ -207,7 +208,7 @@
 		<div class="copyright">
 			&copy;
 			<fmt:formatDate value="${date}" pattern="yyyy" />
-			<a href="javascript:void(0);">Bionische Technology Pvt. Ltd.</a>
+			<a href="javascript:void(0);">Mavric Soft.</a>
 		</div>
 	</div>
 	<!-- #Footer -->

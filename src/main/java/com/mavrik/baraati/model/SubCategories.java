@@ -22,11 +22,14 @@ public class SubCategories {
 	@Column(name="sub_cat_id", length=11)
 	private int subCatId;
 	
+	@Column(name="category_id", length=11)
+	private int categoryId;
+	
 	@Column(name="sub_cat_name")
 	private String subCatName;
 	
-	@Column(name="isUsed")
-	private int is_used;
+	@Column(name="is_used")
+	private int isUsed;
 
 	/**
 	 * @return the subCatId
@@ -59,25 +62,35 @@ public class SubCategories {
 	/**
 	 * @return the is_used
 	 */
-	public int getIs_used() {
-		return is_used;
+	 
+
+	public int getCategoryId() {
+		return categoryId;
 	}
 
-	/**
-	 * @param is_used the is_used to set
-	 */
-	public void setIs_used(int is_used) {
-		this.is_used = is_used;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
+
+	public int getIsUsed() {
+		return isUsed;
+	}
+
+	public void setIsUsed(int isUsed) {
+		this.isUsed = isUsed;
+	}
+
+	@Override
+	public String toString() {
+		return "SubCategories [subCatId=" + subCatId + ", categoryId=" + categoryId + ", subCatName=" + subCatName
+				+ ", isUsed=" + isUsed + "]";
+	}
+
+	 
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
-	@Override
-	public String toString() {
-		return "SubCategories [subCatId=" + subCatId + ", subCatName=" + subCatName + ", is_used=" + is_used + "]";
-	}
-	
-	
+	 
 	
 }

@@ -7,7 +7,7 @@
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 	name="viewport">
-<title>Add / View Item</title>
+<title>Add / View Item Type</title>
 <!-- Favicon-->
 <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 
@@ -86,10 +86,10 @@
 	rel="stylesheet" />
 
 <!-- Colorpicker Css -->
-<link
+<%-- <link
 	href="${pageContext.request.contextPath}/resources/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css"
 	rel="stylesheet" />
-
+ --%>
 <!-- Dropzone Css -->
 <link
 	href="${pageContext.request.contextPath}/resources/plugins/dropzone/dropzone.css"
@@ -111,9 +111,9 @@
 	rel="stylesheet">
 
 <!-- Bootstrap Select Css -->
-<link
+<%-- <link
 	href="${pageContext.request.contextPath}/resources/plugins/bootstrap-select/css/bootstrap-select.css"
-	rel="stylesheet" />
+	rel="stylesheet" /> --%>
 
 <!-- noUISlider Css -->
 <link
@@ -181,115 +181,75 @@
 			<div class="container-fluid"></div>
 
 
-			<div class="body" ng-controller="itemMasterController">
+			<div class="body" ng-controller="itemTypeController">
 				<div class="row clearfix">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="card">
 							<div class="header">
 
 
-								<h2 class="card-inside-title">ADD ITEM DETAILS</h2>
+								<h2 class="card-inside-title">ADD ITEM TYPE DETAILS</h2>
 
 							</div>
 							<div class="body">
 
-								<form name="payScaleForm" ng-submit="submitAddItem()">
+								<form name="payScaleForm" ng-submit="submitAddItemType()">
 									<div class="row clearfix">
 
 										<input type="hidden" ng-model="itemId" id="itemId"
 											ng-value="0">
 											
 											<div class="col-md-4">
-											<b>Item Name</b>
 
-											  <div class="input-group">
-												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="itemName" id="itemName"  placeholder="Item name"  >
-												</div>
-												 
-											</div>
-										</div>
-										
-										<div class="col-md-4">
-
-											<b>Item type</b> <select class="form-control"
-												ng-model="typeId" id="typeId" required="required">
+											<b>Category</b> <select class="form-control" ng-change="getSubCategory()"
+												ng-model="catId" id="catId" required="required">
 												 
 												 
-													<option value="" selected="selected" disabled="disabled">Select Item type</option>
-													<c:forEach items="${itemTypesList}" var="itemType">
-													<option value="${itemType.typeId}" >${itemType.itemType}</option>
-													</c:forEach>
+													<option value="" selected="selected" disabled="disabled">Select Category</option>
 												 
+												 
+												 <c:forEach var="category" items="${categoryList}">
+												 	<option value="${category.categoryId}" >${category.categoryName}</option>
+												 											 
+												 </c:forEach>
 											</select>
 
 										</div>
 										<div class="col-md-4">
-											<b>Design No</b>
+
+											<b>Sub Category</b> <select class="form-control browser-default custom-select" 
+											
+											
+											
+												ng-model="subCatId" id="subCatId" required="required">
+												 
+												 
+													<option value="" disabled="disabled" selected="selected">Select Sub Category</option>
+													 
+												 <option ng-repeat="subCategory in subCategoryList" value="{{subCategory.subCatId}}">
+												 
+												 {{ subCategory.subCatName }}
+												 
+												 
+												 </option>
+												 
+												 
+											</select>
+
+										</div>
+										
+										<div class="col-md-4">
+											<b>Item Type Title</b>
 
 											  <div class="input-group">
 												<div class="form-line">
 													<input type="text" class="form-control text-center"
-														ng-model="designNo" id="designNo"  placeholder="Design No"  >
+														ng-model="itemType" id="itemType"  placeholder="Item name"  >
 												</div>
 												 
-											</div>
-										</div>
-										<div class="col-md-4">
-											<b>Bar code</b>
-
-											  <div class="input-group">
-												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="barcode" id="barcode"  placeholder="Bar code"  >
-												</div>
-												 
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<b>Size</b>
-
-											  <div class="input-group">
-												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="itemSize" id="itemSize"  placeholder="Item Size"  >
-												</div>
-												 
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<b>Item Quantity </b>
-
-											<div class="input-group " >
-												<div class="form-line">
-													<input type="number" min="1" value="0" class="form-control text-center"
-														ng-model="itemQuantity" id="itemQuantity" placeholder="Item Quantity"> 
-												</div>
-												 
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<b>Item Price (Rs.)</b>
-
-											<div class="input-group spinner" data-trigger="spinner">
-												<div class="form-line">
-													<input type="text" class="form-control text-center" id="itemPrice"
-														ng-model="itemPrice" value="0" data-rule="currency" placeholder="Item Price">
-												</div> 
-												<span class="input-group-addon"> <a
-													href="javascript:;" class="spin-up" data-spin="up"><i
-														class="glyphicon glyphicon-chevron-up"></i></a> <a
-													href="javascript:;" class="spin-down" data-spin="down"><i
-														class="glyphicon glyphicon-chevron-down"></i></a>
-												</span>
 											</div>
 										</div>
 										 
- 
 
 										<div class="col-md-4">
 											<div class="col-md-4">
@@ -323,7 +283,7 @@
 						<div class="card">
 
 							<div class="header">
-								<h2>ITEM DETAILS DETAILS</h2>
+								<h2>JOB PAY SCALE DETAILS</h2>
 							</div>
 
 							<div class="body">
@@ -332,35 +292,33 @@
 										class="table table-bordered table-striped table-hover  dataTable">
 										<thead>
 											<tr>
-												<th>Item Name</th>
-												<th>Itme Type</th>
-												<th>Design No</th>
-												<th>Size</th>
-												<th>Item Quantity</th>
-												<th>Item Price</th>
-												 
+											<th>Type Title</th>
+												<th>Category</th>
+												<th>Sub Category</th>
+											 
+											  
+												<!-- <th>Action</th> -->
+ 
 											</tr>
 										</thead>
 										<tfoot>
 											<tr>
-												<th>Item Name</th>
-												<th>Itme Type</th>
-												<th>Design No</th>
-												<th>Size</th>
-												<th>Item Quantity</th>
-												<th>Item Price</th>
+												<th>Type Title</th>
+												<th>Category</th>
+												<th>Sub Category</th>
+												 
+											 
+												<!-- <th>Action</th> -->
 											</tr>
 										</tfoot>
 										<tbody>
-											<tr ng-repeat="item in itemList">
+											<tr ng-repeat="itemType in itemTypeList">
 
-												<td>{{ item.itemName }}</td>
-												<td>{{ item.itemType }}</td>
-												<td>{{ item.designNo }}</td>
-												<td>{{ item.itemSize }}</td>
-												<td>{{ item.itemQuantity }}</td>
-												<td>{{ item.itemPrice }}</td>
-												 
+												<td>{{ itemType.itemType }}</td>
+												<td>{{ itemType.categoryName }}</td>
+												<td>{{ itemType.subCatName }}</td>
+												
+												
 
 												<!-- <td><a ng-click="editJPayScale(pay)" class="edit-button"
 													style="cursor: pointer;">Edit</a></td> -->
@@ -397,8 +355,8 @@
 		src="${pageContext.request.contextPath}/resources/plugins/bootstrap/js/bootstrap.js"></script>
 
 	<!-- Select Plugin Js -->
-	<script
-		src="${pageContext.request.contextPath}/resources/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+	<%-- <script
+		src="${pageContext.request.contextPath}/resources/plugins/bootstrap-select/js/bootstrap-select.js"></script> --%>
 
 	<!-- Slimscroll Plugin Js -->
 	<script
@@ -447,8 +405,8 @@
 		src="${pageContext.request.contextPath}/resources/plugins/jquery-inputmask/jquery.inputmask.bundle.js"></script>
 
 	<!-- Multi Select Plugin Js -->
-	<script
-		src="${pageContext.request.contextPath}/resources/multi-select/js/jquery.multi-select.js"></script>
+	<%-- <script
+		src="${pageContext.request.contextPath}/resources/multi-select/js/jquery.multi-select.js"></script> --%>
 
 	<!-- Jquery Spinner Plugin Js -->
 	<script
@@ -468,6 +426,6 @@
 
 
 	<script
-		src="${pageContext.request.contextPath}/resources/ng/master/item/item.js"></script>
+		src="${pageContext.request.contextPath}/resources/ng/master/item/itemType.js"></script>
 </body>
 </html>
