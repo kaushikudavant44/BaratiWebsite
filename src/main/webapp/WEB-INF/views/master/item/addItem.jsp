@@ -198,77 +198,87 @@
 
 										<input type="hidden" ng-model="itemId" id="itemId"
 											ng-value="0">
-											
-											<div class="col-md-4">
+
+										<div class="col-md-4">
 											<b>Item Name</b>
 
-											  <div class="input-group">
+											<div class="input-group">
 												<div class="form-line">
 													<input type="text" class="form-control text-center"
-														ng-model="itemName" id="itemName"  placeholder="Item name"  >
+														ng-model="itemName" id="itemName" placeholder="Item name">
 												</div>
-												 
+
 											</div>
 										</div>
-										
+
 										<div class="col-md-4">
 
 											<b>Item type</b> <select class="form-control"
 												ng-model="typeId" id="typeId" required="required">
-												 
-												 
-													<option value="" selected="selected" disabled="disabled">Select Item type</option>
-													<c:forEach items="${itemTypesList}" var="itemType">
-													<option value="${itemType.typeId}" >${itemType.itemType}</option>
-													</c:forEach>
-												 
+
+
+												<option value="" selected="selected" disabled="disabled">Select
+													Item type</option>
+												<c:forEach items="${itemTypesList}" var="itemType">
+												<c:choose>
+												<c:when test="${itemType.typeId==item.typeId}">
+													<option value="${itemType.typeId}">${itemType.itemType}</option>
+												</c:when>
+												<c:otherwise>
+											
+													<option value="${itemType.typeId}">${itemType.itemType}</option>
+												
+												</c:otherwise>
+												</c:choose>
+												</c:forEach>
 											</select>
 
 										</div>
 										<div class="col-md-4">
 											<b>Design No</b>
 
-											  <div class="input-group">
+											<div class="input-group">
 												<div class="form-line">
 													<input type="text" class="form-control text-center"
-														ng-model="designNo" id="designNo"  placeholder="Design No"  >
+														ng-model="designNo" id="designNo" placeholder="Design No">
 												</div>
-												 
+
 											</div>
 										</div>
-										<div class="col-md-4">
+										<!-- <div class="col-md-4">
 											<b>Bar code</b>
 
-											  <div class="input-group">
+											<div class="input-group">
 												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="barcode" id="barcode"  placeholder="Bar code"  >
+													<input type="hidden" class="form-control text-center"
+														ng-model="barcode" id="barcode" placeholder="Bar code">
 												</div>
-												 
-											</div>
-										</div>
 
+											</div>
+										</div> -->
+										<input type="hidden" class="form-control text-center"
+														ng-model="barcode" id="barcode" placeholder="Bar code">
 										<div class="col-md-4">
 											<b>Size</b>
 
-											  <div class="input-group">
+											<div class="input-group">
 												<div class="form-line">
 													<input type="text" class="form-control text-center"
-														ng-model="itemSize" id="itemSize"  placeholder="Item Size"  >
+														ng-model="itemSize" id="itemSize" placeholder="Item Size">
 												</div>
-												 
+
 											</div>
 										</div>
 
 										<div class="col-md-4">
 											<b>Item Quantity </b>
 
-											<div class="input-group " >
+											<div class="input-group ">
 												<div class="form-line">
-													<input type="number" min="1" value="0" class="form-control text-center"
-														ng-model="itemQuantity" id="itemQuantity" placeholder="Item Quantity"> 
+													<input type="number" class="form-control text-center" ng-model="itemQuantity"
+														id="itemQuantity" placeholder="Item Quantity">
 												</div>
-												 
+
 											</div>
 										</div>
 
@@ -277,9 +287,10 @@
 
 											<div class="input-group spinner" data-trigger="spinner">
 												<div class="form-line">
-													<input type="text" class="form-control text-center" id="itemPrice"
-														ng-model="itemPrice" value="0" data-rule="currency" placeholder="Item Price">
-												</div> 
+													<input type="text" class="form-control text-center"
+														id="itemPrice" ng-model="itemPrice" value="0"
+														data-rule="currency" placeholder="Item Price">
+												</div>
 												<span class="input-group-addon"> <a
 													href="javascript:;" class="spin-up" data-spin="up"><i
 														class="glyphicon glyphicon-chevron-up"></i></a> <a
@@ -288,8 +299,8 @@
 												</span>
 											</div>
 										</div>
-										 
- 
+
+
 
 										<div class="col-md-4">
 											<div class="col-md-4">
@@ -319,7 +330,8 @@
 
 
 
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" data-ng-init="init()">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+						data-ng-init="init()">
 						<div class="card">
 
 							<div class="header">
@@ -332,38 +344,43 @@
 										class="table table-bordered table-striped table-hover  dataTable">
 										<thead>
 											<tr>
+												<th>Sr. No.</th>
 												<th>Item Name</th>
 												<th>Itme Type</th>
 												<th>Design No</th>
 												<th>Size</th>
 												<th>Item Quantity</th>
 												<th>Item Price</th>
-												 
+												<th>Edit</th>
+												<th>Delete</th>
 											</tr>
 										</thead>
 										<tfoot>
 											<tr>
+												<th>Sr. No.</th>
 												<th>Item Name</th>
 												<th>Itme Type</th>
 												<th>Design No</th>
 												<th>Size</th>
 												<th>Item Quantity</th>
 												<th>Item Price</th>
+												<th>Edit</th>
+												<th>Delete</th>
 											</tr>
 										</tfoot>
 										<tbody>
 											<tr ng-repeat="item in itemList">
-
+												<td>{{$index+1}}</td>
 												<td>{{ item.itemName }}</td>
 												<td>{{ item.itemType }}</td>
 												<td>{{ item.designNo }}</td>
 												<td>{{ item.itemSize }}</td>
 												<td>{{ item.itemQuantity }}</td>
 												<td>{{ item.itemPrice }}</td>
-												 
-
-												<!-- <td><a ng-click="editJPayScale(pay)" class="edit-button"
-													style="cursor: pointer;">Edit</a></td> -->
+												<td><a ng-click="editItemDetails(item)"
+													class="edit-button" style="cursor: pointer;">Edit</a></td>
+												<td><a ng-click="deleteItem(item)"
+													class="edit-button" style="cursor: pointer;">Delete</a></td>
 
 
 											</tr>
@@ -469,5 +486,7 @@
 
 	<script
 		src="${pageContext.request.contextPath}/resources/ng/master/item/item.js"></script>
+		
+	
 </body>
 </html>

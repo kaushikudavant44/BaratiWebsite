@@ -55,28 +55,12 @@ app.controller('subCategoryMasterController', function($scope, $http, $location)
 				});
 	}
 
-	/*$scope.editJPayScale = function(pay) {
+	$scope.editSubCategory = function(subCategory) {
 
-		$scope.payscaleId = pay.payscaleId;
-		$scope.gradeBasic = pay.gradeBasic;
-		$scope.gradeTa = pay.gradeTa;
-		$scope.gradeHra = pay.gradeHra;
-		$scope.gradeBonus = pay.gradeBonus;
-		$scope.gradeOther = pay.gradeOther;
-		$scope.gradePf = pay.gradePf;
-		$scope.gradePt = pay.gradePt;
-		$scope.graduity = pay.graduity;
-		$scope.mediclaim = pay.mediclaim;
-		$scope.gradeGrossSalary = pay.gradeGrossSalary;
-		$scope.gradeNetSalary = pay.gradeNetSalary;
-		$scope.jobId = pay.jobId;
-		//$('#jobId option[value='+pay.jobId+']');
-
-		$("[data-id=jobId]").html(pay.jobName);
-
-		$('#jobId option[value="' + pay.jobId + '"]').attr("selected",
-				"selected");	
-		$('#gradeBasic').focus();
-	};*/
+		$scope.catId = subCategory.catId;
+		$scope.subCategoryId = subCategory.subCategoryId;
+		$scope.isUsed = subCategory.isUsed;
+			
+	};
 
 });

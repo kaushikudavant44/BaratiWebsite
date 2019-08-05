@@ -7,7 +7,7 @@
 <meta
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 	name="viewport">
-<title>Add / View Vendors</title>
+<title>Add / View Category</title>
 <!-- Favicon-->
 <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 
@@ -181,103 +181,51 @@
 			<div class="container-fluid"></div>
 
 
-			<div class="body" ng-controller="vendorMasterController">
+			<div class="body" ng-controller="categoryMasterController">
 				<div class="row clearfix">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="card">
 							<div class="header">
 
 
-								<h2 class="card-inside-title">ADD VENDOR DETAILS</h2>
+								<h2 class="card-inside-title">ADD SUBCATEGORY DETAILS</h2>
 
 							</div>
 							<div class="body">
 
-								<form name="vendorForm" ng-submit="submitVendor()">
+								<form name="categoryForm" ng-submit="submitAddCategory()">
 									<div class="row clearfix">
-
-										<input type="hidden" ng-model="vendorId" id="vendorId"
-											ng-value="0">
-
 										<div class="col-md-4">
-											<b>Vendor Name</b>
-
-										  <div class="input-group">
+											<b>Category Name</b>
+											<input type="hidden" class=""
+														ng-model="categoryId" id="categoryId">
+											<div class="input-group">
 												<div class="form-line">
-													<input type="text"  class="form-control text-center"
-														ng-model="vendorName" id="vendorName">
-												</div>
-
-											</div>
-										</div>
-
-										<!-- <div class="col-md-4">
-
-											<b>GST Number</b> <select class="form-control"
-												ng-model="gstNumber" id="gstNumber" required="required">
+												 <select class="form-control" ng-change="getSubCategory()"
+												ng-model="catId" id="catId" required="required">
 												 
 												 
-													<option value="1">1</option>
+													<option value="" selected="selected" disabled="disabled">Select Category</option>
 												 
+												 
+												 <c:forEach var="category" items="${categoryList}">
+												 	<option value="${category.categoryId}" >${category.categoryName}</option>
+												 											 
+												 </c:forEach>
 											</select>
-
-										</div> -->
-										<div class="col-md-4">
-											<b>GST Number</b>
-
-											<div class="input-group">
-												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="vendorGst" id="vendorGst">
 												</div>
-
+												
 											</div>
 										</div>
 										<div class="col-md-4">
-											<b>Address</b>
+											<b>Sub Category</b>
 
-											<div class="input-group">
+											  <div class="input-group">
 												<div class="form-line">
 													<input type="text" class="form-control text-center"
-														ng-model="vendorAddress">
+														ng-model="subCategory" id="subCategory"  placeholder="Sub Category Name"  >
 												</div>
-
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<b>Contact Number 1</b>
-
-											<div class="input-group">
-												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="vendorContact1">
-												</div>
-
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<b>Contact Number 2</b>
-
-											<div class="input-group">
-												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="vendorContact2">
-												</div>
-
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<b>Email </b>
-
-											<div class="input-group">
-												<div class="form-line">
-													<input type="email" class="form-control text-center"
-														ng-model="vendorEmail">
-												</div>
-
+												 
 											</div>
 										</div>
 										<div class="col-md-4">
@@ -313,7 +261,7 @@
 						<div class="card">
 
 							<div class="header">
-								<h2>VENDORS DETAILS</h2>
+								<h2>CATEGORY DETAILS</h2>
 							</div>
 
 							<div class="body">
@@ -322,41 +270,26 @@
 										class="table table-bordered table-striped table-hover  dataTable">
 										<thead>
 											<tr>
-												<th>Sr. No.</th>
-												<th>Vendor Name</th>
-												<th>GST No</th>
-												<th>Address</th>
-												<th>Contact Numbers</th>
-												<th>Email</th>
+												<th>Sr No.</th>
+												<th>Category Name</th>
+												<th>Sub Category Name</th>
 												<th>Edit</th>
 												<th>Delete</th>
+												
 											</tr>
 										</thead>
-										<tfoot>
-											<tr>
-												<th>Sr. No.</th>
-												<th>Vendor Name</th>
-												<th>GST No</th>
-												<th>Address</th>
-												<th>Contact Numbers</th>
-												<th>Email</th>
-												<th>Edit</th>
-												<th>Delete</th>
-											</tr>
-										</tfoot>
+										
 										<tbody>
-											<tr ng-repeat="vendor in vendors">
-
-												<td>{{ $index + 1}}</td>
-												<td>{{ vendor.vendorName }}</td>
-												<td>{{ vendor.vendorGst }}</td>
-												<td>{{ vendor.vendorAddress }}</td>
-												<td>{{ vendor.vendorContact1 }} {{ vendor.vendorContact2 }}</td>
-												<td>{{ vendor.vendorEmail }}</td>
-												<td><a ng-click="editVendorDetails(vendor)"
+											<tr ng-repeat="subCategory in subCategories">
+												<td></td>
+												<td>{{subCategory.categoryName}}</td>
+												<td>{{ subCategory.subCategoryName }}</td>
+												
+												<td><a ng-click="editSubCategory(subCategory)"
 													class="edit-button" style="cursor: pointer;">Edit</a></td>
-												<td><a ng-click="deleteVendor(vendor)"
+													<td><a ng-click="deleteSubCategory(subCategory)"
 													class="edit-button" style="cursor: pointer;">Delete</a></td>
+
 
 											</tr>
 										</tbody>
@@ -460,6 +393,6 @@
 
 
 	<script
-		src="${pageContext.request.contextPath}/resources/ng/master/Vendor/vendor.js"></script>
+		src="${pageContext.request.contextPath}/resources/ng/master/category/category.js"></script>
 </body>
 </html>

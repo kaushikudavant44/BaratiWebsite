@@ -12,7 +12,8 @@ app.controller('categoryMasterController', function($scope, $http, $location) {
 
 		var postData = {
 
-			categoryName : $scope.categoryName
+			categoryId : $scope.categoryId,
+			categoryName : $scope.categoryName,
 
 		};
 
@@ -42,41 +43,52 @@ app.controller('categoryMasterController', function($scope, $http, $location) {
 		$http({
 			method : 'GET',
 			url : '/Baraati/category/getAllCategories',
-			 
-		}).then(
-				function successCallback(response) {	
 
-					 console.log("Success "+response);
-					 $scope.categories = response.data; 
-						document.getElementById("loader").style.display="none";
-				}, function errorsCallback(response) {
-					console.log(respose);
-					document.getElementById("loader").style.display="none";
-				});
+		}).then(function successCallback(response) {
+
+			console.log("Success " + response);
+			$scope.categories = response.data;
+			document.getElementById("loader").style.display = "none";
+		}, function errorsCallback(response) {
+			console.log(respose);
+			document.getElementById("loader").style.display = "none";
+		});
 	}
 
-	/*$scope.editJPayScale = function(pay) {
+	$scope.editCategory = function(category) {
 
-		$scope.payscaleId = pay.payscaleId;
-		$scope.gradeBasic = pay.gradeBasic;
-		$scope.gradeTa = pay.gradeTa;
-		$scope.gradeHra = pay.gradeHra;
-		$scope.gradeBonus = pay.gradeBonus;
-		$scope.gradeOther = pay.gradeOther;
-		$scope.gradePf = pay.gradePf;
-		$scope.gradePt = pay.gradePt;
-		$scope.graduity = pay.graduity;
-		$scope.mediclaim = pay.mediclaim;
-		$scope.gradeGrossSalary = pay.gradeGrossSalary;
-		$scope.gradeNetSalary = pay.gradeNetSalary;
-		$scope.jobId = pay.jobId;
-		//$('#jobId option[value='+pay.jobId+']');
+		$scope.categoryId = category.categoryId;
+		$scope.categoryName = category.categoryName;
+		$scope.isUsed = category.isUsed;
 
-		$("[data-id=jobId]").html(pay.jobName);
+	};
 
-		$('#jobId option[value="' + pay.jobId + '"]').attr("selected",
-				"selected");	
-		$('#gradeBasic').focus();
-	};*/
+	$scope.deleteCategory = function(category) {
 
+			$scope.categoryId = category.categoryId;
+
+	if(confirm("Are you sure to delete category?")){
+		$http({
+			method : 'PUT',
+			url : '/Baraati/category/deleteCategory',
+			params: { 'categoryId' : $scope.categoryId}
+			
+
+		}).then(function successCallback(response) {
+
+			$scope.info=response.data;
+			
+			
+			refreshData();
+			alert($scope.info.message);
+			document.getElementById("loader").style.display = "none";
+
+		}, function errorsCallback(response) {
+			console.log(respose);
+			document.getElementById("loader").style.display = "none";
+			alert("error");
+		});
+
+	};
+	}
 });

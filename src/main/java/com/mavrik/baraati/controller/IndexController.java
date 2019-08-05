@@ -31,16 +31,14 @@ public class IndexController {
 	public String showAddItemType(Model model) {
 		
 		
-		model.addAttribute("categoryList",categoryRepository.findAllByIsUsed(0));
+		model.addAttribute("categoryList",categoryRepository.findByIsUsed(0));
 		
 		return "master/item/addItemType";
 	}
 	
 	@GetMapping("showAddItem")
 	public String showAddItem(Model model) {
-		
-		
-	 
+					 
 		model.addAttribute("itemTypesList",itemTypesRepository.findByIsUsed(0));
 		return "master/item/addItem";
 	}

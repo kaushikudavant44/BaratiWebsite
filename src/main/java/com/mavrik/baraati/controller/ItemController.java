@@ -6,18 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mavrik.baraati.common.Info;
 import com.mavrik.baraati.model.Item;
 import com.mavrik.baraati.model.ItemTypes;
+import com.mavrik.baraati.model.ItemWithType;
 import com.mavrik.baraati.model.SubCategories;
 import com.mavrik.baraati.pojo.GetItemTypes;
 import com.mavrik.baraati.repository.GetItemTypesRepository;
 import com.mavrik.baraati.repository.ItemRepository;
 import com.mavrik.baraati.repository.ItemTypesRepository;
+import com.mavrik.baraati.repository.ItemWithTypeRepository;
 import com.mavrik.baraati.repository.SubCategoriesRepository;
 
 /**
@@ -38,6 +42,9 @@ public class ItemController {
 	SubCategoriesRepository subCategoriesRepository;
 	@Autowired
 	GetItemTypesRepository getItemTypesRepository;
+	
+	@Autowired
+	ItemWithTypeRepository itemWithTypeRepository;
 	/**
 	 * 
 	 * @param itemId
@@ -61,6 +68,8 @@ public class ItemController {
 	@PostMapping("/addItem")
 	public Item addItem(@RequestBody Item item) {
 		
+		
+		System.out.println("In add item");
 		Item item1 = itemRepository.save(item);
 
 		if (item1 == null) {
@@ -108,6 +117,39 @@ public class ItemController {
 		
 		return itemRepository.findByIsUsedOrderByItemNameAsc(0);
  
+	}
+	
+	@GetMapping("/getAllItemWithItemType")
+	public List<ItemWithType> getAllItemWithItemType() {
+		
+		return itemWithTypeRepository.findAllItemWithItemType();
+ 
+	}
+	
+	/**
+	 * 
+	 * @param itemId
+	 * @return
+	 */
+	@PutMapping("/deleteItem")
+	public Info deleteCategory(@RequestParam("itemId") int itemId) {
+		Info info = new Info();
+
+		System.out.println("itemId id" + itemId);
+
+		int status = itemRepository.updateIsUsedByItemId(itemId);
+		if (status == 1) {
+			info.setError(false);
+			info.setMessage("Deleted Successfully");
+		} else {
+
+			info.setError(true);
+			info.setMessage("Vendor not deleted. Please try again.");
+		}
+		System.out.println(info.toString());
+		
+		return info;
+		
 	}
 	
 }

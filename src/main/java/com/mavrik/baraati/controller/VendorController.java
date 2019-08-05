@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mavrik.baraati.common.Info;
 import com.mavrik.baraati.model.Vendors;
 import com.mavrik.baraati.repository.VendorRepository;
 
@@ -31,13 +34,11 @@ public class VendorController {
 	 * @return vendor
 	 */
 	@PostMapping("/insertVendor")
-	public String insertVendor(@RequestBody Vendors vendor) {
+	public Vendors insertVendor(@RequestBody Vendors vendor) {
 		
 		
-		System.out.println("Vendor "+vendor.toString());
-		vendorRepository.save(vendor);
 		
-		return "master/vendor/addVendor";
+		return vendorRepository.save(vendor);
 	}
 	
 	/**
@@ -54,7 +55,28 @@ public class VendorController {
 	@GetMapping("/getAllVendors")
 	public List<Vendors> getAllVendors() {
 		
-		return vendorRepository.findAllByIsUsed(0);
+		return vendorRepository.findByIsUsed(0);
+	}
+	
+	@PutMapping("/deleteVendor")
+	public Info deleteCategory(@RequestParam("vendorId") int vendorId) {
+		Info info = new Info();
+
+		System.out.println("category id" + vendorId);
+
+		int status = vendorRepository.updateIsUsedByVendorId(vendorId);
+		if (status == 1) {
+			info.setError(false);
+			info.setMessage("Deleted Successfully");
+		} else {
+
+			info.setError(true);
+			info.setMessage("Vendor not deleted. Please try again.");
+		}
+		System.out.println(info.toString());
+		
+		return info;
+		
 	}
 
 }

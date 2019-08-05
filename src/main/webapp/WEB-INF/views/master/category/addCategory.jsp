@@ -196,14 +196,14 @@
 								<form name="categoryForm" ng-submit="submitAddCategory()">
 									<div class="row clearfix">
 										<div class="col-md-4">
-											<b>Category Name</b>
-
-											<div class="input-group spinner" data-trigger="spinner">
+											<b>Category Name</b> <input type="hidden"
+												ng-model="categoryId" id="categoryId" ng-value="0">
+											<div class="input-group">
 												<div class="form-line">
-													<input type="text" class=""
-														ng-model="categoryName" id="categoryName">
+													<input type="text" ng-model="categoryName"
+														id="categoryName">
 												</div>
-												
+
 											</div>
 										</div>
 										<div class="col-md-4">
@@ -252,24 +252,17 @@
 												<th>Category Name</th>
 												<th>Edit</th>
 												<th>Delete</th>
-												
+
 											</tr>
 										</thead>
-										<!-- <tfoot>
-											<tr>
-												<th>Sr No.</th>
-												<th>Category Name</th>
-												<th>Edit</th>
-												<th>Delete</th>
-											</tr>
-										</tfoot> -->
+
 										<tbody>
 											<tr ng-repeat="category in categories">
-
+												<td>{{ $index+1 }}</td>
 												<td>{{ category.categoryName }}</td>
-												<td><a ng-click="editCategory(pay)"
+												<td><a ng-click="editCategory(category)"
 													class="edit-button" style="cursor: pointer;">Edit</a></td>
-													<td><a ng-click="deleteCategory(pay)"
+												<td><a ng-click="deleteCategory(category)"
 													class="edit-button" style="cursor: pointer;">Delete</a></td>
 
 
