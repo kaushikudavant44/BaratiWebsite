@@ -15,7 +15,7 @@ app.controller('categoryMasterController', function($scope, $http, $location) {
 			categoryId : $scope.categoryId,
 			categoryName : $scope.categoryName,
 
-		};
+		}; 
 
 		$http({
 			method : 'POST',
