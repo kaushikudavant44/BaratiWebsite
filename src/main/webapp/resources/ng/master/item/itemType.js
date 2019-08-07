@@ -88,9 +88,64 @@ app.controller('itemTypeController', function($scope, $http, $location) {
 					document.getElementById("loader").style.display="none";
 				
 		}); 
+		 
+		 
+		 
 	};
 	
 	
+	$scope.editItemType = function(itemType) {
+
+		alert(itemType.categoryName);
+		
+		 $scope.itemType = itemType.itemType;
+		/* $scope.categoryName = itemType.categoryName;
+		 $scope.subCatName = itemType.subCatName;
+		 $scope.subCatId = itemType.subCatId;*/
+		 $scope.catId = itemType.catId;
+		
+			$("[data-id=catId]").html(itemType.categoryName);
+			$('#catId option[value="'+itemType.catId+'"]').attr("selected", "selected");
+			
+			 angular.element(document.getElementById("catId")).scope().getSubCategory();
+
+			$("[data-id=subCatId]").html(itemType.subCatName);
+			$('#subCatId option[value="'+itemType.subCatId+'"]').attr("selected", "selected");
+			
+			
+	//	 $('select').prop('selectedIndex', itemType.categoryName); 
+		
 	
+	};
+	
+/*	$scope.deleteItemType = function(item) {
+
+		$scope.itemId = item.itemId;
+
+		if (confirm("Are you sure to delete category?")) {
+			$http({
+				method : 'PUT',
+				url : '/Baraati/item/deleteItem',
+				params : {
+					'itemId' : $scope.itemId
+				}
+
+			}).then(function successCallback(response) {
+
+				$scope.info = response.data;
+
+				refreshData();
+				alert($scope.info.message);
+				document.getElementById("loader").style.display = "none";
+
+			}, function errorsCallback(response) {
+				console.log(respose);
+				document.getElementById("loader").style.display = "none";
+				alert("error");
+			});
+
+		}
+		;
+	}*/
 		
 });

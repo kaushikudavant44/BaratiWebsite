@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mavrik.baraati.model;
+package com.mavrik.baraati.pojo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

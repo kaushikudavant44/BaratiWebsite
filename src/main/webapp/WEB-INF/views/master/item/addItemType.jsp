@@ -196,7 +196,7 @@
 								<form name="payScaleForm" ng-submit="submitAddItemType()">
 									<div class="row clearfix">
 
-										<input type="hidden" ng-model="itemId" id="itemId"
+										<input type="hidden" ng-model="typeId" id="typeId"
 											ng-value="0">
 											
 											<div class="col-md-4">
@@ -292,10 +292,11 @@
 										class="table table-bordered table-striped table-hover  dataTable">
 										<thead>
 											<tr>
-											<th>Type Title</th>
+												<th>Type Title</th>
 												<th>Category</th>
 												<th>Sub Category</th>
-											 
+											 	<th>Edit</th>
+												<th>Delete</th>
 											  
 												<!-- <th>Action</th> -->
  
@@ -306,6 +307,8 @@
 												<th>Type Title</th>
 												<th>Category</th>
 												<th>Sub Category</th>
+												<th>Edit</th>
+												<th>Delete</th>
 												 
 											 
 												<!-- <th>Action</th> -->
@@ -320,8 +323,10 @@
 												
 												
 
-												<!-- <td><a ng-click="editJPayScale(pay)" class="edit-button"
-													style="cursor: pointer;">Edit</a></td> -->
+												<td><a ng-click="editItemType(itemType)" class="edit-button"
+													style="cursor: pointer;">Edit</a></td>
+												<td><a ng-click="deleteItemType(itemType)" class="edit-button"
+													style="cursor: pointer;">Delete</a></td>
 
 
 											</tr>

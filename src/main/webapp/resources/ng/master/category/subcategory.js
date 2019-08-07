@@ -6,13 +6,20 @@ app.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 } ]);
 
 app.controller('subCategoryMasterController', function($scope, $http, $location) {
+	
+	
 	$scope.submitSubCategory = function() {
 
+		
+		
 		document.getElementById("loader").style.display = "block";
 
 		var postData = {
-
-			categoryName : $scope.subCategoryName
+			
+			subCatId : $scope.subCatId,
+			categoryId : $scope.categoryId,
+			subCatName : $scope.subCatName,
+			
 
 		};
 
@@ -21,6 +28,7 @@ app.controller('subCategoryMasterController', function($scope, $http, $location)
 			url : '/Baraati/category/insertSubCategory',
 			data : postData
 		}).then(function successCallback(response) {
+		
 			refreshData();
 			document.getElementById("loader").style.display = "none";
 
@@ -45,9 +53,10 @@ app.controller('subCategoryMasterController', function($scope, $http, $location)
 			 
 		}).then(
 				function successCallback(response) {	
-
+					
+					
 					 console.log("Success "+response);
-					 $scope.categories = response.data; 
+					 $scope.subCategories = response.data; 
 						document.getElementById("loader").style.display="none";
 				}, function errorsCallback(response) {
 					console.log(respose);
@@ -56,11 +65,49 @@ app.controller('subCategoryMasterController', function($scope, $http, $location)
 	}
 
 	$scope.editSubCategory = function(subCategory) {
+		
+		
 
-		$scope.catId = subCategory.catId;
-		$scope.subCategoryId = subCategory.subCategoryId;
-		$scope.isUsed = subCategory.isUsed;
+		$scope.subCatName = subCategory.subCatName;
+	//	$scope.categoryName = subCategory.categoryName;
+		
+		$("[data-id=categoryId]").html(subCategory.categoryName);
+		$('#categoryId option[value="'+subCategory.categoryId+'"]').attr("selected", "selected");
+		$scope.categoryId = subCategory.categoryId;
+		$scope.subCatId = subCategory.subCatId;
+	//	$scope.isUsed = subCategory.isUsed;
 			
 	};
+	
+	$scope.deleteSubCategory = function(subCategory) {
+
+		$scope.subCatId = subCategory.subCatId;
+
+		if (confirm("Are you sure to delete category?")) {
+			$http({
+				method : 'PUT',
+				url : '/Baraati/category/deleteSubCategory',
+				params : {
+					'subCatId' : $scope.subCatId
+				}
+
+			}).then(function successCallback(response) {
+
+				$scope.info = response.data;
+
+				refreshData();
+				alert($scope.info.message);
+				document.getElementById("loader").style.display = "none";
+
+			}, function errorsCallback(response) {
+				console.log(respose);
+				document.getElementById("loader").style.display = "none";
+				alert("error");
+			});
+
+		}
+		;
+	}
+	
 
 });

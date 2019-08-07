@@ -181,7 +181,7 @@
 			<div class="container-fluid"></div>
 
 
-			<div class="body" ng-controller="categoryMasterController">
+			<div class="body" ng-controller="subCategoryMasterController">
 				<div class="row clearfix">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="card">
@@ -193,16 +193,15 @@
 							</div>
 							<div class="body">
 
-								<form name="categoryForm" ng-submit="submitAddCategory()">
+								<form name="subCategoryForm" ng-submit="submitSubCategory()">
 									<div class="row clearfix">
 										<div class="col-md-4">
 											<b>Category Name</b>
-											<input type="hidden" class=""
-														ng-model="categoryId" id="categoryId">
+											<input type="hidden" ng-model="subCatId" id="subCatId" value="0">
 											<div class="input-group">
 												<div class="form-line">
 												 <select class="form-control" ng-change="getSubCategory()"
-												ng-model="catId" id="catId" required="required">
+												ng-model="categoryId" id="categoryId" required="required">
 												 
 												 
 													<option value="" selected="selected" disabled="disabled">Select Category</option>
@@ -223,7 +222,7 @@
 											  <div class="input-group">
 												<div class="form-line">
 													<input type="text" class="form-control text-center"
-														ng-model="subCategory" id="subCategory"  placeholder="Sub Category Name"  >
+														ng-model="subCatName" id="subCatName"  placeholder="Sub Category Name"  >
 												</div>
 												 
 											</div>
@@ -281,9 +280,9 @@
 										
 										<tbody>
 											<tr ng-repeat="subCategory in subCategories">
-												<td></td>
+												<td>{{$index+1}}</td>
 												<td>{{subCategory.categoryName}}</td>
-												<td>{{ subCategory.subCategoryName }}</td>
+												<td>{{subCategory.subCatName}}</td>
 												
 												<td><a ng-click="editSubCategory(subCategory)"
 													class="edit-button" style="cursor: pointer;">Edit</a></td>
@@ -393,6 +392,6 @@
 
 
 	<script
-		src="${pageContext.request.contextPath}/resources/ng/master/category/category.js"></script>
+		src="${pageContext.request.contextPath}/resources/ng/master/category/subcategory.js"></script>
 </body>
 </html>

@@ -8,8 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
  
-@Entity
- 
+@Entity 
 public class GetItemTypes {
 
 	@Id

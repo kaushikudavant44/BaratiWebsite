@@ -43,6 +43,13 @@ public class IndexController {
 		return "master/item/addItem";
 	}
 	
+	@GetMapping("showAddSubCategory")
+	public String showAddSubCategory(Model model) {
+					 
+		model.addAttribute("categoryList",categoryRepository.findByIsUsed(0));
+		return "master/category/addSubCategory";
+	}
+	
 	@GetMapping("showCategoryForm")
 	public String showCategoryForm(Model model) {
 		
