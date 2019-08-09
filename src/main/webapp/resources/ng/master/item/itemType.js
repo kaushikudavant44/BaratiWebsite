@@ -96,19 +96,19 @@ app.controller('itemTypeController', function($scope, $http, $location) {
 	
 	$scope.editItemType = function(itemType) {
 
-		alert(itemType.categoryName);
+		//alert(itemType.catId);
 		
 		 $scope.itemType = itemType.itemType;
 		/* $scope.categoryName = itemType.categoryName;
 		 $scope.subCatName = itemType.subCatName;
 		 $scope.subCatId = itemType.subCatId;*/
-		 $scope.catId = itemType.catId;
+		 
 		
 			$("[data-id=catId]").html(itemType.categoryName);
 			$('#catId option[value="'+itemType.catId+'"]').attr("selected", "selected");
 			
-			 angular.element(document.getElementById("catId")).scope().getSubCategory();
-
+			$scope.catId = itemType.catId;
+			angular.element(document.getElementById("catId")).scope().getSubCategory();
 			$("[data-id=subCatId]").html(itemType.subCatName);
 			$('#subCatId option[value="'+itemType.subCatId+'"]').attr("selected", "selected");
 			
