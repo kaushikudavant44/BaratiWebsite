@@ -213,7 +213,7 @@ button,
 .subtotal-value:before,
 .total-value:before,
 .promo-value:before {
-  content:'Rs. ';
+  content:'';
 }
 
 .hide {
@@ -301,7 +301,8 @@ li.subtotal:before {
 }
 
 .item {
-  width: 55%;
+     width: 19%;
+
 }
 
 .price,
@@ -465,14 +466,14 @@ background: linear-gradient(-45deg,#24ff72,#9a4eff);-webkit-box-shadow: 0 10px 1
   text-align: center;
   text-transform: uppercase;
   padding: 0.625rem 0;
-  width: 100%;
+  width: 82%;
    position: relative;
     z-index: 2;
-    background: #fff;
+    background: lightgrey;
     color: black;
     border-radius: 40px;
     display: block;
-    margin: 20px auto 0;
+    margin-left: 25px;
     cursor: pointer;
     -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
     box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
@@ -575,62 +576,39 @@ background: linear-gradient(-45deg,#24ff72,#9a4eff);-webkit-box-shadow: 0 10px 1
 			<p>Please wait...</p>
 		</div>
 	</div>
-
 	<!-- #END# Page Loader -->
 	<!-- Overlay For Sidebars -->
 	<div class="overlay"></div>
 	<!-- #END# Overlay For Sidebars -->
 	<!-- Search Bar -->
-
 	<!-- #END# Search Bar -->
 	<!-- Top Bar -->
 	<nav class="navbar">
-
 		<jsp:include page="/WEB-INF/views/common/top-menu.jsp"></jsp:include>
 	</nav>
 	<!-- #Top Bar -->
-
-
 	<section>
 		<!-- Left Sidebar -->
 		<jsp:include page="/WEB-INF/views/common/navigation-menu.jsp"></jsp:include>
-
 		<!-- #Left Sidebar -->
 	</section>
-
-
-
+	
 	<div ng-app="app">
-
 		<section class="content">
 			<div class="container-fluid"></div>
-
-
 			<div class="body" ng-controller="billController">
 				<div class="row clearfix" >
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"style="height: 60px;padding-bottom: 5px;">
 						<div class="card">
 							<div class="header">
-
-
 								<h6 class="card-inside-title">GENERATE BILL</h6>
-
-							</div>
-							
+							</div>				
 						</div>
 					</div>
 				</div>
-
-
-
-
-				<!-- Basic Examples -->
+			<!-- Basic Examples -->
 				<div class="row clearfix">
-
-
-
-
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 						data-ng-init="init()">
 						<div class="card" style="min-height: 500px;">
  <main>
@@ -640,57 +618,52 @@ background: linear-gradient(-45deg,#24ff72,#9a4eff);-webkit-box-shadow: 0 10px 1
         <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
         <button class="promo-code-cta" style="background-color: #44ab9f;">Add Item</button>
       </div>
-      <div class="basket-labels">
-        <ul >
-          <li class="item item-heading" style="color: #111; display: inline-block; padding: 0.625rem 0;">Product</li>
-          <li class="price" style="color: #111; display: inline-block; padding: 0.625rem 0;">Price</li>
-          <li class="quantity"style="color: #111; display: inline-block; padding: 0.625rem 0;">Quantity</li>
-          <li class="subtotal"style="color: #111; display: inline-block; padding: 0.625rem 0;">Subtotal</li>
-        </ul>
-      </div>
-      <div class="basket-product">
-        <div class="item">
-            <div class="product-image">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzwQPfxtvLZNj-V_ZAbhYNeHWYmJehIfh6UWv9fH8r8liq3vn-" alt="Placholder Image 2" class="product-frame">
-          </div>
-          <div class="product-details">
-            <h1><strong><span class="item-quantity">4</span> x Eliza J</strong> Lace Sleeve Cuff Dress</h1>
-            <p><strong>Navy, Size 18</strong></p>
-            <p>Product Code - 232321939</p>
-          </div>
-        </div>
-        <div class="price">26.00</div>
-        <div class="quantity">
-          <input type="number" value="4" min="1" class="quantity-field">
-        </div>
-        <div class="subtotal">104.00</div>
-        <div class="remove" >
-          <button class="checkout-cta" >Remove</button>
-        </div>
-      </div>
-      <div class="basket-product">
-        <div class="item">
-            <div class="product-image">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToeiAGenHvcGNQSO_kw9tAXvGdVLb5GmS4tuR6RpkIzbH_O7oX" alt="Placholder Image 2" class="product-frame">
-          </div>
-          <div class="product-details">
-            <h1><strong><span class="item-quantity">1</span> x Whistles</strong> Amella Lace Midi Dress</h1>
-            <p><strong>Navy, Size 10</strong></p>
-            <p>Product Code - 232321939</p>
-          </div>
-        </div>
-        <div class="price">26.00</div>
-        <div class="quantity">
-          <input type="number" value="1" min="1" class="quantity-field">
-        </div>
-        <div class="subtotal">26.00</div>
-        <div class="remove">
-          <button class="checkout-cta">Remove</button>
-        </div>
-      </div>
-
+      
+      
+      <table class="basket-labels">
+      <thead >
+        <tr >
+          <th class="item item-heading" style="color: #111; display: inline-block; padding-left: 0.85rem 0;">Product</th>
+          <th class="price" style="color: #111; display: inline-block; padding: 0.10rem 0;">Price</th>
+          <th class="quantity"style="color: #111; display: inline-block; padding: 0.10rem 0;">Quantity</th>
+          <th class="subtotal"style="color: #111; display: inline-block; padding: 0.10rem 0;">DISC</th>
+           <th class="subtotal"style="color: #111; display: inline-block; padding: 0.10rem 0;">Subtotal</th>
+         <th class="subtotal"style="color: #111; display: inline-block; padding: 0.105rem 0;">Action</th>
+        </tr>
+      </thead>
+      </table>
+      
+       <table class="basket-labels" style="background-color: white;border-top: 0px solid #ccc; ">
+      <tbody >
+      
+       <!-- --------------------------------------------------------------------------- -->
+      
+        <tr style="padding-bottom: 2px;">
+          <td class="item item-heading" style="color: #111; display: inline-block; padding-left: 0.85rem 0;"> Product Code - 232321939</td>
+          <td class="price" style="color: #111; display: inline-block; padding: 0.10rem 0;">26.00</td>
+          <td class="quantity"style="color: #111; display: inline-block; padding: 0.10rem 0;"><input type="number" value="4" min="1" class="quantity-field"> </td>
+           <td class="subtotal"style="color: #111; display: inline-block; padding: 0.10rem 0;">0.00</td>
+          <td class="subtotal"style="color: #111; display: inline-block; padding: 0.10rem 0;">104.00</td>
+           <td class="subtotal"style="color: #111; display: inline-block; padding: 0.105rem 0;"><button class="checkout-cta" >Remove</button></td>
+       
+        </tr>
+         <tr style="padding-bottom: 2px;" >
+          <td class="item item-heading" style="color: #111; display: inline-block; padding-left: 0.85rem 0;"> Product Code - 232321939</td>
+          <td class="price" style="color: #111; display: inline-block; padding: 0.10rem 0;">26.00</td>
+          <td class="quantity"style="color: #111; display: inline-block; padding: 0.10rem 0;"><input type="number" value="4" min="1" class="quantity-field"> </td>
+           <td class="subtotal"style="color: #111; display: inline-block; padding: 0.10rem 0;">0.00</td>
+          <td class="subtotal"style="color: #111; display: inline-block; padding: 0.10rem 0;">104.00</td>
+           <td class="subtotal"style="color: #111; display: inline-block; padding: 0.105rem 0;"><button class="checkout-cta" >Remove</button></td>
+       
+        </tr>
+        <!-- --------------------------------------------------------------------------- -->
+      </tbody></table>
+     
     </div>
     <aside>
+    
+    
+    
       <div class="summary">
         <div class="summary-total-items"><div class="demo-google-material-icon" style="width: 95%" > <i class="material-icons" style="color:white;">shopping_cart</i></div>     <span class="total-items"></span> Items in your Cart</div>
   
@@ -745,14 +718,7 @@ background: linear-gradient(-45deg,#24ff72,#9a4eff);-webkit-box-shadow: 0 10px 1
 			</div>
 			<!-- #END# Basic Examples -->
 
-
-
-
-
 		</section>
-
-
-
 
 	</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
