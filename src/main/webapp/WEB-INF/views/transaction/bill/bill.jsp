@@ -139,7 +139,7 @@ html a {
   -webkit-font-smoothing: antialiased;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
 }
-
+/* 
 body {
   background-color: #fff;
   color: black;
@@ -147,7 +147,7 @@ font-family: 'Roboto', Arial, Tahoma, sans-serif;
   font-size: 62.5%;
   margin: 0 auto;
 }
-
+ */
 a {
   border: 0 none;
   outline: 0;
@@ -165,7 +165,7 @@ p {
 h1 {
   font-size: 0.98rem;
   font-weight: normal;
-  margin: 0;
+  margin: 0;font-size:12px;
   padding: 0;
 }
 
@@ -289,11 +289,11 @@ ul {
   padding: 0;
 }
 
-li {
+/* li {
   color: #111;
   display: inline-block;
   padding: 0.625rem 0;
-}
+} */
 
 li.price:before,
 li.subtotal:before {
@@ -641,11 +641,11 @@ background: linear-gradient(-45deg,#24ff72,#9a4eff);-webkit-box-shadow: 0 10px 1
         <button class="promo-code-cta" style="background-color: #44ab9f;">Add Item</button>
       </div>
       <div class="basket-labels">
-        <ul>
-          <li class="item item-heading">Product</li>
-          <li class="price">Price</li>
-          <li class="quantity">Quantity</li>
-          <li class="subtotal">Subtotal</li>
+        <ul >
+          <li class="item item-heading" style="color: #111; display: inline-block; padding: 0.625rem 0;">Product</li>
+          <li class="price" style="color: #111; display: inline-block; padding: 0.625rem 0;">Price</li>
+          <li class="quantity"style="color: #111; display: inline-block; padding: 0.625rem 0;">Quantity</li>
+          <li class="subtotal"style="color: #111; display: inline-block; padding: 0.625rem 0;">Subtotal</li>
         </ul>
       </div>
       <div class="basket-product">
