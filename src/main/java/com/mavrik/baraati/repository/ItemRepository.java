@@ -20,4 +20,6 @@ public interface ItemRepository extends JpaRepository<Item, Integer>{
 	int updateIsUsedByItemId(@Param("itemId")int itemId);
 
 	Item findByItemId(int itemId);
+
+	Item findByDesignNoAndIsUsed(String designCode, int i);
 } 
