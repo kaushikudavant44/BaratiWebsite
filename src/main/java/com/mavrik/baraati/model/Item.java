@@ -18,15 +18,16 @@ public class Item {
 	
 	@Column(name="item_name")
 	private String itemName;
+	
+	@Column(name="vendor_id")
+	private int vendorId;
 
 	@Column(name="type_id")
 	private int typeId;
 	
 	@Column(name="design_no")
 	private String designNo;
-	
-	@Column(name="barcode")
-	private String barcode;
+ 
 	
 	@Column(name="item_size")
 	private String itemSize;
@@ -34,160 +35,221 @@ public class Item {
 	@Column(name="item_quantity")
 	private String itemQuantity;
 	
+	@Column(name="bottom_price")
+	private float bottomPrice;
+	
 	@Column(name="item_price")
-	private String itemPrice;
+	private float itemPrice;
+	
+	@Column(name="itemDesc")
+	private String itemDesc;
+	
+	@Column(name="hsnNo")
+	private String hsnNo;
+	
+	@Column(name="invoiceDate")
+	private String invoiceDate;
 	
 	@Column(name="po_id")
 	private int poId;
-
+	
+	@Column(name="sgst")
+	private float sgst;
+	
+	@Column(name="cgst")
+	private float cgst;
+	
+	@Column(name="status")
+	private int status;
+	
+	
 	@Column(name="is_used")
 	private int isUsed;
-	
-	
-	/**
-	 * @return the itemId
-	 */
+
+
 	public int getItemId() {
 		return itemId;
-	}
+	} 
 
-	/**
-	 * @param itemId the itemId to set
-	 */
+
 	public void setItemId(int itemId) {
 		this.itemId = itemId;
 	}
 
-	/**
-	 * @return the itemName
-	 */
+
 	public String getItemName() {
 		return itemName;
 	}
 
-	/**
-	 * @param itemName the itemName to set
-	 */
+
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
 
-	/**
-	 * @return the typeId
-	 */
+
+	public int getVendorId() {
+		return vendorId;
+	}
+
+
+	public void setVendorId(int vendorId) {
+		this.vendorId = vendorId;
+	}
+
+
 	public int getTypeId() {
 		return typeId;
 	}
 
-	/**
-	 * @param typeId the typeId to set
-	 */
+
 	public void setTypeId(int typeId) {
 		this.typeId = typeId;
 	}
 
-	/**
-	 * @return the designNo
-	 */
+
 	public String getDesignNo() {
 		return designNo;
 	}
 
-	/**
-	 * @param designNo the designNo to set
-	 */
+
 	public void setDesignNo(String designNo) {
 		this.designNo = designNo;
 	}
 
-	/**
-	 * @return the barcode
-	 */
-	public String getBarcode() {
-		return barcode;
-	}
 
-	/**
-	 * @param barcode the barcode to set
-	 */
-	public void setBarcode(String barcode) {
-		this.barcode = barcode;
-	}
-
-	/**
-	 * @return the itemSize
-	 */
 	public String getItemSize() {
 		return itemSize;
 	}
 
-	/**
-	 * @param itemSize the itemSize to set
-	 */
+
 	public void setItemSize(String itemSize) {
 		this.itemSize = itemSize;
 	}
 
-	/**
-	 * @return the itemQuantity
-	 */
+
 	public String getItemQuantity() {
 		return itemQuantity;
 	}
 
-	/**
-	 * @param itemQuantity the itemQuantity to set
-	 */
+
 	public void setItemQuantity(String itemQuantity) {
 		this.itemQuantity = itemQuantity;
 	}
 
-	/**
-	 * @return the itemPrice
-	 */
-	public String getItemPrice() {
+
+	public float getBottomPrice() {
+		return bottomPrice;
+	}
+
+
+	public void setBottomPrice(float bottomPrice) {
+		this.bottomPrice = bottomPrice;
+	}
+
+
+	public float getItemPrice() {
 		return itemPrice;
 	}
 
-	/**
-	 * @param itemPrice the itemPrice to set
-	 */
-	public void setItemPrice(String itemPrice) {
+
+	public void setItemPrice(float itemPrice) {
 		this.itemPrice = itemPrice;
 	}
 
-	/**
-	 * @return the poId
-	 */
+
+	public String getItemDesc() {
+		return itemDesc;
+	}
+
+
+	public void setItemDesc(String itemDesc) {
+		this.itemDesc = itemDesc;
+	}
+
+
+	public String getHsnNo() {
+		return hsnNo;
+	}
+
+
+	public void setHsnNo(String hsnNo) {
+		this.hsnNo = hsnNo;
+	}
+
+
+	public String getInvoiceDate() {
+		return invoiceDate;
+	}
+
+
+	public void setInvoiceDate(String invoiceDate) {
+		this.invoiceDate = invoiceDate;
+	}
+
+
 	public int getPoId() {
 		return poId;
 	}
 
-	/**
-	 * @param poId the poId to set
-	 */
+
 	public void setPoId(int poId) {
 		this.poId = poId;
 	}
+
+
+	public float getSgst() {
+		return sgst;
+	}
+
+
+	public void setSgst(float sgst) {
+		this.sgst = sgst;
+	}
+
+
+	public float getCgst() {
+		return cgst;
+	}
+
+
+	public void setCgst(float cgst) {
+		this.cgst = cgst;
+	}
+
+
+	public int getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 
 	public int getIsUsed() {
 		return isUsed;
 	}
 
+
 	public void setIsUsed(int isUsed) {
 		this.isUsed = isUsed;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", typeId=" + typeId + ", designNo=" + designNo
-				+ ", barcode=" + barcode + ", itemSize=" + itemSize + ", itemQuantity=" + itemQuantity + ", itemPrice="
-				+ itemPrice + ", poId=" + poId + ", isUsed=" + isUsed + "]";
+		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", vendorId=" + vendorId + ", typeId=" + typeId
+				+ ", designNo=" + designNo + ", itemSize=" + itemSize + ", itemQuantity=" + itemQuantity
+				+ ", bottomPrice=" + bottomPrice + ", itemPrice=" + itemPrice + ", itemDesc=" + itemDesc + ", hsnNo="
+				+ hsnNo + ", invoiceDate=" + invoiceDate + ", poId=" + poId + ", sgst=" + sgst + ", cgst=" + cgst
+				+ ", status=" + status + ", isUsed=" + isUsed + "]";
 	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	
+	
+	
+	 
 	 
 	
+	 
 }

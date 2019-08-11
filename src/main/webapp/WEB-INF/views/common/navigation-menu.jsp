@@ -43,16 +43,17 @@
 			</a>
 				<ul class="ml-menu">
 
-					<li><a href="pages/ui/alerts.html">Item</a></li>
-					<li><a href="${pageContext.request.contextPath}/addNewStaffMember">Category</a></li>
-					<li><a href="${pageContext.request.contextPath}/addNewVendor">Sub Category</a></li>
-					<li><a href="${pageContext.request.contextPath}/addNewVendor">Item</a></li>
-					<li><a href="pages/ui/alerts.html">Vendor</a></li>
+				 
+					<li><a href="${pageContext.request.contextPath}/showCategoryForm">Category</a></li>
+					<li><a href="${pageContext.request.contextPath}/showAddSubCategory">Sub Category</a></li>
+						<li><a href="${pageContext.request.contextPath}/showAddItemType">Item Type</a></li>
+					<li><a href="${pageContext.request.contextPath}/showAddItem">Item</a></li>
+					<li><a href="${pageContext.request.contextPath}/showAddVendor">Vendor</a></li>
 
 
-				</ul></li>
+				</ul></li> 
 
-
+ 
 
 			<li><a href="javascript:void(0);" class="menu-toggle"> <i
 					class="material-icons">swap_calls</i> <span>User Interface

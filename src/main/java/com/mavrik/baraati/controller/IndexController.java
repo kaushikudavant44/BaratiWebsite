@@ -1,15 +1,13 @@
 package com.mavrik.baraati.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.mavrik.baraati.model.ItemTypes;
 import com.mavrik.baraati.repository.CategoryRepository;
 import com.mavrik.baraati.repository.ItemTypesRepository;
+import com.mavrik.baraati.repository.VendorRepository;
 
 @Controller
 public class IndexController {
@@ -18,6 +16,9 @@ public class IndexController {
 	@Autowired
 	CategoryRepository categoryRepository;
 	
+	
+	@Autowired
+	VendorRepository vendorRepository;
 	@Autowired
 	private ItemTypesRepository itemTypesRepository;
 	
@@ -40,6 +41,7 @@ public class IndexController {
 	public String showAddItem(Model model) {
 					 
 		model.addAttribute("itemTypesList",itemTypesRepository.findByIsUsed(0));
+		model.addAttribute("vendorsList",vendorRepository.findByIsUsed(0));
 		return "master/item/addItem";
 	}
 	
@@ -55,11 +57,13 @@ public class IndexController {
 		
 		return "master/category/addCategory";
 	}
+	
 	@GetMapping("showGenerateBill")
 	public String showGenerateBill(Model model) {
-		
-		
+
+
 
 		return "transaction/bill/bill";
 	}
+	
 }
