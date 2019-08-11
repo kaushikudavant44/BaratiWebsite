@@ -54,9 +54,7 @@ public class Item {
 	@Column(name="gst_per")
 	private float gstPer;
 	
-	@Column(name="cgst")
-	private float cgst;
-	
+ 
 	@Column(name="status")
 	private int status;
 	
@@ -194,16 +192,7 @@ public class Item {
 		this.gstPer = gstPer;
 	}
 
-
-	public float getCgst() {
-		return cgst;
-	}
-
-
-	public void setCgst(float cgst) {
-		this.cgst = cgst;
-	}
-
+ 
 
 	public int getStatus() {
 		return status;
@@ -230,8 +219,8 @@ public class Item {
 		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", vendorId=" + vendorId + ", typeId=" + typeId
 				+ ", designNo=" + designNo + ", itemSize=" + itemSize + ", itemQuantity=" + itemQuantity
 				+ ", bottomPrice=" + bottomPrice + ", itemPrice=" + itemPrice + ", hsnNo=" + hsnNo + ", invoiceDate="
-				+ invoiceDate + ", poId=" + poId + ", gstPer=" + gstPer + ", cgst=" + cgst + ", status=" + status
-				+ ", isUsed=" + isUsed + "]";
+				+ invoiceDate + ", poId=" + poId + ", gstPer=" + gstPer + ", status=" + status + ", isUsed=" + isUsed
+				+ "]";
 	}
 
 
