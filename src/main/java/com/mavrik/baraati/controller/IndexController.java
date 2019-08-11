@@ -55,4 +55,11 @@ public class IndexController {
 		
 		return "master/category/addCategory";
 	}
+	@GetMapping("showGenerateBill")
+	public String showGenerateBill(Model model) {
+		
+		
+
+		return "transaction/bill/bill";
+	}
 }
