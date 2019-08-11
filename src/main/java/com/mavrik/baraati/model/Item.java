@@ -40,9 +40,7 @@ public class Item {
 	
 	@Column(name="item_price")
 	private float itemPrice;
-	
-	@Column(name="itemDesc")
-	private String itemDesc;
+ 
 	
 	@Column(name="hsnNo")
 	private String hsnNo;
@@ -53,8 +51,8 @@ public class Item {
 	@Column(name="po_id")
 	private int poId;
 	
-	@Column(name="sgst")
-	private float sgst;
+	@Column(name="gst_per")
+	private float gstPer;
 	
 	@Column(name="cgst")
 	private float cgst;
@@ -157,16 +155,6 @@ public class Item {
 	}
 
 
-	public String getItemDesc() {
-		return itemDesc;
-	}
-
-
-	public void setItemDesc(String itemDesc) {
-		this.itemDesc = itemDesc;
-	}
-
-
 	public String getHsnNo() {
 		return hsnNo;
 	}
@@ -197,13 +185,13 @@ public class Item {
 	}
 
 
-	public float getSgst() {
-		return sgst;
+	public float getGstPer() {
+		return gstPer;
 	}
 
 
-	public void setSgst(float sgst) {
-		this.sgst = sgst;
+	public void setGstPer(float gstPer) {
+		this.gstPer = gstPer;
 	}
 
 
@@ -241,13 +229,12 @@ public class Item {
 	public String toString() {
 		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", vendorId=" + vendorId + ", typeId=" + typeId
 				+ ", designNo=" + designNo + ", itemSize=" + itemSize + ", itemQuantity=" + itemQuantity
-				+ ", bottomPrice=" + bottomPrice + ", itemPrice=" + itemPrice + ", itemDesc=" + itemDesc + ", hsnNo="
-				+ hsnNo + ", invoiceDate=" + invoiceDate + ", poId=" + poId + ", sgst=" + sgst + ", cgst=" + cgst
-				+ ", status=" + status + ", isUsed=" + isUsed + "]";
+				+ ", bottomPrice=" + bottomPrice + ", itemPrice=" + itemPrice + ", hsnNo=" + hsnNo + ", invoiceDate="
+				+ invoiceDate + ", poId=" + poId + ", gstPer=" + gstPer + ", cgst=" + cgst + ", status=" + status
+				+ ", isUsed=" + isUsed + "]";
 	}
-	
-	
-	
+
+
 	 
 	 
 	

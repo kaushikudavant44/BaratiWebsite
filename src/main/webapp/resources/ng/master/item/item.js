@@ -22,11 +22,8 @@ app.controller('itemMasterController', function($scope, $http, $location) {
 				itemSize : $scope.itemSize,
 				itemQuantity : $scope.itemQuantity,
 				itemPrice : $scope.itemPrice,
-				sgst : $scope.sgst,
-				cgst : $scope.cgst,
-				
-				bottomPrice : $scope.bottomPrice,
-				itemDesc : $scope.itemDesc,
+				gstPer : $scope.gstPer,
+		 		bottomPrice : $scope.bottomPrice,
 				hsnNo : $scope.hsnNo,
 				invoiceDate : $scope.invoiceDate,
 				vendorId : $scope.vendorId

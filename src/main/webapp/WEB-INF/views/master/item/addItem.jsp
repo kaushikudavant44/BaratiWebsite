@@ -297,18 +297,7 @@
 										</div>
 
 
-										<div class="col-md-4">
-											<b>Item Description</b>
-
-											<div class="input-group ">
-												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="itemDesc" id="itemDesc"
-														placeholder="Item Description">
-												</div>
-
-											</div>
-										</div>
+										 
 										<div class="col-md-4">
 											<b>Size</b>
 
@@ -374,41 +363,16 @@
 										<br>
 										<div class="col-md-4">
 
-											<b>CGST %</b> <select class="form-control" ng-model="cgst"
-												id="cgst" required="required">
+											<b>GST %</b> <select class="form-control" ng-model="gstPer"
+												id="gstPer" required="required">
 
-<option value="2.50">2.50%</option>
+<option value="5">2.50% CGST + 2.50 %SGST</option>
 
-												<%-- <c:forEach items="${vendorsList}" var="vendors">
- 
-													<option value="${vendors.vendorId}">${vendors.vendorName}</option>
-
-
-												</c:forEach> --%>
+											 
 											</select>
 
 										</div>
-										<div class="col-md-4">
-
-											<b>SGST %</b> <select class="form-control" ng-model="sgst"
-												id="sgst" required="required">
-	<option value="2.50">2.50%</option>
-													
-
-												<%-- <c:forEach items="${vendorsList}" var="vendors"
-													varStatus="count">
-													<c:choose>
-														<c:when test="${count.index==0}">
-															<option selected="selected" value="${vendors.vendorId}">${vendors.vendorName}</option>
-														</c:when>
-														<c:otherwise>
-															<option value="${vendors.vendorId}">${vendors.vendorName}</option>
-														</c:otherwise>
-													</c:choose>
-												</c:forEach> --%>
-											</select>
-
-										</div>
+										 
 
 
 										<div class="col-md-4">
