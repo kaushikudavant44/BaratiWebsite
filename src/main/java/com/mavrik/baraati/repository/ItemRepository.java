@@ -18,6 +18,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer>{
 	@Modifying
 	@Query(value="UPDATE Item set isUsed=1 where itemId=:itemId")
 	int updateIsUsedByItemId(@Param("itemId")int itemId);
+	
 
 	Item findByItemId(int itemId);
 
