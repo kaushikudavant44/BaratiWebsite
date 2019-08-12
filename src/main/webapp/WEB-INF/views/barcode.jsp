@@ -60,7 +60,7 @@
     </style>
      <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-barcode.js"></script>
-   <!--  
+ 
      <script type="text/javascript">
     
       function generateBarcode(can){
@@ -123,7 +123,7 @@
         generateBarcode();
       });
   
-    </script> -->
+    </script> 
 </head>
 <body>
 <div class="price-bg">
@@ -159,7 +159,7 @@
 			 </table>
 			 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 			 <tr>
-				 <td colspan="2" class="label" style="text-align:center;border-bottom: 1px solid #cdd0d4;"><img src="${pageContext.request.contextPath}/resources/images/barcode.png" alt="IMG" width="90" height="40" /></td>
+				 <td colspan="2" class="label" style="text-align:center;border-bottom: 1px solid #cdd0d4;"> <canvas id="canvasTarget" width="190" height="100"></canvas> </td>
 			 </tr>
 			  <tr style="padding-bottom: 2px;">
 				 <td height="10"  style="padding-left:5px;border-bottom: 1px;  font-size: 8px;">Mfd by: Total Wardrobe Solutions</td>
@@ -170,19 +170,19 @@
 			<tr>
 			 <td height="10"  style="padding-left:5px;font-size: 7px;">For Complaints Contact. &nbsp; 080-40820830</td>
 			</tr>
-			<tr> 
+			<tr>  
 			<td height="10"  style="padding-left:5px;font-size: 7px;">E-mail: &nbsp;world@sktn.co.in</td>
 			 </tr>
 			 </tbody></table>
 			  </div><br><br><br><br><br><br><br>
-<%-- <div id="generator">
-   <input style="display: none" type="text" id="barcodeValue" value="${item.vendorId}${item.designNo}NN${item.itemId}">
+ <div id="generator">
+   <input style="display: none" type="text" id="barcodeValue" value="${item.vendorId}${item.designNo}${item.itemId}">
       <div id="config">
          
-            
+             
         <div class="config" style="display: none;">
           <div class="title">Misc</div>
-            Background : <input type="text" id="bgColor" value="#FFFFFF" size="7"><br />
+            Background : <input type="text" id="bgColor" value="#FFFFFF" size="7"><br /> 
             "1" Bars : <input type="text" id="color" value="#000000" size="7"><br />
           <div class="barcode1D">
             bar width: <input type="text" id="barWidth" value="2" size="3"><br />
@@ -210,15 +210,12 @@
     </div>
     
     <div id="barcodeTarget" class="barcodeTarget"></div>
-    <canvas id="canvasTarget" width="200" height="100"></canvas> 
-   MRP- ${item.itemPrice}<br>
-    Name- ${item.itemName}<br>
-    Size-${item.itemSize}     --%>
-
+   <!--  <canvas id="canvasTarget" width="200" height="100"></canvas>  -->
+  
 
 <script>
   
-
+ 
 $( window ).on( "load", function() {
 	 
 	 generateBarcode('canvasTarget');
