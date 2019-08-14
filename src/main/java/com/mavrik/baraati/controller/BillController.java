@@ -1,17 +1,176 @@
 package com.mavrik.baraati.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping; 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller 
+import com.mavrik.baraati.model.Item;
+import com.mavrik.baraati.model.OrderDetail;
+import com.mavrik.baraati.model.OrderHeader;
+import com.mavrik.baraati.repository.BillDetailRepository;
+import com.mavrik.baraati.repository.BillHeaderRepository;
+import com.mavrik.baraati.repository.ItemRepository;
+
+@Controller
 public class BillController {
+
+	@Autowired
+	private ItemRepository itemRepository;
+
+	@Autowired
+	private BillHeaderRepository billHeaderRepository;
 	
+	@Autowired
+	private BillDetailRepository billDetailRepository;
+
+	List<OrderDetail> orderDetailList = new ArrayList<>();
+
 	@GetMapping("redimedBilling")
 	public String showAddSubCategory(Model model) {
-					 
-		//model.addAttribute("categoryList",categoryRepository.findByIsUsed(0));
+
+		// model.addAttribute("categoryList",categoryRepository.findByIsUsed(0));
+		orderDetailList = new ArrayList<>();
+
 		return "transaction/bill/bill";
+	}
+
+	@GetMapping("/getItemBydesignCode")
+	public @ResponseBody Item getItem(HttpServletRequest request, HttpServletResponse response) {
+
+		Item item = new Item();
+
+		try {
+			String designCode = request.getParameter("designCode");
+			System.out.println(designCode);
+			item = itemRepository.findByDesignNoAndIsUsed(designCode, 0);
+
+			if (item == null) {
+				item = new Item();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return item;
+	}
+
+	@GetMapping("/addItemInBillList")
+	public @ResponseBody List<OrderDetail> addItemInBillList(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			int itemId = Integer.parseInt(request.getParameter("itemId"));
+			float itemQty = Float.parseFloat(request.getParameter("itemQty"));
+
+			Item item = itemRepository.findByItemId(itemId);
+
+			OrderDetail itemdetail = new OrderDetail();
+			itemdetail.setItemId(itemId);
+			itemdetail.setItemName(item.getItemName());
+			itemdetail.setItemQty(itemQty);
+			itemdetail.setMrp(item.getBottomPrice());
+			itemdetail.setTaxPer(item.getGstPer());
+			itemdetail.setActualTaxableAmt((itemdetail.getMrp() * 100 / (100 + item.getGstPer())) * itemQty);
+			itemdetail.setActualTaxAmt((itemdetail.getMrp() * item.getGstPer() / (100 + item.getGstPer())) * itemQty);
+
+			float taxableAmt = ((itemdetail.getMrp() - itemdetail.getDiscAmt()) * 100 / (100 + item.getGstPer())
+					* itemQty);
+			float taxAmt = ((itemdetail.getMrp() - itemdetail.getDiscAmt()) * item.getGstPer()
+					/ (100 + item.getGstPer()) * itemQty);
+			itemdetail.setTaxableAmt(taxableAmt);
+			itemdetail.setTaxAmt(taxAmt);
+			itemdetail.setGrandTotal(taxableAmt + taxAmt);
+			orderDetailList.add(itemdetail);
+			// System.out.println(orderDetailList);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return orderDetailList;
+	}
+
+	@PostMapping("/submitBill")
+	public String submitBill(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			Date date = new Date();
+			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat tt = new SimpleDateFormat("HH:mm:ss");
+			OrderHeader order = new OrderHeader();
+			order.setBillDate(sf.format(date));
+			order.setBillNo(1);
+
+			float totalTaxable = 0;
+			float totalTax = 0;
+			float totalActualTaxable = 0;
+			float totalActualTax = 0;
+
+			for (int i = 0; i < orderDetailList.size(); i++) {
+
+				totalTaxable = totalTaxable + orderDetailList.get(i).getTaxableAmt();
+				totalTax = totalTax + orderDetailList.get(i).getTaxAmt();
+				totalActualTaxable = totalActualTaxable + orderDetailList.get(i).getActualTaxableAmt();
+				totalActualTax = totalActualTax + orderDetailList.get(i).getActualTaxAmt();
+			}
+
+			order.setCustName(request.getParameter("custName"));
+			order.setCustMo(request.getParameter("custMo"));
+			order.setEmail(request.getParameter("email"));
+			order.setCustAdd("");
+			order.setAdddateTime(sf.format(date));
+			order.setAdddateTime(tt.format(date));
+			order.setActualTotal(totalActualTaxable);
+			order.setActualTaxrs(totalActualTax);
+			order.setTaxableAmt(totalTaxable);
+			order.setTaxRs(totalTax);
+			order.setGrandTotal(totalTaxable+totalTax);
+			
+			OrderHeader save = billHeaderRepository.save(order);
+
+			for (int i = 0; i < orderDetailList.size(); i++) {
+
+				orderDetailList.get(i).setBillId(save.getBillId());
+			}
+			
+			List<OrderDetail> saveDetial = billDetailRepository.saveAll(orderDetailList);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/redimedBilling";
+	}
+
+	@GetMapping("/deleteItemFromBillDetail")
+	public @ResponseBody List<OrderDetail> deleteItemFromBillDetail(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		try {
+
+			int key = Integer.parseInt(request.getParameter("key"));
+			orderDetailList.remove(key);
+			// System.out.println(orderDetailList);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return orderDetailList;
 	}
 
 }

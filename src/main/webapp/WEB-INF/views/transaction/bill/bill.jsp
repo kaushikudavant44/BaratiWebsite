@@ -529,8 +529,10 @@ aside {
 	}
 }
 </style>
+<c:url var="getItemBydesignCode" value="/getItemBydesignCode" />
+<c:url var="addItemInBillList" value="/addItemInBillList" />
+<c:url var="deleteItemFromBillDetail" value="/deleteItemFromBillDetail" />
 </head>
-
 <body class="theme-red">
 	<!-- Page Loader -->
 	<div class="page-loader-wrapper" id="loader">
@@ -579,126 +581,160 @@ aside {
 						</div>
 					</div>
 				</div>
-				<!-- Basic Examples -->
-				<div class="row clearfix">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="card" style="min-height: 500px;">
-							<main>
-							<div class="basket">
-								<div class="basket-module">
-									<label for="designCode">Enter a code</label> <input
-										id="designCode" type="text" ng-blur="getItemByDesignCode()"
-										ng-model="designCode" name="designCode" maxlength="5"
-										class="promo-code-field">
+				<form id="submitForm"
+					action="${pageContext.request.contextPath}/submitBill"
+					onsubmit="return confirm('Do you really want to submit the Bill ?');"
+					method="post">
+					<div class="row clearfix">
 
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="card">
+
+								<div class="body">
+									<div class="row clearfix">
+
+
+										<div class="col-md-4">
+
+											<label for="custName">Customer Name</label> <input
+												id="custName" type="text" name="custName"
+												class="form-control " required>
+										</div>
+										<div class="col-md-4">
+											<label for="custMo"> Mobile</label> <input id="custMo"
+												type="text" name="custMo" class="form-control " required>
+										</div>
+										<div class="col-md-4">
+											<label for="email">Email</label> <input id="email"
+												type="email" name="email" class="form-control " required>
+
+										</div>
+
+									</div>
+									<hr>
+									<div class="row clearfix">
+
+
+										<div class="col-md-2">
+
+											<label for="designCode">Enter a code</label> <input
+												id="designCode" type="text" onchange="getItemByDesignCode()"
+												name="designCode" maxlength="5" class="form-control ">
+
+										</div>
+										<div class="col-md-4">
+											<label for="designCode">Item Name</label> <input
+												id="itemName" type="text" name="itemName"
+												class="form-control " disabled> <input id="itemId"
+												type="hidden" name="itemId">
+										</div>
+										<div class="col-md-1">
+											<label for="designCode">QTY</label> <input id="itemQty"
+												type="number" name="itemQty" class="form-control " value="1">
+
+										</div>
+
+
+
+										<div class="col-md-2">
+											<label for="designCode">Add Item</label>
+											<button class="promo-code-cta"
+												style="background-color: #44ab9f;" disabled id="addItem"
+												onclick="addItemInBillList()" type="button">Add
+												Item</button>
+
+
+										</div>
+									</div>
+									<div class="table-responsive">
+										<table id="table_grid1"
+											class="table table-bordered table-striped table-hover  dataTable">
+											<thead>
+												<tr>
+													<th>Sr. No.</th>
+													<th>Product</th>
+													<th>Quantity</th>
+													<th>Taxable AMT</th>
+													<th>Tax Per</th>
+													<th>Tax AMT</th>
+													<th>AMT</th>
+													<th>Action</th>
+
+												</tr>
+											</thead>
+
+											<tbody>
+
+											</tbody>
+										</table>
+									</div>
 								</div>
-								<div class="basket-module">
-									<label for="qty">Qty</label> <input type="number" value="4"
-										min="1" class="quantity-field">
-									<button class="promo-code-cta"
-										style="background-color: #44ab9f;">Add Item</button>
-								</div>
-								<span id="errorMsg">sdaf</span>
-								<table class="basket-labels">
-									<thead>
-										<tr>
-											<th class="item item-heading"
-												style="color: #111; display: inline-block; padding-left: 0.85rem 0;">Product</th>
-
-											<th class="quantity"
-												style="color: #111; display: inline-block; padding: 0.10rem 0;">Quantity</th>
-											<th class="subtotal"
-												style="color: #111; display: inline-block; padding: 0.10rem 0;">Taxable
-												AMT</th>
-											<th class="subtotal"
-												style="color: #111; display: inline-block; padding: 0.10rem 0;">Tax
-												Per</th>
-											<th class="subtotal"
-												style="color: #111; display: inline-block; padding: 0.10rem 0;">AMT</th>
-											<th class="subtotal"
-												style="color: #111; display: inline-block; padding: 0.105rem 0;">Action</th>
-										</tr>
-									</thead>
-								</table>
-
-								<table class="basket-labels"
-									style="background-color: white; border-top: 0px solid #ccc;">
-									<tbody>
-
-										<!-- --------------------------------------------------------------------------- -->
-
-
-										<!-- --------------------------------------------------------------------------- -->
-									</tbody>
-								</table>
-
 							</div>
-							<aside>
+						</div>
+					</div>
+
+					<!-- Basic Examples -->
+					<div class="row clearfix">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div class="card" style="min-height: 500px;">
+								<main>
+
+								<aside>
 
 
 
-								<div class="summary">
-									<div class="summary-total-items">
-										<div class="demo-google-material-icon" style="width: 95%">
-											<i class="material-icons" style="color: white;">shopping_cart</i>
+									<div class="summary">
+										<div class="summary-total-items">
+											<div class="demo-google-material-icon" style="width: 95%">
+												<i class="material-icons" style="color: white;">shopping_cart</i>
+											</div>
+											<span class="total-items" id="totalItem"></span> Items in
+											your Cart
 										</div>
-										<span class="total-items"></span> Items in your Cart
-									</div>
 
-									<div class="summary-subtotal">
-										<div class="subtotal-title">Subtotal</div>
-										<div class="subtotal-value final-value" id="basket-subtotal">130.00</div>
-										<div class="summary-promo hide">
-											<div class="promo-title">Promotion</div>
-											<div class="promo-value final-value" id="basket-promo"></div>
+										<div class="summary-subtotal">
+											<div class="subtotal-title">Subtotal</div>
+											<div class="subtotal-value final-value" id="subTotal">0.00</div>
+
 										</div>
-									</div>
 
-									<div class="summary-subtotal">
+										<!-- <div class="summary-subtotal">
 										<div class="subtotal-title">Discount %</div>
-										<div class="subtotal-value final-value" id="basket-subtotal">
-											<input type="text" name="disc_per" id="disc_per" value="0"
+										<div class="subtotal-value final-value">
+											<input type="text" name="discPer" id="discPer" value="0"
 												style="color: black; padding-left: 5px; border-radius: 25px; width: 75px; text-align: center;" />
 										</div>
-										<div class="summary-promo hide">
-											<div class="promo-title">Promotion</div>
-											<div class="promo-value final-value" id="basket-promo"></div>
-										</div>
+
 									</div>
 									<div class="summary-subtotal">
 										<div class="subtotal-title">Disc In Rs</div>
-										<div class="subtotal-value final-value" id="basket-subtotal">
-											<input type="text" name="disc_amt" id="disc_amt" value="0"
+										<div class="subtotal-value final-value">
+											<input type="text" name="discAer" id="discAer" value="0"
 												style="color: black; padding-left: 5px; border-radius: 25px; width: 75px; text-align: center;" />
 										</div>
-										<div class="summary-promo hide">
-											<div class="promo-title">Promotion</div>
-											<div class="promo-value final-value" id="basket-promo"></div>
+
+									</div> -->
+
+										<div class="summary-subtotal">
+											<div class="subtotal-title">Tax Amt</div>
+											<div class="subtotal-value final-value" id="taxAmt">0.00</div>
+
+										</div>
+										<div class="summary-total">
+											<div class="total-title">Total</div>
+											<div class="total-value final-value" id="total">0.00</div>
+										</div>
+										<div class="summary-checkout">
+											<input class="checkout-cta" type="submit" value="Submit Bill">
 										</div>
 									</div>
+								</aside>
+								</main>
 
-									<div class="summary-subtotal">
-										<div class="subtotal-title">Tax Amt</div>
-										<div class="subtotal-value final-value" id="basket-subtotal">0.00</div>
-										<div class="summary-promo hide">
-											<div class="promo-title">Promotion</div>
-											<div class="promo-value final-value" id="basket-promo"></div>
-										</div>
-									</div>
-									<div class="summary-total">
-										<div class="total-title">Total</div>
-										<div class="total-value final-value" id="basket-total">130.00</div>
-									</div>
-									<div class="summary-checkout">
-										<button class="checkout-cta">Go to Secure Checkout</button>
-									</div>
-								</div>
-							</aside>
-							</main>
-
+							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 			<!-- #END# Basic Examples -->
 
@@ -790,4 +826,206 @@ aside {
 	<script
 		src="${pageContext.request.contextPath}/resources/ng/bill/billing.js"></script>
 </body>
+
+<script type="text/javascript">
+	function getItemByDesignCode() {
+
+		var designCode = $("#designCode").val();
+
+		$.getJSON('${getItemBydesignCode}', {
+
+			designCode : designCode,
+			ajax : 'true',
+
+		}, function(data) {
+
+			//alert(data.itemId)
+			if (data.itemId == 0) {
+
+				alert("Item Not Found")
+				//document.getElementById("errorMsg").style.display = "block";
+				document.getElementById("itemName").value = "";
+				document.getElementById("itemId").value = "";
+				//document.getElementById("errorMsg").textContent = "Item Not Found";
+				document.getElementById("addItem").disabled = true;
+
+			} else {
+				//document.getElementById("errorMsg").style.display = "none";
+				document.getElementById("itemId").value = data.itemId;
+				document.getElementById("addItem").disabled = false;
+				document.getElementById("itemName").value = data.itemName;
+			}
+		});
+
+	}
+
+	function addItemInBillList() {
+
+		var itemId = $("#itemId").val();
+		var itemQty = $("#itemQty").val();
+		var flag = 1;
+
+		if (itemId == "" || itemId == 0) {
+			alert("Item");
+			flag = 0;
+		} else if (isNaN(itemQty) || itemQty < 0 || itemQty == "") {
+			alert("Enter valid Qty");
+			flag = 0;
+		}
+		''
+		//alert(itemId + ' ' + itemQty)
+		if (flag == 1) {
+
+			$('#loader').show();
+			$
+					.getJSON(
+							'${addItemInBillList}',
+
+							{
+
+								itemId : itemId,
+								itemQty : itemQty,
+								ajax : 'true'
+
+							},
+							function(data) {
+
+								$('#table_grid1 td').remove();
+								$('#loader').hide();
+
+								if (data == "") {
+									alert("No records found !!");
+
+								}
+								var subTotal = 0.00;
+								var taxAmt = 0.00;
+								var total = 0.00;
+								document.getElementById("totalItem").textContent = data.length;
+								$
+										.each(
+												data,
+												function(key, itemList) {
+
+													var tr = $('<tr></tr>');
+													tr.append($('<td></td>')
+															.html(key + 1));
+													tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			itemList.itemName));
+													tr
+															.append($(
+																	'<td align="right"></td>')
+																	.html(
+																			itemList.itemQty));
+													tr
+															.append($(
+																	'<td align="right"></td>')
+																	.html(
+																			itemList.actualTaxableAmt
+																					.toFixed(2)));
+													tr
+															.append($(
+																	'<td align="right"></td>')
+																	.html(
+																			itemList.taxPer
+																					.toFixed(2)));
+													tr
+															.append($(
+																	'<td align="right"></td>')
+																	.html(
+																			itemList.actualTaxAmt
+																					.toFixed(2)));
+													tr
+															.append($(
+																	'<td align="right"></td>')
+																	.html(
+																			(itemList.actualTaxableAmt + itemList.actualTaxAmt)
+																					.toFixed(2)));
+													tr
+															.append($(
+																	'<td></td>')
+																	.html(
+																			'<a href="#" title="Delete Item" onclick="deleteItem('
+																					+ key
+																					+ ')">Delete</a>'));
+													$('#table_grid1 tbody')
+															.append(tr);
+													subTotal = subTotal
+															+ itemList.actualTaxableAmt;
+													taxAmt = taxAmt
+															+ itemList.actualTaxAmt;
+
+												})
+
+								document.getElementById("subTotal").textContent = subTotal
+										.toFixed(2);
+								document.getElementById("taxAmt").textContent = taxAmt
+										.toFixed(2);
+								document.getElementById("total").textContent = (subTotal + taxAmt)
+										.toFixed(2);
+
+							});
+
+		}
+	}
+
+	function deleteItem(key) {
+
+		$('#loader').show();
+		$.getJSON('${deleteItemFromBillDetail}',
+
+		{
+
+			key : key,
+			ajax : 'true'
+
+		}, function(data) {
+
+			$('#table_grid1 td').remove();
+			$('#loader').hide();
+
+			if (data == "") {
+				alert("No records found !!");
+
+			}
+			var subTotal = 0.00;
+			var taxAmt = 0.00;
+			var total = 0.00;
+			document.getElementById("totalItem").textContent = data.length;
+			$.each(data, function(key, itemList) {
+
+				var tr = $('<tr></tr>');
+				tr.append($('<td></td>').html(key + 1));
+				tr.append($('<td></td>').html(itemList.itemName));
+				tr.append($('<td align="right"></td>').html(itemList.itemQty));
+				tr.append($('<td align="right"></td>').html(
+						itemList.actualTaxableAmt.toFixed(2)));
+				tr.append($('<td align="right"></td>').html(
+						itemList.taxPer.toFixed(2)));
+				tr.append($('<td align="right"></td>').html(
+						itemList.actualTaxAmt.toFixed(2)));
+				tr.append($('<td align="right"></td>').html(
+						(itemList.actualTaxableAmt + itemList.actualTaxAmt)
+								.toFixed(2)));
+				tr.append($('<td></td>').html(
+						'<a href="#" title="Delete Item" onclick="deleteItem('
+								+ key + ')">Delete</a>'));
+				$('#table_grid1 tbody').append(tr);
+				subTotal = subTotal + itemList.actualTaxableAmt;
+				taxAmt = taxAmt + itemList.actualTaxAmt;
+
+			})
+
+			document.getElementById("subTotal").textContent = subTotal
+					.toFixed(2);
+			document.getElementById("taxAmt").textContent = taxAmt.toFixed(2);
+			document.getElementById("total").textContent = (subTotal + taxAmt)
+					.toFixed(2);
+
+		});
+
+	}
+</script>
 </html>

@@ -5,107 +5,172 @@ app.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 	cfpLoadingBarProvider.includeBar = true; // Show the bar.
 } ]);
 
-app.controller('billController', function($scope, $http, $location) {
-	$scope.getItemByDesignCode = function() {
+app
+		.controller(
+				'billController',
+				function($scope, $http, $location) {
+					$scope.getItemByDesignCode = function() {
 
-		document.getElementById("loader").style.display = "block";
+						if ($scope.designCode != "") {
+							document.getElementById("loader").style.display = "block";
 
-		 
-		$http({
-			method : 'POST',
-			url : '/Baraati/billRestController/getItemBydesignCode',
+							$http(
+									{
+										method : 'POST',
+										url : '/Baraati/billRestController/getItemBydesignCode',
 
-			params : {
-				'designCode' : $scope.designCode
-			}
+										params : {
+											'designCode' : $scope.designCode
+										}
 
-		}).then(function successCallback(response) {
+									})
+									.then(
+											function successCallback(response) {
 
-			document.getElementById("loader").style.display = "none";
-			 
-			if(response.data.itemId==0){
-				document.getElementById("errorMsg").textContent = "Item Not Found";
-			}else{
-				document.getElementById("errorMsg").style.display = "none";
-			}
-			
+												document
+														.getElementById("loader").style.display = "none";
 
-		}, function errorsCallback(response) {
-			console.log(respose);
-			document.getElementById("loader").style.display = "none";
-			alert("error");
-		});
+												if (response.data.itemId == 0) {
 
-	}
+													document
+															.getElementById("errorMsg").style.display = "block";
+													document
+															.getElementById("itemName").value = "";
+													document
+															.getElementById("itemId").value = "";
+													document
+															.getElementById("errorMsg").textContent = "Item Not Found";
+													document
+															.getElementById("addItem").disabled = true;
 
-	$scope.init = function() {
+												} else {
+													document
+															.getElementById("errorMsg").style.display = "none";
+													document
+															.getElementById("itemId").value = response.data.itemId;
+													document
+															.getElementById("addItem").disabled = false;
+													document
+															.getElementById("itemName").value = response.data.itemName;
+												}
 
-		refreshData();
-	};
+											},
+											function errorsCallback(response) {
+												console.log(respose);
+												document
+														.getElementById("loader").style.display = "none";
+												alert("error");
+											});
+						}
+					}
 
-	function refreshData() {
+					$scope.addItemInBillList = function() {
 
-		$http({
-			method : 'GET',
-			url : '/Baraati/item/getAllItemWithItemType',
+						document.getElementById("loader").style.display = "block";
+						var itemId = document.getElementById("itemId").value;
+						alert(itemId)
+						$http(
+								{
+									method : 'POST',
+									url : '/Baraati/billRestController/addItemInBillList',
 
-		}).then(function successCallback(response) {
+									params : {
+										'itemId' : itemId,
+										'itemQty' : $scope.itemQty
+									}
 
-			console.log(response);
-			$scope.itemList = response.data;
+								})
+								.then(
+										function successCallback(response) {
 
-			document.getElementById("loader").style.display = "none";
+											document.getElementById("loader").style.display = "none";
+											document.getElementById("addItem").disabled = true;
+											$scope.itemList = response.data;
 
-		}, function errorsCallback(response) {
-			console.log(respose);
-			document.getElementById("loader").style.display = "none";
-		});
-	}
+										},
+										function errorsCallback(response) {
+											console.log(respose);
+											document.getElementById("loader").style.display = "none";
+											alert("error");
+										});
+					}
 
-	$scope.editItemDetails = function(item) {
+					$scope.init = function() {
 
-		$scope.itemId = item.itemId;
-		$scope.itemName = item.itemName;
-		$scope.typeId = item.itemType;
-		$scope.designNo = item.designNo;
-		$scope.barcode = item.barcode;
-		$scope.itemSize = item.itemSize;
-		$scope.itemQuantity = Number(item.itemQuantity);
-		$scope.itemPrice = item.itemPrice;
-		$('select').prop('selectedIndex', item.itemType);
+						refreshData();
+					};
 
-	};
+					function refreshData() {
 
-	$scope.deleteItem = function(item) {
+						$http({
+							method : 'GET',
+							url : '/Baraati/item/getAllItemWithItemType',
 
-		$scope.itemId = item.itemId;
+						})
+								.then(
+										function successCallback(response) {
 
-		if (confirm("Are you sure to delete category?")) {
-			$http({
-				method : 'PUT',
-				url : '/Baraati/item/deleteItem',
-				params : {
-					'itemId' : $scope.itemId
-				}
+											console.log(response);
+											$scope.itemList = response.data;
 
-			}).then(function successCallback(response) {
+											document.getElementById("loader").style.display = "none";
 
-				$scope.info = response.data;
+										},
+										function errorsCallback(response) {
+											console.log(respose);
+											document.getElementById("loader").style.display = "none";
+										});
+					}
 
-				refreshData();
-				alert($scope.info.message);
-				document.getElementById("loader").style.display = "none";
+					$scope.editItemDetails = function(item) {
 
-			}, function errorsCallback(response) {
-				console.log(respose);
-				document.getElementById("loader").style.display = "none";
-				alert("error");
-			});
+						$scope.itemId = item.itemId;
+						$scope.itemName = item.itemName;
+						$scope.typeId = item.itemType;
+						$scope.designNo = item.designNo;
+						$scope.barcode = item.barcode;
+						$scope.itemSize = item.itemSize;
+						$scope.itemQuantity = Number(item.itemQuantity);
+						$scope.itemPrice = item.itemPrice;
+						$('select').prop('selectedIndex', item.itemType);
 
-		}
-		;
-	}
+					};
 
-	/* */
+					$scope.deleteItem = function(item) {
 
-});
+						$scope.itemId = item.itemId;
+
+						if (confirm("Are you sure to delete category?")) {
+							$http({
+								method : 'PUT',
+								url : '/Baraati/item/deleteItem',
+								params : {
+									'itemId' : $scope.itemId
+								}
+
+							})
+									.then(
+											function successCallback(response) {
+
+												$scope.info = response.data;
+
+												refreshData();
+												alert($scope.info.message);
+												document
+														.getElementById("loader").style.display = "none";
+
+											},
+											function errorsCallback(response) {
+												console.log(respose);
+												document
+														.getElementById("loader").style.display = "none";
+												alert("error");
+											});
+
+						}
+						;
+					}
+
+					/* */
+
+				});
