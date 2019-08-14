@@ -60,35 +60,25 @@
 			</a>
 				<ul class="ml-menu">
 				
-				
+				 
 				
 					<li><a href="${pageContext.request.contextPath}/showAddItem">Item</a></li>
-					<!-- <li><a href="pages/ui/animations.html">Animations</a></li>
-					<li><a href="pages/ui/badges.html">Badges</a></li>
-
-					<li><a href="pages/ui/breadcrumbs.html">Breadcrumbs</a></li>
-					<li><a href="pages/ui/buttons.html">Buttons</a></li>
-					<li><a href="pages/ui/collapse.html">Collapse</a></li>
-					<li><a href="pages/ui/colors.html">Colors</a></li>
-					<li><a href="pages/ui/dialogs.html">Dialogs</a></li>
-					<li><a href="pages/ui/icons.html">Icons</a></li>
-					<li><a href="pages/ui/labels.html">Labels</a></li>
-					<li><a href="pages/ui/list-group.html">List Group</a></li>
-					<li><a href="pages/ui/media-object.html">Media Object</a></li>
-					<li><a href="pages/ui/modals.html">Modals</a></li>
-					<li><a href="pages/ui/notifications.html">Notifications</a></li>
-					<li><a href="pages/ui/pagination.html">Pagination</a></li>
-					<li><a href="pages/ui/preloaders.html">Preloaders</a></li>
-					<li><a href="pages/ui/progressbars.html">Progress Bars</a></li>
-					<li><a href="pages/ui/range-sliders.html">Range Sliders</a></li>
-					<li><a href="pages/ui/sortable-nestable.html">Sortable &
-							Nestable</a></li>
-					<li><a href="pages/ui/tabs.html">Tabs</a></li>
-					<li><a href="pages/ui/thumbnails.html">Thumbnails</a></li>
-					<li><a href="pages/ui/tooltips-popovers.html">Tooltips &
-							Popovers</a></li>
-					<li><a href="pages/ui/waves.html">Waves</a></li> -->
+					 
 				</ul></li>  
+				
+				 <li><a href="javascript:void(0);" class="menu-toggle"> <i
+					class="material-icons">swap_calls</i> <span>Billing</span>
+			</a>
+				<ul class="ml-menu">
+				
+				 
+				
+					<li><a href="${pageContext.request.contextPath}/redimedBilling">Readymade</a></li>
+					<li><a href="${pageContext.request.contextPath}/stichinBilling">Non Readymade billing</a></li>
+					 
+				</ul></li>  
+				
+				
 			<%-- <li class="accordion-toggle"><a href="javascript:void(0);"
 				class="menu-toggle"> <i class="material-icons">assignment</i> <span>Forms</span>
 			</a>
