@@ -221,7 +221,8 @@ main {
 }
 
 .basket {
-	width: 70%;
+	width: 72%;
+	margin-bottom: 19px;
 }
 
 .basket-module {
@@ -360,7 +361,7 @@ li.price:before, li.subtotal:before {
 aside {
 	float: right;
 	position: relative;
-	width: 30%;
+	width: 28%;
 }
 
 .summary {
@@ -585,7 +586,7 @@ aside {
 					action="${pageContext.request.contextPath}/submitBill"
 					onsubmit="return confirm('Do you really want to submit the Bill ?');"
 					method="post">
-					<div class="row clearfix">
+				<!-- 	<div class="row clearfix">
 
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="card">
@@ -646,39 +647,45 @@ aside {
 
 										</div>
 									</div>
-									<div class="table-responsive">
-										<table id="table_grid1"
-											class="table table-bordered table-striped table-hover  dataTable">
-											<thead>
-												<tr>
-													<th>Sr. No.</th>
-													<th>Product</th>
-													<th>Quantity</th>
-													<th>Taxable AMT</th>
-													<th>Tax Per</th>
-													<th>Tax AMT</th>
-													<th>AMT</th>
-													<th>Action</th>
-
-												</tr>
-											</thead>
-
-											<tbody>
-
-											</tbody>
-										</table>
-									</div>
+									
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
 					<!-- Basic Examples -->
 					<div class="row clearfix">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="card" style="min-height: 500px;">
 								<main>
+                              <div class="basket">
+                                         <div class="col-md-3">
+											<label for="designCode">Enter a code</label> <input
+												id="designCode" type="text" onchange="getItemByDesignCode()"
+												name="designCode" maxlength="5" class="form-control ">
 
+										</div>
+										<div class="col-md-4">
+											<label for="designCode">Item Name</label> <input
+												id="itemName" type="text" name="itemName"
+												class="form-control " disabled> <input id="itemId"
+												type="hidden" name="itemId">
+										</div>
+										<div class="col-md-2">
+											<label for="designCode">QTY</label> <input id="itemQty"
+												type="number" name="itemQty" class="form-control " value="1">
+
+										</div>
+										<div class="col-md-3">
+											<label for="designCode">  &nbsp;</label>
+											<button class="promo-code-cta"
+												style="background-color: #d080cb;" disabled id="addItem"
+												onclick="addItemInBillList()" type="button">Add
+												Item</button>
+										</div>            
+                         </div>
+                           
+                              
 								<aside>
 
 
@@ -725,10 +732,52 @@ aside {
 											<div class="total-value final-value" id="total">0.00</div>
 										</div>
 										<div class="summary-checkout">
-											<input class="checkout-cta" type="submit" value="Submit Bill">
+											 <button class="checkout-cta" type="submit" style="background-color: #d080cb;color:white;font-weight: bold;">Submit Bill</button> 
 										</div>
 									</div>
 								</aside>
+								<div class="basket" >
+                            <div class="col-md-4">
+
+											<label for="custName">Customer Name</label> <input
+												id="custName" type="text" name="custName"
+												class="form-control " required>
+										</div>
+										<div class="col-md-4">
+											<label for="custMo"> Mobile</label> <input id="custMo"
+												type="text" name="custMo" class="form-control " required>
+										</div>
+										<div class="col-md-4">
+											<label for="email">Email</label> <input id="email"
+												type="email" name="email" class="form-control " required>
+
+										</div>
+										</div>
+								 <div class="basket"style="margin-top: 20px;">
+                            <div class="table-responsive">
+										<table id="table_grid1"
+											class="table table-bordered table-striped table-hover  dataTable">
+											<thead>
+												<tr>
+													<th>Sr.No.</th>
+													<th>Product</th>
+													<th>Quantity</th>
+													<th>Taxable</th>
+													<th>Tax%</th>
+													<th>Tax_amt</th>
+													<th>AMT</th>
+													<th>Action</th>
+
+												</tr>
+											</thead>
+
+											<tbody>
+
+											</tbody>
+										</table>
+									</div>
+                            </div>
+								
 								</main>
 
 							</div>

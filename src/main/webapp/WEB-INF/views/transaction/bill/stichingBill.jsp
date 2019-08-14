@@ -586,7 +586,7 @@ aside {
 					action="${pageContext.request.contextPath}/submitStitchingBill"
 					onsubmit="return confirm('Do you really want to submit the Bill ?');"
 					method="post">
-					<div class="row clearfix">
+					<!-- <div class="row clearfix">
 
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="card">
@@ -696,14 +696,36 @@ aside {
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
 					<!-- Basic Examples -->
 					<div class="row clearfix">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="card" style="min-height: 500px;">
 								<main>
+ 						<div class="basket">
+ 							<div class="col-md-4">
 
+											<label for="designCode">Enter a code</label> <input
+												id="designCode" type="text" onchange="getItemByDesignCode()"
+												placeholder="DesignCode" name="designCode" maxlength="5"
+												class="form-control ">
+
+										</div>
+										<div class="col-md-4">
+											<label for="itemName">Item Name</label> <input id="itemName"
+												type="text" name="itemName" class="form-control "
+												placeholder="Item Name" disabled> <input id="itemId"
+												type="hidden" name="itemId">
+										</div>
+
+										<div class="col-md-4">
+											<label for="itemDesc">Item Desc</label> <input id=itemDesc
+												type="text" name="itemDesc" class="form-control "
+												placeholder="Item Description">
+										</div>
+ </div>
+ 
 								<aside>
 
 
@@ -750,10 +772,67 @@ aside {
 											<div class="total-value final-value" id="total">0.00</div>
 										</div>
 										<div class="summary-checkout">
-											<input class="checkout-cta" type="submit" value="Submit Bill">
+											 <button class="checkout-cta" type="submit" style="background-color: #d080cb;color:white;font-weight: bold;">Submit Bill</button> 
 										</div>
 									</div>
 								</aside>
+								<div class="basket" style="margin-top:10px;">
+ 	<div class="col-md-3">
+											<label for="designCode">QTY</label> <input id="itemQty"
+												style="text-align: right;" type="number" name="itemQty"
+												class="form-control " value="1">
+
+										</div>
+										<div class="col-md-3">
+											<label for="designCode">AMT</label> <input id="amt"
+												style="text-align: right;" type="text" name="amt"
+												class="form-control " value="1">
+
+										</div>
+
+										<div class="col-md-3">
+											<label for="stichingamt">Stitching AMT</label> <input
+												id="stichingamt" style="text-align: right;" type="text"
+												name="stichingamt" class="form-control " value="0">
+										</div>
+
+
+										<div class="col-md-3">
+											<label for="designCode">&nbsp;</label>
+											<button class="promo-code-cta"
+												style="background-color: #d080cb;" disabled id="addItem"
+												onclick="addItemInBillList()" type="button">Add
+												Item</button>
+
+
+										</div>
+ 
+ </div>
+ <div class="basket"style="margin-top:25px;">
+ 
+ <div class="table-responsive">
+										<table id="table_grid1"
+											class="table table-bordered table-striped table-hover  dataTable">
+											<thead>
+												<tr>
+													<th width="5%">Sr.No</th>
+													<th>Product</th>
+													<th width="10%">Qty</th>
+													<th width="10%">Taxable</th>
+													<th width="10%">Stitching Amt</th>
+													<th width="10%">Tax%</th>
+													<th width="10%">Tax_Amt</th>
+													<th width="10%">AMT</th>
+													<th width="5%">Action</th>
+												</tr>
+											</thead>
+
+											<tbody>
+
+											</tbody>
+										</table>
+									</div>
+ </div>
 								</main>
 
 							</div>
