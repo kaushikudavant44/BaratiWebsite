@@ -65,7 +65,7 @@
 
 				<div  ng-controller="loginController" ng-submit="submitLoginForm()">
 					<form class="login100-form validate-form">
-						<span class="login100-form-title"> Lab Login </span>
+						<span class="login100-form-title"> Barati Login </span>
 
 						<div class="wrap-input100 validate-input"
 							data-validate="Username is required">

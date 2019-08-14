@@ -51,8 +51,16 @@ public class Item {
 	@Column(name="po_id")
 	private int poId;
 	
+	
+	@Column(name="invoice_no")
+	private int invoiceNo;
+	
 	@Column(name="gst_per")
 	private float gstPer;
+	
+	@Column(name="item_purchase_price")
+	private float itemPurchasePrice;
+	
 	
  
 	@Column(name="status")
@@ -214,18 +222,38 @@ public class Item {
 	}
 
 
+	public float getItemPurchasePrice() {
+		return itemPurchasePrice;
+	}
+
+
+	public void setItemPurchasePrice(float itemPurchasePrice) {
+		this.itemPurchasePrice = itemPurchasePrice;
+	}
+
+
+	public int getInvoiceNo() {
+		return invoiceNo;
+	}
+
+
+	public void setInvoiceNo(int invoiceNo) {
+		this.invoiceNo = invoiceNo;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", vendorId=" + vendorId + ", typeId=" + typeId
 				+ ", designNo=" + designNo + ", itemSize=" + itemSize + ", itemQuantity=" + itemQuantity
 				+ ", bottomPrice=" + bottomPrice + ", itemPrice=" + itemPrice + ", hsnNo=" + hsnNo + ", invoiceDate="
-				+ invoiceDate + ", poId=" + poId + ", gstPer=" + gstPer + ", status=" + status + ", isUsed=" + isUsed
-				+ "]";
+				+ invoiceDate + ", poId=" + poId + ", invoiceNo=" + invoiceNo + ", gstPer=" + gstPer
+				+ ", itemPurchasePrice=" + itemPurchasePrice + ", status=" + status + ", isUsed=" + isUsed + "]";
 	}
 
 
 	 
-	 
-	
+
+ 
 	 
 }

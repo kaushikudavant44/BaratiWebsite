@@ -43,28 +43,27 @@
 			</a>
 				<ul class="ml-menu">
 
-				 
+				 <li><a href="${pageContext.request.contextPath}/showAddVendor">Vendor</a></li>
 					<li><a href="${pageContext.request.contextPath}/showCategoryForm">Category</a></li>
 					<li><a href="${pageContext.request.contextPath}/showAddSubCategory">Sub Category</a></li>
 						<li><a href="${pageContext.request.contextPath}/showAddItemType">Item Type</a></li>
-					<li><a href="${pageContext.request.contextPath}/showAddItem">Item</a></li>
-					<li><a href="${pageContext.request.contextPath}/showAddVendor">Vendor</a></li>
+					
+					
 
 
 				</ul></li> 
 
  
 
-			<li><a href="javascript:void(0);" class="menu-toggle"> <i
-					class="material-icons">swap_calls</i> <span>User Interface
-						(UI)</span>
+		 <li><a href="javascript:void(0);" class="menu-toggle"> <i
+					class="material-icons">swap_calls</i> <span>Add Item</span>
 			</a>
 				<ul class="ml-menu">
 				
 				
 				
-					<li><a href="pages/ui/alerts.html">Alerts</a></li>
-					<li><a href="pages/ui/animations.html">Animations</a></li>
+					<li><a href="${pageContext.request.contextPath}/showAddItem">Item</a></li>
+					<!-- <li><a href="pages/ui/animations.html">Animations</a></li>
 					<li><a href="pages/ui/badges.html">Badges</a></li>
 
 					<li><a href="pages/ui/breadcrumbs.html">Breadcrumbs</a></li>
@@ -88,9 +87,9 @@
 					<li><a href="pages/ui/thumbnails.html">Thumbnails</a></li>
 					<li><a href="pages/ui/tooltips-popovers.html">Tooltips &
 							Popovers</a></li>
-					<li><a href="pages/ui/waves.html">Waves</a></li>
-				</ul></li>
-			<li class="accordion-toggle"><a href="javascript:void(0);"
+					<li><a href="pages/ui/waves.html">Waves</a></li> -->
+				</ul></li>  
+			<%-- <li class="accordion-toggle"><a href="javascript:void(0);"
 				class="menu-toggle"> <i class="material-icons">assignment</i> <span>Forms</span>
 			</a>
 				<ul class="ml-menu">
@@ -199,8 +198,8 @@
 			</a></li>
 			<li><a href="javascript:void(0);"> <i
 					class="material-icons col-light-blue">donut_large</i> <span>Information</span>
-			</a></li>
-		</ul>
+			</a></li> --%>
+		</ul> 
 	</div>
 	<!-- #Menu -->
 

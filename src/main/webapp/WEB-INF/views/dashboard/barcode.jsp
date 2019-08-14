@@ -1,33 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-   <%@ taglib prefix = "fn" 
-   uri = "http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Barcode</title>
+<title>Insert title here</title>
 
 
 
 
  <style>
- .price-bg {
-    width: 180px;
-   /*  float: left; */
-    height: auto;
-    overflow: hidden;
-    padding: 5px 5px 0 5px;
-    margin: 0 0 4px 0;
-    font-size: 11px;
-    border-radius:14px;
-    font-weight:bold;
-    -webkit-box-shadow: 0px 0px 2px 2px rgba(220,227,230,1);
-    -moz-box-shadow: 0px 0px 2px 2px rgba(220,227,230,1);
-    box-shadow: 0px 0px 2px 2px rgba(220,227,230,1);
-    }
-    
-     /*  * {
+      * {
           color:#7F7F7F;
           font-family:Arial,sans-serif;
           font-size:12px;
@@ -55,19 +38,17 @@
       #submit{
           clear: both;
       }
-      #barcodeTarget,
-      #canvasTarget{
-        margin-top: 20px;
-      }       */  
+          
+ 
     </style>
      <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-barcode.js"></script>
- 
+    
      <script type="text/javascript">
     
       function generateBarcode(can){
         var value = $("#barcodeValue").val();
-        var btype = 'ean8';
+        var btype = 'code128';
         var renderer = 'canvas';
 
         var settings = {
@@ -125,69 +106,18 @@
         generateBarcode();
       });
   
-    </script> 
+    </script>
 </head>
 <body>
-<div class="price-bg">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			  <tbody><tr  height="15">
-					<td class="label" width="20">M.R.P </td>
-				    <td>:&nbsp;Rs.<span id="mrp">${item.itemPrice}/-</span><span  style="font-size: 7px;">(Incl of all Taxes)</span></td>
-			      </tr>
-			  <tr style="padding-bottom: 2px;" height="15">
-				<td class="label"   width="20">PRODUCT </td>
-				<td>:&nbsp;<span id="product_name">${item.itemName}</span></td>
-			  </tr>
-			  <tr style="padding-bottom: 2px;"height="15">
-			    <td class="label" width="20">SIZE </td>
-				<td>:&nbsp;<span id="product_size">${item.itemSize}.</span></td>
-			  </tr>
-			 <!-- <tr style="padding-bottom: 2px;"height="15">
-				 <td class="label" width="20">COLOR </td>
-				<td>:&nbsp;<span id="product_color">DARK PINK</span></td>
-			 </tr> -->
-			  <tr style="padding-bottom: 2px;" height="15">
-				 <td class="label" width="20">NET QTY </td>
-				<td>:&nbsp;<span id="product_qty">1 Pc. Pkd</span></td>
-			 </tr>
-			  <tr style="padding-bottom: 2px;"height="15">
-				 <td class="label" >CODE </td>
-			<%-- 	<td>:&nbsp;<span id="product_code">${fn:substringBefore(item.itemPrice, '.')}${item.vendorId}</span></td>
-		 --%>	<td>:&nbsp;<span id="product_code">${barcodeDetails.barcode}</span></td>
-		
-			
-			 </tr>  
-			  <!-- <tr style="padding-bottom: 2px;"  height="15"> 
-				 <td class="label" width="20">DESCRIPTION </td>
-				<td >:&nbsp;<span id="product_desc">FEB D-13</span></td> 
-			 </tr> -->
-			 </table>
-			 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-			 <tr>
-				 <td colspan="2" class="label" style="text-align:center;border-bottom: 1px solid #cdd0d4;"> <canvas id="canvasTarget" width="190" height="100"></canvas> </td>
-			 </tr>
-			  <!-- <tr style="padding-bottom: 2px;">
-				 <td height="10"  style="padding-left:5px;border-bottom: 1px;  font-size: 8px;">Mfd by: Total Wardrobe Solutions</td>
-			 </tr>	 --> 
-			 <tr> 
-			 <td height="10" style="padding-left:5px;font-size: 7px;">Barati plot no. 4, Near Prasad Circle, Gangapur Road, Nashik</td>
-			</tr>
-			<!-- <tr>
-			 <td height="10"  style="padding-left:5px;font-size: 7px;">For Complaints Contact. &nbsp; 080-40820830</td>
-			</tr> -->
-			<!-- <tr>  
-			<td height="10"  style="padding-left:5px;font-size: 7px;">E-mail: &nbsp;world@sktn.co.in</td>
-			 </tr> -->
-			 </tbody></table>
-			  </div><br><br><br><br><br><br><br>
- <div id="generator">
-   <input style="display: none" type="text" id="barcodeValue" value="${barcodeDetails.barcode}">
+
+<div id="generator">
+   <input style="display: none" type="text" id="barcodeValue" value="${item.vendorId}${item.designNo}${item.itemId}">
       <div id="config">
          
-             
+            
         <div class="config" style="display: none;">
           <div class="title">Misc</div>
-            Background : <input type="text" id="bgColor" value="#FFFFFF" size="7"><br /> 
+            Background : <input type="text" id="bgColor" value="#FFFFFF" size="7"><br />
             "1" Bars : <input type="text" id="color" value="#000000" size="7"><br />
           <div class="barcode1D">
             bar width: <input type="text" id="barWidth" value="2" size="3"><br />
@@ -199,8 +129,8 @@
             Form: <input type="checkbox" name="rectangular" id="rectangular"><label for="rectangular">Rectangular</label><br />
           </div>
           <div id="miscCanvas">
-            x : <input type="text" id="posX" value="10" size="3"><br />
-            y : <input type="text" id="posY" value="20" size="3"><br />
+            x : <input type="text" id="posX" value="1" size="1"><br />
+            y : <input type="text" id="posY" value="4" size="3"><br /> 
           </div>
         </div>
              
@@ -214,17 +144,45 @@
          
     </div>
     
-    <div id="barcodeTarget" class="barcodeTarget"></div>
-   <!--  <canvas id="canvasTarget" width="200" height="100"></canvas>  -->
+    <div id="barcodeDiv" style="border-style: ridge;border-radius:5px; width: 300px;"> 
+    <canvas id="canvasTarget" width="300" height="80"></canvas>  
+   MRP- ${item.itemPrice}<br>
+    Name- ${item.itemName}<br> 
+    Size-${item.itemSize}   
+
+<button onclick="PrintElem('barcodeDiv')">
+Print
+</button> 
+</div> 
+
+<script> 
   
 
-<script>
-  
- 
 $( window ).on( "load", function() {
 	 
-	 generateBarcode('canvasTarget');
+	 generateBarcode('canvasTarget'); 
 }); 
+
+
+
+function PrintElem(elem)
+{
+    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write('<h1>' + document.title  + '</h1>');
+    mywindow.document.write(document.getElementById(elem).innerHTML);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+
+    mywindow.print();
+    mywindow.close();
+
+    return true;
+}
 
 </script> 
 </body>

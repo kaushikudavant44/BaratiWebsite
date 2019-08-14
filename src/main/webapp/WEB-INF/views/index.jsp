@@ -64,14 +64,14 @@
 				</div>
 
 				<div ng-controller="loginController">
-					<form class="login100-form validate-form"
-						ng-submit="submitLoginForm()">
-						<span class="login100-form-title"> Lab Login </span>
+					<!-- <form class="login100-form validate-form"
+						ng-submit="submitLoginForm()"> -->
+						<span class="login100-form-title"> Barati Login </span>
 
 						<div class="wrap-input100 validate-input"
 							data-validate="Username is required">
 							<input class="input100" type="text" name="userName"
-								ng-model="userName" placeholder="Username"> <span
+								ng-model="userName" placeholder="Username" id="userName"> <span
 								class="focus-input100"></span> <span class="symbol-input100">
 								<i class="fa fa-user" aria-hidden="true"></i>
 							</span>
@@ -80,14 +80,14 @@
 						<div class="wrap-input100 validate-input"
 							data-validate="Password is required">
 							<input class="input100" type="password" name="pass"
-								ng-model="password" placeholder="Password"> <span
+								ng-model="password" placeholder="Password" id="password"> <span
 								class="focus-input100"></span> <span class="symbol-input100">
 								<i class="fa fa-lock" aria-hidden="true"></i>
 							</span>
 						</div>
 
 						<div class="container-login100-form-btn">
-							<button class="login100-form-btn">Login</button>
+							<button class="login100-form-btn" onclick="login()">Login</button>
 						</div>
 
 
@@ -96,7 +96,7 @@
 								class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 							</a> -->
 						</div>
-					</form>
+					<!-- </form> -->
 				</div>
 			</div>
 		</div>
@@ -118,6 +118,8 @@
 	<!--===============================================================================================-->
 	<script
 		src="${pageContext.request.contextPath}/resources/vendor/tilt/tilt.jquery.min.js"></script>
+	 
+		
 	<script>
 		$('.js-tilt').tilt({
 			scale : 1.1
@@ -130,7 +132,22 @@
 	<script src="//code.angularjs.org/1.6.0/angular-cookies.min.js"></script>
 
 
+<script type="text/javascript">
+function login(){
+if(document.getElementById("userName").value=='barati')
+{
+if(document.getElementById("password").value=='barati'){
+	window.open("showAddItem/","_self");
+}
+else
+	alert("Password Invalid"); 
 
+} 
+else{
+alert("User Name Invalid");
+}
+}
+</script>
 
 </body>
 </html>

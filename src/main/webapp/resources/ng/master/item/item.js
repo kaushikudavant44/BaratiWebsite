@@ -26,7 +26,9 @@ app.controller('itemMasterController', function($scope, $http, $location) {
 		 		bottomPrice : $scope.bottomPrice,
 				hsnNo : $scope.hsnNo,
 				invoiceDate : $scope.invoiceDate,
-				vendorId : $scope.vendorId
+				vendorId : $scope.vendorId,
+				itemPurchasePrice : $scope.itemPurchasePrice,
+				invoiceNo : $scope.invoiceNo
 		};
 
 		$http({

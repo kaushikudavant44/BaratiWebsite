@@ -199,7 +199,7 @@
 								<form name="payScaleForm" ng-submit="submitAddItem()">
 									<div class="row clearfix">
 
-										<div class="col-md-2"></div>
+
 										<div class="col-md-4">
 
 											<b>Select Vendor</b> <select class="form-control"
@@ -232,9 +232,31 @@
 											</div>
 										</div>
 
-										<div class="col-md-2"></div>
+<div class="col-md-4">
+											<b>Invoice No.</b>
+
+											<div class="input-group">
+												<div class="form-line">
+													<input type="text" class="form-control text-center"
+														ng-model="invoiceNo" id="invoiceNo" placeholder="Invoice No">
+												</div>
+
+											</div> 
+										</div>
 										<input type="hidden" ng-model="itemId" id="itemId"
 											ng-value="0">
+											
+											<div class="col-md-4"> 
+											<b>Item Name</b>
+
+											<div class="input-group">
+												<div class="form-line">
+													<input type="text" class="form-control text-center"
+														ng-model="itemName" id="itemName" placeholder="Item name">
+												</div>
+
+											</div> 
+										</div>
 										<div class="col-md-4">
 
 											<b>Item type</b> <select class="form-control"
@@ -258,17 +280,7 @@
 											</select>
 
 										</div>
-										<div class="col-md-4">
-											<b>Item Name</b>
-
-											<div class="input-group">
-												<div class="form-line">
-													<input type="text" class="form-control text-center"
-														ng-model="itemName" id="itemName" placeholder="Item name">
-												</div>
-
-											</div>
-										</div>
+										
 
 
 										<div class="col-md-4">
@@ -297,7 +309,7 @@
 										</div>
 
 
-										 
+
 										<div class="col-md-4">
 											<b>Size</b>
 
@@ -322,9 +334,26 @@
 
 											</div>
 										</div>
-
 										<div class="col-md-4">
-											<b>Rate/(Qty/mtr) (Rs.)</b>
+											<b>Purchase Price/(Qty/mtr) (Rs.)</b>
+
+											<div class="input-group spinner" data-trigger="spinner">
+												<div class="form-line">
+													<input type="text" class="form-control text-center"
+														id="itemPurchasePrice" ng-model="itemPurchasePrice" value="0"
+														data-rule="currency" placeholder="Item Purchase Price"
+														required="required">
+												</div>
+												<span class="input-group-addon"> <a
+													href="javascript:;" class="spin-up" data-spin="up"><i
+														class="glyphicon glyphicon-chevron-up"></i></a> <a
+													href="javascript:;" class="spin-down" data-spin="down"><i
+														class="glyphicon glyphicon-chevron-down"></i></a>
+												</span>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<b>MRP (Qty/mtr) (Rs.)</b>
 
 											<div class="input-group spinner" data-trigger="spinner">
 												<div class="form-line">
@@ -334,7 +363,7 @@
 														required="required">
 												</div>
 												<span class="input-group-addon"> <a
-													href="javascript:;" class="spin-up" data-spin="up"><i
+								 					href="javascript:;" class="spin-up" data-spin="up"><i
 														class="glyphicon glyphicon-chevron-up"></i></a> <a
 													href="javascript:;" class="spin-down" data-spin="down"><i
 														class="glyphicon glyphicon-chevron-down"></i></a>
@@ -366,13 +395,13 @@
 											<b>GST %</b> <select class="form-control" ng-model="gstPer"
 												id="gstPer" required="required">
 
-<option value="5">2.50% CGST + 2.50 %SGST</option>
-
-											 
+												<option value="5">2.50% CGST + 2.50 %SGST</option>
+<option value="8">4% CGST +4 %SGST</option>
+<option value="12">6% CGST +6 %SGST</option>
 											</select>
 
 										</div>
-										 
+
 
 
 										<div class="col-md-4">
@@ -397,7 +426,7 @@
 
 
 				<!-- Basic Examples -->
-				 
+
 			</div>
 			<!-- #END# Basic Examples -->
 

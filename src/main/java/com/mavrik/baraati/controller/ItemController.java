@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mavrik.baraati.common.Info;
+import com.mavrik.baraati.model.BarcodeDetails;
 import com.mavrik.baraati.model.Item;
 import com.mavrik.baraati.model.ItemTypes;
 import com.mavrik.baraati.model.SubCategories;
 import com.mavrik.baraati.pojo.GetItemTypes;
 import com.mavrik.baraati.pojo.ItemWithType;
+import com.mavrik.baraati.repository.BarcodeDetailsRepository;
 import com.mavrik.baraati.repository.GetItemTypesRepository;
 import com.mavrik.baraati.repository.ItemRepository;
 import com.mavrik.baraati.repository.ItemTypesRepository;
@@ -45,6 +47,8 @@ public class ItemController {
 	
 	@Autowired
 	ItemWithTypeRepository itemWithTypeRepository;
+	@Autowired
+	BarcodeDetailsRepository barcodeDetailsRepository;
 	/**
 	 * 
 	 * @param itemId
@@ -76,6 +80,28 @@ public class ItemController {
 			item1 = new Item();
 		}
 		else {
+			
+			BarcodeDetails barcodeDetails=new BarcodeDetails();
+			int position = String.valueOf(item1.getBottomPrice()).indexOf(".");
+			String barcode=item1.getVendorId()+String.valueOf(item1.getBottomPrice()).substring(0, position-1);
+			if(barcode.length()<8)
+			{
+				  int count=8-barcode.length();
+				  String no="";
+				  for(int i=0;i<count;i++)
+					  no=no+i;
+				barcode=barcode+no;
+			}
+			barcodeDetails.setBarcode(barcode);
+			barcodeDetails.setDesignNo(item1.getDesignNo());
+			barcodeDetails.setItemId(item1.getItemId());
+			barcodeDetails.setItemName(item1.getItemName());
+			barcodeDetails.setTypeId(item1.getTypeId());
+			barcodeDetails.setVendorId(item1.getVendorId());
+			barcodeDetails.setItemPrice(item1.getItemPrice());
+			barcodeDetails.setBottomPrice(item1.getBottomPrice());
+			
+			barcodeDetailsRepository.save(barcodeDetails);
 			System.out.println("Item Add Successfully");
 		}
 		return item1;

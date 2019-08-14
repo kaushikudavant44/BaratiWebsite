@@ -9,7 +9,21 @@ app.controller('loginController', function($scope, $http, $location) {
 
 	$scope.submitLoginForm = function() {
 
-		$http({
+		if($scope.userName=='barati')
+			{
+			if($scope.password=='barati'){
+				window.open("showAddItem/","_blank");
+			}
+			else
+				alert("Password Invalid");
+			
+			}
+		else{
+			alert("User Name Invalid");
+		}
+		 
+		 
+	/*	$http({
 			method : 'POST',
 			url : '/api/lab/labStaffLogin',
 			params : {
@@ -38,7 +52,7 @@ app.controller('loginController', function($scope, $http, $location) {
 				}, function errorsCallback(response) {
 					console.log(respose);
 					alert("error");
-				});
+				});*/
 
 	}
 
