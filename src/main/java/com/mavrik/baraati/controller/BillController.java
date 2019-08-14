@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mavrik.baraati.common.DateConvertor;
 import com.mavrik.baraati.model.Item;
 import com.mavrik.baraati.model.OrderDetail;
 import com.mavrik.baraati.model.OrderHeader;
@@ -308,8 +309,98 @@ public class BillController {
 	}
 
 	@GetMapping("showBillList")
-	public String showBillList(Model model) {
+	public String showBillList(HttpServletRequest request, HttpServletResponse response, Model model) {
 
+		try {
+
+			String frDate = request.getParameter("frDate");
+			String toDate = request.getParameter("toDate");
+
+			if ((frDate != "" || frDate != null) && (toDate != "" || toDate != null)) {
+
+				List<OrderHeader> list = billHeaderRepository.findBetweenDate(DateConvertor.convertToYMD(frDate),
+						DateConvertor.convertToYMD(toDate));
+				for (int i = 0; i < list.size(); i++) {
+					list.get(i).setBillDate(DateConvertor.convertToDMY(list.get(i).getBillDate()));
+				}
+				model.addAttribute("frDate", frDate);
+				model.addAttribute("toDate", toDate);
+				model.addAttribute("list", list);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "transaction/bill/showBillList";
+	}
+
+	@GetMapping("/deleteBill")
+	public String deleteBill(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			int billId = Integer.parseInt(request.getParameter("billId"));
+			int delete = billHeaderRepository.deleteBill(billId);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/showBillList";
+	}
+
+	@GetMapping("updateBillStatus")
+	public String updateBillStatus(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+		try {
+			int billId = Integer.parseInt(request.getParameter("billId"));
+			OrderHeader orderHeader = billHeaderRepository.findByBillId(billId);
+			// orderHeader.setBillDate(DateConvertor.convertToDMY(orderHeader.getBillDate()));
+			List<OrderDetail> orderDetail = billDetailRepository.findByBillId(billId);
+			
+			model.addAttribute("orderHeader", orderHeader);
+			model.addAttribute("orderDetail",orderDetail);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "transaction/bill/updateBillStatus";
+	}
+	
+	@GetMapping("/completeBillDetail")
+	public String completeBillDetail(HttpServletRequest request, HttpServletResponse response) {
+
+		int billId = Integer.parseInt(request.getParameter("billId"));
+		int billDetailId = Integer.parseInt(request.getParameter("billDetailId"));
+		try {
+
+			
+			int update = billDetailRepository.updateDetail(billDetailId);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/updateBillStatus?billId="+billId;
+	}
+	
+	@PostMapping("/completeBillHeader")
+	public String completeBillHeader(HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+
+			int billId = Integer.parseInt(request.getParameter("billId"));
+
+			int updateHeder = billHeaderRepository.updateDetail(billId); 
+			int updateDetail = billDetailRepository.updateDetailAll(billId);
+			 
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/showBillList";
 	}
 }
