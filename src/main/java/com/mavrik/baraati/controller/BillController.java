@@ -74,14 +74,14 @@ public class BillController {
 
 			int itemId = Integer.parseInt(request.getParameter("itemId"));
 			float itemQty = Float.parseFloat(request.getParameter("itemQty"));
-
+			float amt = Float.parseFloat(request.getParameter("amt"));
 			Item item = itemRepository.findByItemId(itemId);
 
 			OrderDetail itemdetail = new OrderDetail();
 			itemdetail.setItemId(itemId);
 			itemdetail.setItemName(item.getItemName());
 			itemdetail.setItemQty(itemQty);
-			itemdetail.setMrp(item.getBottomPrice());
+			itemdetail.setMrp(amt);
 			itemdetail.setTaxPer(item.getGstPer());
 			itemdetail.setActualTaxableAmt((itemdetail.getMrp() * 100 / (100 + item.getGstPer())) * itemQty);
 			itemdetail.setActualTaxAmt((itemdetail.getMrp() * item.getGstPer() / (100 + item.getGstPer())) * itemQty);
@@ -202,11 +202,11 @@ public class BillController {
 			itemdetail.setMrp(amt);
 			itemdetail.setStitchingAmt(stichingamt);
 			itemdetail.setRemark(itemDesc);
-			
+
 			if (stichingamt > 0) {
 				itemdetail.setIsStiching(1);
 				itemdetail.setStatus(0);
-			}else {
+			} else {
 				itemdetail.setStatus(1);
 			}
 			itemdetail.setTaxPer(item.getGstPer());
@@ -228,7 +228,7 @@ public class BillController {
 
 		return orderDetailList;
 	}
-	
+
 	@GetMapping("/deleteItemFromStitchingBillDetail")
 	public @ResponseBody List<OrderDetail> deleteItemFromStitchingBillDetail(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -264,16 +264,16 @@ public class BillController {
 			float totalActualTax = 0;
 
 			int sts = 1;
-			
+
 			for (int i = 0; i < orderDetailList.size(); i++) {
 
 				totalTaxable = totalTaxable + orderDetailList.get(i).getTaxableAmt();
 				totalTax = totalTax + orderDetailList.get(i).getTaxAmt();
 				totalActualTaxable = totalActualTaxable + orderDetailList.get(i).getActualTaxableAmt();
 				totalActualTax = totalActualTax + orderDetailList.get(i).getActualTaxAmt();
-				
-				if(orderDetailList.get(i).getStatus()==0) {
-					sts=0;
+
+				if (orderDetailList.get(i).getStatus() == 0) {
+					sts = 0;
 				}
 			}
 
@@ -290,7 +290,7 @@ public class BillController {
 			order.setGrandTotal(totalTaxable + totalTax);
 			order.setStatus(sts);
 			order.setIsStiching(1);
-			
+
 			OrderHeader save = billHeaderRepository.save(order);
 
 			for (int i = 0; i < orderDetailList.size(); i++) {
@@ -305,5 +305,11 @@ public class BillController {
 		}
 
 		return "redirect:/stichinBilling";
+	}
+
+	@GetMapping("showBillList")
+	public String showBillList(Model model) {
+
+		return "transaction/bill/showBillList";
 	}
 }

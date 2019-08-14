@@ -128,7 +128,9 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/themes/all-themes.css"
 	rel="stylesheet" />
-
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css"
+	rel="stylesheet" type="text/css">
 <style type="text/css">
 @charset "utf-8";
 
@@ -221,8 +223,7 @@ main {
 }
 
 .basket {
-	width: 72%;
-	margin-bottom: 19px;
+	width: 70%;
 }
 
 .basket-module {
@@ -361,7 +362,7 @@ li.price:before, li.subtotal:before {
 aside {
 	float: right;
 	position: relative;
-	width: 28%;
+	width: 30%;
 }
 
 .summary {
@@ -586,7 +587,7 @@ aside {
 					action="${pageContext.request.contextPath}/submitBill"
 					onsubmit="return confirm('Do you really want to submit the Bill ?');"
 					method="post">
-					<!-- 	<div class="row clearfix">
+					<div class="row clearfix">
 
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="card">
@@ -597,9 +598,10 @@ aside {
 
 										<div class="col-md-4">
 
-											<label for="custName">Customer Name</label> <input
-												id="custName" type="text" name="custName"
-												class="form-control " required>
+											<label for="frDate">From Date</label> <input type="text"
+												class="form-control  datepicker" autocomplete="off"
+												name="frDate" id="frDate" placeholder="From Date"
+												required="required">
 										</div>
 										<div class="col-md-4">
 											<label for="custMo"> Mobile</label> <input id="custMo"
@@ -647,142 +649,17 @@ aside {
 
 										</div>
 									</div>
-									
-								</div>
-							</div>
-						</div>
-					</div> -->
-
-					<!-- Basic Examples -->
-					<div class="row clearfix">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<div class="card" style="min-height: 500px;">
-								<main>
-								<div class="basket">
-									<div class="col-md-5">
-										<label for="designCode">Enter Design code</label> <input
-											id="designCode" type="text" onchange="getItemByDesignCode()"
-											name="designCode" placeholder="Design Code"
-											class="form-control ">
-
-									</div>
-									<div class="col-md-5">
-										<label for="designCode">Item Name</label> <input id="itemName"
-											type="text" name="itemName" placeholder="Item Name"
-											class="form-control " disabled> <input id="itemId"
-											type="hidden" name="itemId">
-									</div>
-
-
-								</div>
-
-								<div class="basket">
-									<div class="col-md-4">
-										<label for="designCode">QTY</label> <input id="itemQty"
-											type="number" name="itemQty" style="text-align: right;"
-											class="form-control " value="1">
-
-									</div>
-
-									<div class="col-md-4">
-										<label for="designCode">AMT</label> <input id="amt"
-											type="text" name="amt" style="text-align: right;"
-											class="form-control " value="1">
-
-									</div>
-
-									<div class="col-md-3">
-										<label for="designCode"> &nbsp;</label>
-										<button class="promo-code-cta"
-											style="background-color: #d080cb;" disabled id="addItem"
-											onclick="addItemInBillList()" type="button">Add Item</button>
-									</div>
-								</div>
-
-
-								<aside>
-
-
-
-									<div class="summary">
-										<div class="summary-total-items">
-											<div class="demo-google-material-icon" style="width: 95%">
-												<i class="material-icons" style="color: white;">shopping_cart</i>
-											</div>
-											<span class="total-items" id="totalItem"></span> Items in
-											your Cart
-										</div>
-
-										<div class="summary-subtotal">
-											<div class="subtotal-title">Subtotal</div>
-											<div class="subtotal-value final-value" id="subTotal">0.00</div>
-
-										</div>
-
-										<!-- <div class="summary-subtotal">
-										<div class="subtotal-title">Discount %</div>
-										<div class="subtotal-value final-value">
-											<input type="text" name="discPer" id="discPer" value="0"
-												style="color: black; padding-left: 5px; border-radius: 25px; width: 75px; text-align: center;" />
-										</div>
-
-									</div>
-									<div class="summary-subtotal">
-										<div class="subtotal-title">Disc In Rs</div>
-										<div class="subtotal-value final-value">
-											<input type="text" name="discAer" id="discAer" value="0"
-												style="color: black; padding-left: 5px; border-radius: 25px; width: 75px; text-align: center;" />
-										</div>
-
-									</div> -->
-
-										<div class="summary-subtotal">
-											<div class="subtotal-title">Tax Amt</div>
-											<div class="subtotal-value final-value" id="taxAmt">0.00</div>
-
-										</div>
-										<div class="summary-total">
-											<div class="total-title">Total</div>
-											<div class="total-value final-value" id="total">0.00</div>
-										</div>
-										<div class="summary-checkout">
-											<button class="checkout-cta" type="submit"
-												style="background-color: #d080cb; color: white; font-weight: bold;">Submit
-												Bill</button>
-										</div>
-									</div>
-								</aside>
-								<div class="basket">
-									<div class="col-md-4">
-
-										<label for="custName">Customer Name</label> <input
-											id="custName" type="text" placeholder="Customer Name"
-											name="custName" class="form-control " required>
-									</div>
-									<div class="col-md-4">
-										<label for="custMo"> Mobile</label> <input id="custMo"
-											type="text" name="custMo" placeholder="Mobile"
-											class="form-control " required>
-									</div>
-									<div class="col-md-4">
-										<label for="email">Email</label> <input id="email"
-											type="email" name="email" placeholder="Email"
-											class="form-control " required>
-
-									</div>
-								</div>
-								<div class="basket" style="margin-top: 20px;">
 									<div class="table-responsive">
 										<table id="table_grid1"
 											class="table table-bordered table-striped table-hover  dataTable">
 											<thead>
 												<tr>
-													<th>Sr.No.</th>
+													<th>Sr. No.</th>
 													<th>Product</th>
 													<th>Quantity</th>
-													<th>Taxable</th>
-													<th>Tax%</th>
-													<th>Tax_amt</th>
+													<th>Taxable AMT</th>
+													<th>Tax Per</th>
+													<th>Tax AMT</th>
 													<th>AMT</th>
 													<th>Action</th>
 
@@ -795,12 +672,10 @@ aside {
 										</table>
 									</div>
 								</div>
-
-								</main>
-
 							</div>
 						</div>
 					</div>
+
 				</form>
 			</div>
 			<!-- #END# Basic Examples -->
@@ -888,12 +763,19 @@ aside {
 	<script
 		src="${pageContext.request.contextPath}/resources/controllerjs/navigation.js"></script>
 
-
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
 
 	<script
 		src="${pageContext.request.contextPath}/resources/ng/bill/billing.js"></script>
 </body>
-
+<script>
+	/*-------------------datepicker------------------*/
+	$('.datepicker').datepicker({
+		format : 'dd-mm-yyyy',
+		autoclose : true
+	});
+</script>
 <script type="text/javascript">
 	function getItemByDesignCode() {
 
@@ -921,7 +803,6 @@ aside {
 				document.getElementById("itemId").value = data.itemId;
 				document.getElementById("addItem").disabled = false;
 				document.getElementById("itemName").value = data.itemName;
-				document.getElementById("amt").value = data.bottomPrice;
 			}
 		});
 
@@ -931,7 +812,6 @@ aside {
 
 		var itemId = $("#itemId").val();
 		var itemQty = $("#itemQty").val();
-		var amt = $("#amt").val();
 		var flag = 1;
 
 		if (itemId == "" || itemId == 0) {
@@ -940,10 +820,8 @@ aside {
 		} else if (isNaN(itemQty) || itemQty < 0 || itemQty == "") {
 			alert("Enter valid Qty");
 			flag = 0;
-		} else if (isNaN(amt) || amt < 0 || amt == "") {
-			alert("Enter valid Ammount");
-			flag = 0;
 		}
+		''
 		//alert(itemId + ' ' + itemQty)
 		if (flag == 1) {
 
@@ -956,7 +834,6 @@ aside {
 
 								itemId : itemId,
 								itemQty : itemQty,
-								amt : amt,
 								ajax : 'true'
 
 							},
