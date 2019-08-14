@@ -30,6 +30,9 @@ public class OrderDetail {
 	@Column(name="mrp")
 	private float mrp;
 	
+	@Column(name="stitching_amt")
+	private float stitchingAmt;
+	
 	@Column(name="actual_taxable_amt")
 	private float actualTaxableAmt;
 	
@@ -59,6 +62,9 @@ public class OrderDetail {
 	
 	@Column(name="remark")
 	private String remark;
+	
+	@Column(name="is_stiching")
+	private int isStiching;
 	
 	@Transient
 	private String itemName;
@@ -183,13 +189,37 @@ public class OrderDetail {
 		this.actualTaxableAmt = actualTaxableAmt;
 	}
 
+	public float getStitchingAmt() {
+		return stitchingAmt;
+	}
+
+	public void setStitchingAmt(float stitchingAmt) {
+		this.stitchingAmt = stitchingAmt;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public int getIsStiching() {
+		return isStiching;
+	}
+
+	public void setIsStiching(int isStiching) {
+		this.isStiching = isStiching;
+	}
+
 	@Override
 	public String toString() {
 		return "OrderDetail [billDetailId=" + billDetailId + ", billId=" + billId + ", itemId=" + itemId + ", itemQty="
-				+ itemQty + ", mrp=" + mrp + ", actualTaxableAmt=" + actualTaxableAmt + ", actualTaxAmt=" + actualTaxAmt
-				+ ", taxableAmt=" + taxableAmt + ", discAmt=" + discAmt + ", taxAmt=" + taxAmt + ", taxPer=" + taxPer
-				+ ", grandTotal=" + grandTotal + ", status=" + status + ", isUsed=" + isUsed + ", itemName=" + itemName
-				+ "]";
+				+ itemQty + ", mrp=" + mrp + ", stitchingAmt=" + stitchingAmt + ", actualTaxableAmt=" + actualTaxableAmt
+				+ ", actualTaxAmt=" + actualTaxAmt + ", taxableAmt=" + taxableAmt + ", discAmt=" + discAmt + ", taxAmt="
+				+ taxAmt + ", taxPer=" + taxPer + ", grandTotal=" + grandTotal + ", status=" + status + ", isUsed="
+				+ isUsed + ", remark=" + remark + ", isStiching=" + isStiching + ", itemName=" + itemName + "]";
 	}
 	
 	  
