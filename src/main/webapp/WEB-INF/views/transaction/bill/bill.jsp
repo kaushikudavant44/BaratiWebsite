@@ -678,19 +678,19 @@ aside {
 
 								<div class="basket">
 									<div class="col-md-4">
-										<label for="designCode">QTY</label> <input id="itemQty"
+										<label for="itemQty">QTY</label> <input id="itemQty"
 											type="number" name="itemQty" style="text-align: right;"
 											class="form-control " value="1">
 
 									</div>
 
 									<div class="col-md-4">
-										<label for="designCode">AMT</label> <input id="amt"
-											type="text" name="amt" style="text-align: right;"
-											class="form-control " value="1">
+										<label for="amt">AMT</label> <input id="amt" type="text"
+											name="amt" style="text-align: right;" class="form-control "
+											value="1">
 
 									</div>
- 
+
 									<div class="col-md-3">
 										<label for="designCode"> &nbsp;</label>
 										<button class="promo-code-cta"
@@ -717,34 +717,41 @@ aside {
 										<div class="summary-subtotal">
 											<div class="subtotal-title">Subtotal</div>
 											<div class="subtotal-value final-value" id="subTotal">0.00</div>
-
+											<input type="hidden" name="subTotalHidden"
+												id="subTotalHidden" value="0" />
 										</div>
-
-										<!-- <div class="summary-subtotal">
-										<div class="subtotal-title">Discount %</div>
-										<div class="subtotal-value final-value">
-											<input type="text" name="discPer" id="discPer" value="0"
-												style="color: black; padding-left: 5px; border-radius: 25px; width: 75px; text-align: center;" />
-										</div>
-
-									</div>
-									<div class="summary-subtotal">
-										<div class="subtotal-title">Disc In Rs</div>
-										<div class="subtotal-value final-value">
-											<input type="text" name="discAer" id="discAer" value="0"
-												style="color: black; padding-left: 5px; border-radius: 25px; width: 75px; text-align: center;" />
-										</div>
-
-									</div> -->
-
 										<div class="summary-subtotal">
 											<div class="subtotal-title">Tax Amt</div>
 											<div class="subtotal-value final-value" id="taxAmt">0.00</div>
+											<input type="hidden" name="taxAmtHidden" id="taxAmtHidden"
+												value="0" />
+										</div>
+										<div class="summary-subtotal">
+											<div class="subtotal-title">Discount %</div>
+											<div class="subtotal-value final-value">
+												<input type="text" name="discPer" id="discPer" value="0"
+													onchange="getDiscountOnBill()"
+													style="color: black; padding-left: 5px; border-radius: 25px; width: 75px; text-align: center;" />
+											</div>
 
 										</div>
+										<div class="summary-subtotal">
+											<div class="subtotal-title">Disc In Rs</div>
+											<div class="subtotal-value final-value">
+												<input type="text" name="discAmt" id="discAmt" value="0"
+													onchange="getDiscountOnBill()"
+													style="color: black; padding-left: 5px; border-radius: 25px; width: 75px; text-align: center;" />
+											</div>
+
+										</div>
+
+
 										<div class="summary-total">
 											<div class="total-title">Total</div>
 											<div class="total-value final-value" id="total">0.00</div>
+											<input type="hidden" name="totalHidden" id="totalHidden"
+												value="0" /> <input type="hidden" name="totalNonChangable"
+												id="totalNonChangable" value="0" />
 										</div>
 										<div class="summary-checkout">
 											<button class="checkout-cta" type="submit"
@@ -1034,70 +1041,151 @@ aside {
 
 								document.getElementById("subTotal").textContent = subTotal
 										.toFixed(2);
+								document.getElementById("subTotalHidden").value = subTotal
+										.toFixed(2);
 								document.getElementById("taxAmt").textContent = taxAmt
+										.toFixed(2);
+								document.getElementById("taxAmtHidden").value = taxAmt
 										.toFixed(2);
 								document.getElementById("total").textContent = (subTotal + taxAmt)
 										.toFixed(2);
-
+								document.getElementById("totalHidden").value = (subTotal + taxAmt)
+										.toFixed(2);
+								document.getElementById("totalNonChangable").value = (subTotal + taxAmt)
+										.toFixed(2);
+								getDiscountOnBill();
 							});
 
 		}
 	}
 
+	function getDiscountOnBill() {
+
+		var total = document.getElementById("totalNonChangable").value;
+		var discPer = document.getElementById("discPer").value;
+		var discAmt = document.getElementById("discAmt").value;
+
+		if (discPer == "") {
+			document.getElementById("discPer").value = 0;
+			discPer = 0;
+		}
+		if (discAmt == "") {
+			document.getElementById("discAmt").value = 0;
+			discAmt = 0;
+		}
+
+		if (discPer == 0) {
+
+			total = total - discAmt;
+			document.getElementById("total").textContent = total.toFixed(2);
+			document.getElementById("totalHidden").value = total.toFixed(2);
+
+		} else {
+
+			discAmt = (discPer / 100) * total;
+			total = total - discAmt;
+			document.getElementById("discAmt").value = discAmt.toFixed(2);
+			document.getElementById("total").textContent = total.toFixed(2);
+			document.getElementById("totalHidden").value = total.toFixed(2);
+		}
+
+	}
 	function deleteItem(key) {
 
 		$('#loader').show();
-		$.getJSON('${deleteItemFromBillDetail}',
+		$
+				.getJSON(
+						'${deleteItemFromBillDetail}',
 
-		{
+						{
 
-			key : key,
-			ajax : 'true'
+							key : key,
+							ajax : 'true'
 
-		}, function(data) {
+						},
+						function(data) {
 
-			$('#table_grid1 td').remove();
-			$('#loader').hide();
+							$('#table_grid1 td').remove();
+							$('#loader').hide();
 
-			if (data == "") {
-				alert("No records found !!");
+							if (data == "") {
+								alert("No records found !!");
 
-			}
-			var subTotal = 0.00;
-			var taxAmt = 0.00;
-			var total = 0.00;
-			document.getElementById("totalItem").textContent = data.length;
-			$.each(data, function(key, itemList) {
+							}
+							var subTotal = 0.00;
+							var taxAmt = 0.00;
+							var total = 0.00;
+							document.getElementById("totalItem").textContent = data.length;
+							$
+									.each(
+											data,
+											function(key, itemList) {
 
-				var tr = $('<tr></tr>');
-				tr.append($('<td></td>').html(key + 1));
-				tr.append($('<td></td>').html(itemList.itemName));
-				tr.append($('<td align="right"></td>').html(itemList.itemQty));
-				tr.append($('<td align="right"></td>').html(
-						itemList.actualTaxableAmt.toFixed(2)));
-				tr.append($('<td align="right"></td>').html(
-						itemList.taxPer.toFixed(2)));
-				tr.append($('<td align="right"></td>').html(
-						itemList.actualTaxAmt.toFixed(2)));
-				tr.append($('<td align="right"></td>').html(
-						(itemList.actualTaxableAmt + itemList.actualTaxAmt)
-								.toFixed(2)));
-				tr.append($('<td></td>').html(
-						'<a href="#" title="Delete Item" onclick="deleteItem('
-								+ key + ')">Delete</a>'));
-				$('#table_grid1 tbody').append(tr);
-				subTotal = subTotal + itemList.actualTaxableAmt;
-				taxAmt = taxAmt + itemList.actualTaxAmt;
+												var tr = $('<tr></tr>');
+												tr.append($('<td></td>').html(
+														key + 1));
+												tr.append($('<td></td>').html(
+														itemList.itemName));
+												tr
+														.append($(
+																'<td align="right"></td>')
+																.html(
+																		itemList.itemQty));
+												tr
+														.append($(
+																'<td align="right"></td>')
+																.html(
+																		itemList.actualTaxableAmt
+																				.toFixed(2)));
+												tr
+														.append($(
+																'<td align="right"></td>')
+																.html(
+																		itemList.taxPer
+																				.toFixed(2)));
+												tr
+														.append($(
+																'<td align="right"></td>')
+																.html(
+																		itemList.actualTaxAmt
+																				.toFixed(2)));
+												tr
+														.append($(
+																'<td align="right"></td>')
+																.html(
+																		(itemList.actualTaxableAmt + itemList.actualTaxAmt)
+																				.toFixed(2)));
+												tr
+														.append($('<td></td>')
+																.html(
+																		'<a href="#" title="Delete Item" onclick="deleteItem('
+																				+ key
+																				+ ')">Delete</a>'));
+												$('#table_grid1 tbody').append(
+														tr);
+												subTotal = subTotal
+														+ itemList.actualTaxableAmt;
+												taxAmt = taxAmt
+														+ itemList.actualTaxAmt;
 
-			})
+											})
 
-			document.getElementById("subTotal").textContent = subTotal
-					.toFixed(2);
-			document.getElementById("taxAmt").textContent = taxAmt.toFixed(2);
-			document.getElementById("total").textContent = (subTotal + taxAmt)
-					.toFixed(2);
-
-		});
+							document.getElementById("subTotal").textContent = subTotal
+									.toFixed(2);
+							document.getElementById("subTotalHidden").value = subTotal
+									.toFixed(2);
+							document.getElementById("taxAmt").textContent = taxAmt
+									.toFixed(2);
+							document.getElementById("taxAmtHidden").value = taxAmt
+									.toFixed(2);
+							document.getElementById("total").textContent = (subTotal + taxAmt)
+									.toFixed(2);
+							document.getElementById("totalHidden").value = (subTotal + taxAmt)
+									.toFixed(2);
+							document.getElementById("totalNonChangable").value = (subTotal + taxAmt)
+									.toFixed(2);
+							getDiscountOnBill();
+						});
 
 	}
 </script>

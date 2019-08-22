@@ -129,6 +129,11 @@ public class BillController {
 				totalActualTax = totalActualTax + orderDetailList.get(i).getActualTaxAmt();
 			}
 
+			float discPer = Float.parseFloat(request.getParameter("discPer"));
+			float discAmt = Float.parseFloat(request.getParameter("discAmt"));
+			
+			float totalHidden = Float.parseFloat(request.getParameter("totalHidden"));
+			
 			order.setCustName(request.getParameter("custName"));
 			order.setCustMo(request.getParameter("custMo"));
 			order.setEmail(request.getParameter("email"));
@@ -139,7 +144,9 @@ public class BillController {
 			order.setActualTaxrs(totalActualTax);
 			order.setTaxableAmt(totalTaxable);
 			order.setTaxRs(totalTax);
-			order.setGrandTotal(totalTaxable + totalTax);
+			order.setDiscRs(discAmt);
+			order.setDiscPer(discPer);
+			order.setGrandTotal(totalHidden);
 
 			OrderHeader save = billHeaderRepository.save(order);
 
