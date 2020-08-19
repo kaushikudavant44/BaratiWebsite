@@ -1,12 +1,13 @@
 var app = angular.module('app', [ 'angular-loading-bar' ]);
 
+var URL='/Barati/';
+
 app.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 	cfpLoadingBarProvider.includeSpinner = true; // Show the spinner.
 	cfpLoadingBarProvider.includeBar = true; // Show the bar.
 } ]);
 
-app
-		.controller(
+app.controller(
 				'billController',
 				function($scope, $http, $location) {
 					$scope.getItemByDesignCode = function() {
@@ -17,7 +18,7 @@ app
 							$http(
 									{
 										method : 'POST',
-										url : '/Baraati/billRestController/getItemBydesignCode',
+										url : URL+'billRestController/getItemBydesignCode',
 
 										params : {
 											'designCode' : $scope.designCode
@@ -72,7 +73,7 @@ app
 						$http(
 								{
 									method : 'POST',
-									url : '/Baraati/billRestController/addItemInBillList',
+									url : URL+'billRestController/addItemInBillList',
 
 									params : {
 										'itemId' : itemId,
@@ -104,7 +105,7 @@ app
 
 						$http({
 							method : 'GET',
-							url : '/Baraati/item/getAllItemWithItemType',
+							url : URL+'item/getAllItemWithItemType',
 
 						})
 								.then(
@@ -143,7 +144,7 @@ app
 						if (confirm("Are you sure to delete category?")) {
 							$http({
 								method : 'PUT',
-								url : '/Baraati/item/deleteItem',
+								url : URL+'item/deleteItem',
 								params : {
 									'itemId' : $scope.itemId
 								}

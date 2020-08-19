@@ -1,5 +1,7 @@
 var app = angular.module('app', [ 'angular-loading-bar' ]);
 
+var URL='/Barati/';
+
 app.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 	cfpLoadingBarProvider.includeSpinner = true; // Show the spinner.
 	cfpLoadingBarProvider.includeBar = true; // Show the bar.
@@ -19,7 +21,7 @@ app.controller('categoryMasterController', function($scope, $http, $location) {
 
 		$http({
 			method : 'POST',
-			url : '/Baraati/category/insertCategory',
+			url : URL+'category/insertCategory',
 			data : postData
 		}).then(function successCallback(response) {
 			refreshData();
@@ -42,7 +44,7 @@ app.controller('categoryMasterController', function($scope, $http, $location) {
 
 		$http({
 			method : 'GET',
-			url : '/Baraati/category/getAllCategories',
+			url : URL+'category/getAllCategories',
 
 		}).then(function successCallback(response) {
 
@@ -70,7 +72,7 @@ app.controller('categoryMasterController', function($scope, $http, $location) {
 	if(confirm("Are you sure to delete category?")){
 		$http({
 			method : 'PUT',
-			url : '/Baraati/category/deleteCategory',
+			url : URL+'category/deleteCategory',
 			params: { 'categoryId' : $scope.categoryId}
 			
 

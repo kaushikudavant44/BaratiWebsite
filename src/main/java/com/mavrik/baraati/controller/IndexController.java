@@ -6,21 +6,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.mavrik.baraati.repository.CategoryRepository;
+import com.mavrik.baraati.repository.ItemRepository;
 import com.mavrik.baraati.repository.ItemTypesRepository;
+import com.mavrik.baraati.repository.ItemWithTypeRepository;
 import com.mavrik.baraati.repository.VendorRepository;
 
 @Controller
 public class IndexController {
 
+	@Autowired
+	private ItemRepository itemRepository;
 	
 	@Autowired
 	CategoryRepository categoryRepository;
 	
-	
 	@Autowired
 	VendorRepository vendorRepository;
+	
 	@Autowired
 	private ItemTypesRepository itemTypesRepository;
+	
+	@Autowired
+	ItemWithTypeRepository itemWithTypeRepository;
 	
 	@GetMapping("showSampleForm")
 	public String showSampleForm(Model model) {
@@ -61,9 +68,16 @@ public class IndexController {
 	@GetMapping("showGenerateBill")
 	public String showGenerateBill(Model model) {
 
-
-
 		return "transaction/bill/bill";
 	}
 	
+	
+	@GetMapping("showAllItems")
+	public String showAllItem(Model model) {
+		
+		
+		model.addAttribute("itemList",itemWithTypeRepository.findAllItemWithItemType(0));
+		return "master/item/getItems";
+	}
 }
+  

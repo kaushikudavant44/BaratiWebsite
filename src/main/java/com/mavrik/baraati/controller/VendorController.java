@@ -36,7 +36,7 @@ public class VendorController {
 	@PostMapping("/insertVendor")
 	public Vendors insertVendor(@RequestBody Vendors vendor) {
 		
-		
+		System.out.println("Vendor det"+vendor.toString());
 		
 		return vendorRepository.save(vendor);
 	}

@@ -23,15 +23,16 @@ public class ItemWithType {
 	
 	@Column(name="item_name")
 	private String itemName;
+	
+	@Column(name="vendor_id")
+	private int vendorId;
 
 	@Column(name="type_id")
 	private int typeId;
 	
 	@Column(name="design_no")
 	private String designNo;
-	
-	@Column(name="barcode")
-	private String barcode;
+ 
 	
 	@Column(name="item_size")
 	private String itemSize;
@@ -39,14 +40,33 @@ public class ItemWithType {
 	@Column(name="item_quantity")
 	private String itemQuantity;
 	
+	@Column(name="bottom_price")
+	private float bottomPrice;
+	
 	@Column(name="item_price")
-	private String itemPrice;
+	private float itemPrice;
+ 
+	
+	@Column(name="hsnNo")
+	private String hsnNo;
+	
+	@Column(name="invoiceDate")
+	private String invoiceDate;
 	
 	@Column(name="po_id")
 	private int poId;
-
+	
+	@Column(name="gst_per")
+	private float gstPer;
+	
+ 
+	@Column(name="status")
+	private int status;
+	
+	
 	@Column(name="is_used")
 	private int isUsed;
+
 	
 	@Column(name="item_type")
 	private String itemType;
@@ -107,19 +127,6 @@ public class ItemWithType {
 		this.designNo = designNo;
 	}
 
-	/**
-	 * @return the barcode
-	 */
-	public String getBarcode() {
-		return barcode;
-	}
-
-	/**
-	 * @param barcode the barcode to set
-	 */
-	public void setBarcode(String barcode) {
-		this.barcode = barcode;
-	}
 
 	/**
 	 * @return the itemSize
@@ -149,19 +156,6 @@ public class ItemWithType {
 		this.itemQuantity = itemQuantity;
 	}
 
-	/**
-	 * @return the itemPrice
-	 */
-	public String getItemPrice() {
-		return itemPrice;
-	}
-
-	/**
-	 * @param itemPrice the itemPrice to set
-	 */
-	public void setItemPrice(String itemPrice) {
-		this.itemPrice = itemPrice;
-	}
 
 	/**
 	 * @return the poId
@@ -205,13 +199,113 @@ public class ItemWithType {
 		this.itemType = itemType;
 	}
 
+	/**
+	 * @return the vendorId
+	 */
+	public int getVendorId() {
+		return vendorId;
+	}
+
+	/**
+	 * @param vendorId the vendorId to set
+	 */
+	public void setVendorId(int vendorId) {
+		this.vendorId = vendorId;
+	}
+
+	/**
+	 * @return the bottomPrice
+	 */
+	public float getBottomPrice() {
+		return bottomPrice;
+	}
+
+	/**
+	 * @param bottomPrice the bottomPrice to set
+	 */
+	public void setBottomPrice(float bottomPrice) {
+		this.bottomPrice = bottomPrice;
+	}
+
+	/**
+	 * @return the itemPrice
+	 */
+	public float getItemPrice() {
+		return itemPrice;
+	}
+
+	/**
+	 * @param itemPrice the itemPrice to set
+	 */
+	public void setItemPrice(float itemPrice) {
+		this.itemPrice = itemPrice;
+	}
+
+	/**
+	 * @return the hsnNo
+	 */
+	public String getHsnNo() {
+		return hsnNo;
+	}
+
+	/**
+	 * @param hsnNo the hsnNo to set
+	 */
+	public void setHsnNo(String hsnNo) {
+		this.hsnNo = hsnNo;
+	}
+
+	/**
+	 * @return the invoiceDate
+	 */
+	public String getInvoiceDate() {
+		return invoiceDate;
+	}
+
+	/**
+	 * @param invoiceDate the invoiceDate to set
+	 */
+	public void setInvoiceDate(String invoiceDate) {
+		this.invoiceDate = invoiceDate;
+	}
+
+	/**
+	 * @return the gstPer
+	 */
+	public float getGstPer() {
+		return gstPer;
+	}
+
+	/**
+	 * @param gstPer the gstPer to set
+	 */
+	public void setGstPer(float gstPer) {
+		this.gstPer = gstPer;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public int getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
-		return "ItemWithType [itemId=" + itemId + ", itemName=" + itemName + ", typeId=" + typeId + ", designNo="
-				+ designNo + ", barcode=" + barcode + ", itemSize=" + itemSize + ", itemQuantity=" + itemQuantity
-				+ ", itemPrice=" + itemPrice + ", poId=" + poId + ", isUsed=" + isUsed + ", itemType=" + itemType + "]";
+		return "ItemWithType [itemId=" + itemId + ", itemName=" + itemName + ", vendorId=" + vendorId + ", typeId="
+				+ typeId + ", designNo=" + designNo + ", itemSize=" + itemSize + ", itemQuantity=" + itemQuantity
+				+ ", bottomPrice=" + bottomPrice + ", itemPrice=" + itemPrice + ", hsnNo=" + hsnNo + ", invoiceDate="
+				+ invoiceDate + ", poId=" + poId + ", gstPer=" + gstPer + ", status=" + status + ", isUsed=" + isUsed
+				+ ", itemType=" + itemType + "]";
 	}
-	
+
 	
 	
 

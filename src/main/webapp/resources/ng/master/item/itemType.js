@@ -1,5 +1,7 @@
 var app = angular.module('app', [ 'angular-loading-bar' ]);
 
+var URL='/Barati/';
+
 app.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 	cfpLoadingBarProvider.includeSpinner = true; // Show the spinner.
 	cfpLoadingBarProvider.includeBar = true; // Show the bar.
@@ -13,7 +15,7 @@ app.controller('itemTypeController', function($scope, $http, $location) {
 		$http({
 			method : 'POST',
 			  
-			url : '/Baraati/item/getSubCategoryByCatId',
+			url : URL+'item/getSubCategoryByCatId',
 			params: { 'catId' : $scope.catId}
 		}).then(
 				function successCallback(response) {	
@@ -47,7 +49,7 @@ app.controller('itemTypeController', function($scope, $http, $location) {
 
 		$http({
 			method : 'POST',
-			url : '/Baraati/item/addItemType',
+			url : URL+'item/addItemType',
 			data : postData
 		}).then(function successCallback(response) {
 			refreshData();
@@ -73,12 +75,12 @@ app.controller('itemTypeController', function($scope, $http, $location) {
 
 		 $http({
 			method : 'GET',
-			url : '/Baraati/item/getAllItemType',
+			url : URL+'item/getAllItemType',
 			 
 		}).then(
 				function successCallback(response) {	
 
-					 
+					 alert(response.data);
 					$scope.itemTypeList = response.data; 
 					document.getElementById("loader").style.display="none";
 			

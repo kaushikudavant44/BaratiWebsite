@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-   <%@ taglib prefix = "fn" 
-   uri = "http://java.sun.com/jsp/jstl/functions" %>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,23 +10,23 @@
 
 
 
- <style>
- .price-bg {
-    width: 180px;
-   /*  float: left; */
-    height: auto;
-    overflow: hidden;
-    padding: 5px 5px 0 5px;
-    margin: 0 0 4px 0;
-    font-size: 11px;
-    border-radius:14px;
-    font-weight:bold;
-    -webkit-box-shadow: 0px 0px 2px 2px rgba(220,227,230,1);
-    -moz-box-shadow: 0px 0px 2px 2px rgba(220,227,230,1);
-    box-shadow: 0px 0px 2px 2px rgba(220,227,230,1);
-    }
-    
-     /*  * {
+<style>
+.price-bg {
+	width: 180px;
+	/*  float: left; */
+	height: auto;
+	overflow: hidden;
+	padding: 5px 5px 0 5px;
+	margin: 0 0 4px 0;
+	font-size: 11px;
+	border-radius: 14px;
+	font-weight: bold;
+	-webkit-box-shadow: 0px 0px 2px 2px rgba(220, 227, 230, 1);
+	-moz-box-shadow: 0px 0px 2px 2px rgba(220, 227, 230, 1);
+	box-shadow: 0px 0px 2px 2px rgba(220, 227, 230, 1);
+}
+
+/*  * {
           color:#7F7F7F;
           font-family:Arial,sans-serif;
           font-size:12px;
@@ -58,12 +57,14 @@
       #barcodeTarget,
       #canvasTarget{
         margin-top: 20px;
-      }       */  
-    </style>
-     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-barcode.js"></script>
- 
-     <script type="text/javascript">
+      }       */
+</style>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/jquery-barcode.js"></script>
+
+<script type="text/javascript">
     
       function generateBarcode(can){
         var value = $("#barcodeValue").val();
@@ -125,52 +126,59 @@
         generateBarcode();
       });
   
-    </script> 
+    </script>
 </head>
 <body>
-<div class="price-bg">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			  <tbody><tr  height="15">
-					<td class="label" width="20">M.R.P </td>
-				    <td>:&nbsp;Rs.<span id="mrp">${item.itemPrice}/-</span><span  style="font-size: 7px;">(Incl of all Taxes)</span></td>
-			      </tr>
-			  <tr style="padding-bottom: 2px;" height="15">
-				<td class="label"   width="20">PRODUCT </td>
-				<td>:&nbsp;<span id="product_name">${item.itemName}</span></td>
-			  </tr>
-			  <tr style="padding-bottom: 2px;"height="15">
-			    <td class="label" width="20">SIZE </td>
-				<td>:&nbsp;<span id="product_size">${item.itemSize}.</span></td>
-			  </tr>
-			 <!-- <tr style="padding-bottom: 2px;"height="15">
+	<div class="price-bg">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr style="padding-bottom: 2px;" height="15">
+					<td class="label">CODE</td>
+					<%-- 	<td>:&nbsp;<span id="product_code">${fn:substringBefore(item.itemPrice, '.')}${item.vendorId}</span></td>
+		 --%>
+					<td>:&nbsp;<span id="product_code">${barcodeDetails.barcode}</span></td>
+				</tr>
+
+				<tr style="padding-bottom: 2px;" height="15">
+					<td class="label" width="20">PRODUCT</td>
+					<td>:&nbsp;<span id="product_name">${item.itemName}</span></td>
+				</tr>
+				<tr style="padding-bottom: 2px;" height="15">
+					<td class="label" width="20">SIZE</td>
+					<td>:&nbsp;<span id="product_size">${item.itemSize}.</span></td>
+				</tr>
+				<!-- <tr style="padding-bottom: 2px;"height="15">
 				 <td class="label" width="20">COLOR </td>
 				<td>:&nbsp;<span id="product_color">DARK PINK</span></td>
 			 </tr> -->
-			  <tr style="padding-bottom: 2px;" height="15">
-				 <td class="label" width="20">NET QTY </td>
-				<td>:&nbsp;<span id="product_qty">1 Pc. Pkd</span></td>
-			 </tr>
-			  <tr style="padding-bottom: 2px;"height="15">
-				 <td class="label" >CODE </td>
-			<%-- 	<td>:&nbsp;<span id="product_code">${fn:substringBefore(item.itemPrice, '.')}${item.vendorId}</span></td>
-		 --%>	<td>:&nbsp;<span id="product_code">${barcodeDetails.barcode}</span></td>
-		
-			
-			 </tr>  
-			  <!-- <tr style="padding-bottom: 2px;"  height="15"> 
+				<tr style="padding-bottom: 2px;" height="15">
+					<td class="label" width="20">NET QTY</td>
+					<td>:&nbsp;<span id="product_qty">1 Pc. Pkd</span></td>
+				</tr>
+				<tr height="15">
+					<td class="label" width="20">M.R.P</td>
+					<td>:&nbsp;Rs.<span id="mrp">${item.itemPrice}/-</span><span
+						style="font-size: 7px;">(Incl of all Taxes)</span></td>
+				</tr>
+
+				<!-- <tr style="padding-bottom: 2px;"  height="15"> 
 				 <td class="label" width="20">DESCRIPTION </td>
 				<td >:&nbsp;<span id="product_desc">FEB D-13</span></td> 
 			 </tr> -->
-			 </table>
-			 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-			 <tr>
-				 <td colspan="2" class="label" style="text-align:center;border-bottom: 1px solid #cdd0d4;"> <canvas id="canvasTarget" width="190" height="100"></canvas> </td>
-			 </tr>
-			  <!-- <tr style="padding-bottom: 2px;">
+		</table>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td colspan="2" class="label"
+					style="text-align: center; border-bottom: 1px solid #cdd0d4;">
+					<canvas id="canvasTarget" width="190" height="100"></canvas>
+				</td>
+			</tr>
+			<!-- <tr style="padding-bottom: 2px;">
 				 <td height="10"  style="padding-left:5px;border-bottom: 1px;  font-size: 8px;">Mfd by: Total Wardrobe Solutions</td>
-			 </tr>	 --> 
-			 <tr> 
-			 <td height="10" style="padding-left:5px;font-size: 7px;">Barati plot no. 4, Near Prasad Circle, Gangapur Road, Nashik</td>
+			 </tr>	 -->
+			<tr>
+				<td height="10" style="padding-left: 5px; font-size: 7px;">Barati
+					plot no. 4, Near Prasad Circle, Gangapur Road, Nashik</td>
 			</tr>
 			<!-- <tr>
 			 <td height="10"  style="padding-left:5px;font-size: 7px;">For Complaints Contact. &nbsp; 080-40820830</td>
@@ -178,47 +186,61 @@
 			<!-- <tr>  
 			<td height="10"  style="padding-left:5px;font-size: 7px;">E-mail: &nbsp;world@sktn.co.in</td>
 			 </tr> -->
-			 </tbody></table>
-			  </div><br><br><br><br><br><br><br>
- <div id="generator">
-   <input style="display: none" type="text" id="barcodeValue" value="${barcodeDetails.barcode}">
-      <div id="config">
-         
-             
-        <div class="config" style="display: none;">
-          <div class="title">Misc</div>
-            Background : <input type="text" id="bgColor" value="#FFFFFF" size="7"><br /> 
-            "1" Bars : <input type="text" id="color" value="#000000" size="7"><br />
-          <div class="barcode1D">
-            bar width: <input type="text" id="barWidth" value="2" size="3"><br />
-            bar height: <input type="text" id="barHeight" value="50" size="3"><br />
-          </div>
-          <div class="barcode2D">
-            Module Size: <input type="text" id="moduleSize" value="5" size="3"><br />
-            Quiet Zone Modules: <input type="text" id="quietZoneSize" value="1" size="3"><br />
-            Form: <input type="checkbox" name="rectangular" id="rectangular"><label for="rectangular">Rectangular</label><br />
-          </div>
-          <div id="miscCanvas">
-            x : <input type="text" id="posX" value="10" size="3"><br />
-            y : <input type="text" id="posY" value="20" size="3"><br />
-          </div>
-        </div>
-             
-         
-      </div>
-        
-      <div id="submit">
-        <input style="display: none" type="button" onclick="generateBarcode('canvasTarget');" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate the barcode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">
-      
-      </div>
-         
-    </div>
-    
-    <div id="barcodeTarget" class="barcodeTarget"></div>
-   <!--  <canvas id="canvasTarget" width="200" height="100"></canvas>  -->
-  
+			</tbody>
+		</table>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div id="generator">
+		<input style="display: none" type="text" id="barcodeValue"
+			value="${barcodeDetails.barcode}">
+		<div id="config">
 
-<script>
+
+			<div class="config" style="display: none;">
+				<div class="title">Misc</div>
+				Background : <input type="text" id="bgColor" value="#FFFFFF"
+					size="7"><br /> "1" Bars : <input type="text" id="color"
+					value="#000000" size="7"><br />
+				<div class="barcode1D">
+					bar width: <input type="text" id="barWidth" value="2" size="3"><br />
+					bar height: <input type="text" id="barHeight" value="50" size="3"><br />
+				</div>
+				<div class="barcode2D">
+					Module Size: <input type="text" id="moduleSize" value="5" size="3"><br />
+					Quiet Zone Modules: <input type="text" id="quietZoneSize" value="1"
+						size="3"><br /> Form: <input type="checkbox"
+						name="rectangular" id="rectangular"><label
+						for="rectangular">Rectangular</label><br />
+				</div>
+				<div id="miscCanvas">
+					x : <input type="text" id="posX" value="10" size="3"><br />
+					y : <input type="text" id="posY" value="20" size="3"><br />
+				</div>
+			</div>
+
+
+		</div>
+
+		<div id="submit">
+			<input style="display: none" type="button"
+				onclick="generateBarcode('canvasTarget');"
+				value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Generate the barcode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">
+
+		</div>
+
+	</div>
+
+	<div id="barcodeTarget" class="barcodeTarget"></div>
+	<!--  <canvas id="canvasTarget" width="200" height="100"></canvas>  -->
+
+
+	<script>
   
  
 $( window ).on( "load", function() {
@@ -226,6 +248,6 @@ $( window ).on( "load", function() {
 	 generateBarcode('canvasTarget');
 }); 
 
-</script> 
+</script>
 </body>
 </html>

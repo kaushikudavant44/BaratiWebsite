@@ -1,5 +1,7 @@
 var app = angular.module('app', [ 'angular-loading-bar' ]);
 
+
+
 app.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 	cfpLoadingBarProvider.includeSpinner = true; // Show the spinner.
 	cfpLoadingBarProvider.includeBar = true; // Show the bar.
@@ -24,7 +26,7 @@ app.controller('vendorMasterController', function($scope, $http, $location) {
 
 		$http({
 			method : 'POST',
-			url : '/Baraati/vendor/insertVendor',
+			url : '/Barati/vendor/insertVendor',
 			data : postData
 		}).then(function successCallback(response) {
 
@@ -39,7 +41,7 @@ app.controller('vendorMasterController', function($scope, $http, $location) {
 	}
 
 	$scope.init = function() {
-
+		
 		refreshData();
 	};
 
@@ -47,11 +49,15 @@ app.controller('vendorMasterController', function($scope, $http, $location) {
 		$http({
 
 			method : 'GET',
-			url : '/Baraati/vendor/getAllVendors',
+			url : '/Barati/vendor/getAllVendors',
 
 		}).then(function successCallback(response) {
 
+						
 			$scope.vendors = response.data;
+			
+			alert($scope.vendors);
+			
 			document.getElementById("loader").style.display = "none";
 
 		}, function errorsCallback(response) {
@@ -83,7 +89,7 @@ app.controller('vendorMasterController', function($scope, $http, $location) {
 		if (confirm("Are you sure to delete category?")) {
 			$http({
 				method : 'PUT',
-				url : '/Baraati/vendor/deleteVendor',
+				url : '/Barati/vendor/deleteVendor',
 				params : {
 					'vendorId' : $scope.vendorId
 				}

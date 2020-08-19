@@ -47,6 +47,7 @@
 					<li><a href="${pageContext.request.contextPath}/showCategoryForm">Category</a></li>
 					<li><a href="${pageContext.request.contextPath}/showAddSubCategory">Sub Category</a></li>
 						<li><a href="${pageContext.request.contextPath}/showAddItemType">Item Type</a></li>
+						<li><a href="${pageContext.request.contextPath}/showAllItems">Show Items</a></li>
 					
 					
 

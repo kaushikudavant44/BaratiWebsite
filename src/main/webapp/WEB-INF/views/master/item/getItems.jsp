@@ -128,9 +128,6 @@
 <link
 	href="${pageContext.request.contextPath}/resources/css/themes/all-themes.css"
 	rel="stylesheet" />
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css"
-	rel="stylesheet" type="text/css">
 
 
 
@@ -191,7 +188,7 @@
 							<div class="header">
 
 
-								<h2 class="card-inside-title">ADD ITEM DETAILS</h2>
+								<h2 class="card-inside-title">Search</h2>
 
 							</div>
 							<div class="body">
@@ -201,221 +198,16 @@
 
 
 										<div class="col-md-4">
-
-											<b>Select Vendor</b> <select class="form-control"
-												ng-model="vendorId" id="vendorId" required="required">
-
-
-												<option value="" selected="selected" disabled="disabled">Select
-													Vendor</option>
-												<c:forEach items="${vendorsList}" var="vendors"> 
-
-													<option value="${vendors.vendorId}">${vendors.vendorName}</option>
-
-
-												</c:forEach>
-											</select>
-
-										</div>
-
-										<div class="col-md-4">
-											<b>Invoice Date</b>
-
-											<div class="input-group">
-												<div class="form-line">
-													<input type="text"
-														class="form-control text-center datepicker "
-														autocomplete="off" ng-model="invoiceDate" id="invoiceDate"
-														placeholder="Invoice Date" required="required">
-												</div>
-
-											</div>
-										</div>
-
-<div class="col-md-4">
-											<b>Invoice No.</b>
-
-											<div class="input-group">
-												<div class="form-line">
-													<input type="text" class="form-control text-center num-only"
-														ng-model="invoiceNo" id="invoiceNo" placeholder="Invoice No">
-												</div>
-
-											</div> 
-										</div>
-										<input type="hidden" ng-model="itemId" id="itemId"
-											ng-value="0">
-											
-											<div class="col-md-4"> 
 											<b>Item Name</b>
 
 											<div class="input-group">
 												<div class="form-line">
-													<input type="text" class="form-control text-center allUpperCase"
-														ng-model="itemName" id="itemName" placeholder="Item name">
-												</div>
-
-											</div> 
-										</div>
-										<div class="col-md-4">
-
-											<b>Item type</b> <select class="form-control"
-												ng-model="typeId" id="typeId" required="required">
-
-
-												<option value="" selected="selected" disabled="disabled">Select
-													Item type</option>
-												<c:forEach items="${itemTypesList}" var="itemType">
-													<c:choose>
-														<c:when test="${itemType.typeId==item.typeId}">
-															<option value="${itemType.typeId}">${itemType.itemType}</option>
-														</c:when>
-														<c:otherwise>
-
-															<option value="${itemType.typeId}">${itemType.itemType}</option>
-
-														</c:otherwise>
-													</c:choose>
-												</c:forEach>
-											</select>
-
-										</div>
-										
-
-
-										<div class="col-md-4">
-											<b>Design No</b>
-
-											<div class="input-group">
-												<div class="form-line">
-													<input type="text" class="form-control text-center allUpperCase"
-														ng-model="designNo" id="designNo" placeholder="Design No"
-														required="required">
-												</div>
-
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<b>HSN No</b>
-
-											<div class="input-group">
-												<div class="form-line">
-													<input type="text" class="form-control text-center allUpperCase"
-														ng-model="hsnNo" id="hsnNo" placeholder="HSN No">
-												</div>
-
-											</div>
-										</div>
-
-
-
-										<div class="col-md-4">
-											<b>Size</b>
-
-											<div class="input-group">
-												<div class="form-line">
-													<input type="text" class="form-control text-center allUpperCase"
-														ng-model="itemSize" id="itemSize" placeholder="Item Size">
-												</div>
-
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<b>Item Quantity / Meter</b>
-
-											<div class="input-group ">
-												<div class="form-line">
-													<input type="text" class="form-control text-center num-only"
-														ng-model="itemQuantity" id="itemQuantity"
-														placeholder="Item Quantity" required="required">
-												</div>
-
-											</div>
-										</div>
-										<div class="col-md-4">
-											<b>Purchase Price/(Qty/mtr) (Rs.)</b>
-
-											<div class="input-group spinner" data-trigger="spinner">
-												<div class="form-line">
-													<input type="text" class="form-control text-center num-only"
-														id="itemPurchasePrice" ng-model="itemPurchasePrice" value="0"
-														data-rule="currency" placeholder="Item Purchase Price"
-														required="required">
-												</div>
-												<span class="input-group-addon"> <a
-													href="javascript:;" class="spin-up" data-spin="up"><i
-														class="glyphicon glyphicon-chevron-up"></i></a> <a
-													href="javascript:;" class="spin-down" data-spin="down"><i
-														class="glyphicon glyphicon-chevron-down"></i></a>
-												</span>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<b>MRP (Qty/mtr) (Rs.)</b>
-
-											<div class="input-group spinner" data-trigger="spinner">
-												<div class="form-line">
-													<input type="text"  class="form-control text-center num-only"
-														id="itemPrice" ng-model="itemPrice" value="0"
-														data-rule="currency" placeholder="Item Price"
-														required="required">
-												</div>
-												<span class="input-group-addon"> <a
-								 					href="javascript:;" class="spin-up" data-spin="up"><i
-														class="glyphicon glyphicon-chevron-up"></i></a> <a
-													href="javascript:;" class="spin-down" data-spin="down"><i
-														class="glyphicon glyphicon-chevron-down"></i></a>
-												</span>
-											</div>
-										</div>
-
-										<div class="col-md-4">
-											<b>Bottom Rate/(Qty/mtr) (Rs.)</b>
-
-											<div class="input-group spinner" data-trigger="spinner">
-												<div class="form-line">
 													<input type="text" class="form-control text-center"
-														id="bottomPrice" ng-model="bottomPrice" value="0"
-														data-rule="currency" placeholder="Item Bottom Price">
+														ng-model="itemId" id="itemName" placeholder="Item name">
 												</div>
-												<span class="input-group-addon"> <a
-													href="javascript:;" class="spin-up" data-spin="up"><i
-														class="glyphicon glyphicon-chevron-up"></i></a> <a
-													href="javascript:;" class="spin-down" data-spin="down"><i
-														class="glyphicon glyphicon-chevron-down"></i></a>
-												</span>
+
 											</div>
 										</div>
-
-										<br>
-										<div class="col-md-4">
-
-											<b>GST %</b> <select class="form-control" ng-model="gstPer"
-												id="gstPer" required="required">
-
-												<option value="5">2.50% CGST + 2.50 %SGST</option>
-<option value="8">4% CGST +4 %SGST</option>
-<option value="12">6% CGST +6 %SGST</option>
-											</select>
-
-										</div>
-
-
-
-										<div class="col-md-4">
-											<br>
-
-											<button type="submit"
-												class="btn btn-block btn-lg btn-primary waves-effect">Submit</button>
-										</div>
-
-
-									</div>
-
-
-
 								</form>
 							</div>
 						</div>
@@ -426,6 +218,72 @@
 
 
 				<!-- Basic Examples -->
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+					data-ng-init="init()">
+					<div class="card">
+
+						<div class="header">
+							<h2>ITEM DETAILS DETAILS</h2>
+						</div>
+
+						<div class="body">
+							<div class="table-responsive">
+								<table id="jobListTable"
+									class="table table-bordered table-striped table-hover  dataTable">
+									<thead>
+										<tr>
+											<th>Sr. No.</th>
+											<th>Item Name</th>
+											<th>Item Type</th>
+											<th>Design No</th>
+											<th>Size</th>
+											<th>Item Quantity</th>
+											<th>Item Price</th>
+											<th>Barcode Print</th>
+											<th>Edit</th>
+											<th>Delete</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>Sr. No.</th>
+											<th>Item Name</th>
+											<th>Item Type</th>
+											<th>Design No</th>
+											<th>Size</th>
+											<th>Item Quantity</th>
+											<th>Item Price</th>
+											<th>Barcode Print</th>
+											<th>Edit</th>
+											<th>Delete</th>
+										</tr>
+									</tfoot>
+									<tbody>
+									<c:forEach items="${itemList}" var="item" varStatus="count">
+										<tr>
+											<td>${count.index+1}</td>
+											<td>${ item.itemName }</td>
+											<td>${ item.itemType }</td>
+											<td>${ item.designNo }</td>
+											<td>${ item.itemSize }</td>
+											<td>${ item.itemQuantity }</td>
+											<td>${ item.itemPrice }</td>
+												<td><a href="showBarcode/${item.itemId}"
+												class="edit-button" style="cursor: pointer;">Print Barcode</a></td>
+											<td><a ng-click="editItemDetails(${item})"
+												class="edit-button" style="cursor: pointer;">Edit</a></td>
+											<td><a ng-click="deleteItem(${item})" class="edit-button"
+												style="cursor: pointer;">Delete</a></td>
+
+
+										</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
 
 			</div>
 			<!-- #END# Basic Examples -->
@@ -518,43 +376,11 @@
 	<script
 		src="${pageContext.request.contextPath}/resources/controllerjs/navigation.js"></script>
 
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
+
 
 	<script
 		src="${pageContext.request.contextPath}/resources/ng/master/item/item.js"></script>
-	<script>
-		/*-------------------datepicker------------------*/
-		$('.datepicker').datepicker({
-			format : 'yyyy-mm-dd',
-			autoclose : true
-		});
 
-		 jQuery.fn.ForceNumericOnly =
-			 function()
-			 {
-			     return this.each(function()
-			     {
-			         $(this).keydown(function(e)
-			         {
-			             var key = e.charCode || e.keyCode || 0;
-			             // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
-			             // home, end, period, and numpad decimal
-			             return (
-			                 key == 8 || 
-			                 key == 9 ||
-			                 key == 13 ||
-			                 key == 46 ||
-			                // key == 110 ||
-			                // key == 190 ||
-			                 (key >= 35 && key <= 40) ||
-			                 (key >= 48 && key <= 57) ||
-			                 (key >= 96 && key <= 105));
-			         });
-			     });
-			 };
-			 $(".num-only").ForceNumericOnly();
-			 
-	</script>
+
 </body>
 </html>

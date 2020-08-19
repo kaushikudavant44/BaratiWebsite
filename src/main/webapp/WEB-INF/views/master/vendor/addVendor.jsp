@@ -133,7 +133,7 @@
 
 </head>
 
-<body class="theme-red">
+<body class="theme-red" data-ng-init="init()">
 	<!-- Page Loader -->
 	<div class="page-loader-wrapper" id="loader">
 		<div class="loader">
@@ -202,9 +202,10 @@
 										<div class="col-md-4">
 											<b>Vendor Name</b>
 
-										  <div class="input-group">
+											<div class="input-group">
 												<div class="form-line">
-													<input type="text"  class="form-control text-center"
+													<input type="text"
+														class="form-control text-center allUpperCase"
 														ng-model="vendorName" id="vendorName">
 												</div>
 
@@ -227,7 +228,8 @@
 
 											<div class="input-group">
 												<div class="form-line">
-													<input type="text" class="form-control text-center"
+													<input type="text"
+														class="form-control text-center allUpperCase"
 														ng-model="vendorGst" id="vendorGst">
 												</div>
 
@@ -238,7 +240,8 @@
 
 											<div class="input-group">
 												<div class="form-line">
-													<input type="text" class="form-control text-center"
+													<input type="text"
+														class="form-control text-center allUpperCase"
 														ng-model="vendorAddress">
 												</div>
 
@@ -250,7 +253,8 @@
 
 											<div class="input-group">
 												<div class="form-line">
-													<input type="text" class="form-control text-center"
+													<input type="text"
+														class="form-control text-center allUpperCase"
 														ng-model="vendorContact1">
 												</div>
 
@@ -262,7 +266,8 @@
 
 											<div class="input-group">
 												<div class="form-line">
-													<input type="text" class="form-control text-center"
+													<input type="text"
+														class="form-control text-center allUpperCase"
 														ng-model="vendorContact2">
 												</div>
 
@@ -274,7 +279,8 @@
 
 											<div class="input-group">
 												<div class="form-line">
-													<input type="email" class="form-control text-center"
+													<input type="email"
+														class="form-control text-center allUpperCase"
 														ng-model="vendorEmail">
 												</div>
 
@@ -308,8 +314,7 @@
 
 
 
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-						data-ng-init="init()">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="card">
 
 							<div class="header">
@@ -351,7 +356,8 @@
 												<td>{{ vendor.vendorName }}</td>
 												<td>{{ vendor.vendorGst }}</td>
 												<td>{{ vendor.vendorAddress }}</td>
-												<td>{{ vendor.vendorContact1 }} {{ vendor.vendorContact2 }}</td>
+												<td>{{ vendor.vendorContact1 }} {{
+													vendor.vendorContact2 }}</td>
 												<td>{{ vendor.vendorEmail }}</td>
 												<td><a ng-click="editVendorDetails(vendor)"
 													class="edit-button" style="cursor: pointer;">Edit</a></td>

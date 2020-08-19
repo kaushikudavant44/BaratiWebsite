@@ -1,16 +1,23 @@
 var app = angular.module('app', [ 'angular-loading-bar' ]);
 
+var URL='/Barati/';
+
 app.config([ 'cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
 	cfpLoadingBarProvider.includeSpinner = true; // Show the spinner.
 	cfpLoadingBarProvider.includeBar = true; // Show the bar.
 } ]);
 
 app.controller('itemMasterController', function($scope, $http, $location) {
+	
+	
 	$scope.submitAddItem = function() {
 
-		document.getElementById("loader").style.display="block";
+		alert("in method");
+		
+	//	document.getElementById("loader").style.display="block";
 		$scope.invoiceDate=document.getElementById("invoiceDate").value;
 		 
+		alert($scope.invoiceDate);
 	 
 		var postData = {
 				
@@ -33,11 +40,11 @@ app.controller('itemMasterController', function($scope, $http, $location) {
 
 		$http({
 			method : 'POST',
-			url : '/Baraati/item/addItem',
+			url : URL+'item/addItem',
 			data : postData
 		}).then(function successCallback(response) {
 			
-			 
+			 alert("success");
 			document.getElementById("loader").style.display="none";
 		if(confirm("Do you want print Barcode now!"))
 			{
@@ -45,7 +52,8 @@ app.controller('itemMasterController', function($scope, $http, $location) {
 			}
 
 		}, function errorsCallback(response) {
-			console.log(respose);
+			alert(response);
+			
 			document.getElementById("loader").style.display="none";
 			alert("error");
 		});

@@ -21,6 +21,8 @@ public interface ItemRepository extends JpaRepository<Item, Integer>{
 	
 
 	Item findByItemId(int itemId);
+	
+	List<Item> findByIsUsed(int isUsed);
 
 	Item findByDesignNoAndIsUsed(String designCode, int i);
 } 

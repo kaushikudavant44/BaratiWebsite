@@ -148,7 +148,7 @@ public class ItemController {
 	@GetMapping("/getAllItemWithItemType")
 	public List<ItemWithType> getAllItemWithItemType() {
 		
-		return itemWithTypeRepository.findAllItemWithItemType();
+		return itemWithTypeRepository.findAllItemWithItemType(0);
  
 	}
 	
